@@ -16,19 +16,28 @@ class ResidenceListTile extends StatelessWidget {
         color: context.appTheme.cardBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: CachedImage(
-              url: residence.thumbnailUrl,
-              // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
-              borderRadius: BorderRadius.circular(8),
+      child: SizedBox(
+        height: 110,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: CachedImage(
+                      url: residence.thumbnailUrl,
+                      // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Gap(10),
-          Expanded(child: _ResidenceInfo(residence: residence)),
-        ],
+            const Gap(10),
+            Expanded(child: _ResidenceInfo(residence: residence)),
+          ],
+        ),
       ),
     );
   }
@@ -38,7 +47,6 @@ class _ResidenceInfo extends StatelessWidget {
   final ResidenceResponseModel residence;
 
   const _ResidenceInfo({
-    super.key,
     required this.residence,
   });
 
@@ -47,29 +55,36 @@ class _ResidenceInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          residence.name.value,
-          style: context.textStyle.t14600,
-        ),
-        Text(
-          residence.city.value,
-          style: context.secondaryTextStyle.t12500,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                residence.name.value,
+                style: context.textStyle.t14600,
+              ),
+              Text(
+                residence.city.value,
+                style: context.secondaryTextStyle.t12500,
+              ),
+              const Gap(5),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _ResidenceCharacteristic(
+                    icon: Icons.bed_outlined,
+                    text: '${residence.rooms.value} rooms',
+                  ),
+                  _ResidenceCharacteristic(
+                    icon: Icons.square_foot_outlined,
+                    text: '${residence.size.formatDecimals().value}m2',
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         const Gap(5),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _ResidenceCharacteristic(
-              icon: Icons.bed_outlined,
-              text: '${residence.rooms.value} rooms',
-            ),
-            _ResidenceCharacteristic(
-              icon: Icons.square_foot_outlined,
-              text: '${residence.size.formatDecimals().value}m2',
-            ),
-          ],
-        ),
-        const Gap(12),
         Align(
           alignment: Alignment.centerRight,
           child: Text(
