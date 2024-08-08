@@ -10,33 +10,37 @@ class ResidenceListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: context.appTheme.cardBackgroundColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: SizedBox(
-        height: 110,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: CachedImage(
-                      url: residence.thumbnailUrl,
-                      // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
-                      borderRadius: BorderRadius.circular(8),
+    return Clickable(
+      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: context.appTheme.cardBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: SizedBox(
+          height: 110,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: CachedImage(
+                        url: residence.thumbnailUrl,
+                        // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const Gap(10),
-            Expanded(child: _ResidenceInfo(residence: residence)),
-          ],
+              const Gap(10),
+              Expanded(child: _ResidenceInfo(residence: residence)),
+            ],
+          ),
         ),
       ),
     );

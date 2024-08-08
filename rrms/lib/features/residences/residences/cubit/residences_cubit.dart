@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ResidencesCubit extends EventProviderCubit<ResidencesState> {
+class ResidencesCubit extends Cubit<ResidencesState> {
   final ResidencesRepository residencesRepository;
 
   ResidencesCubit({
@@ -11,8 +11,6 @@ class ResidencesCubit extends EventProviderCubit<ResidencesState> {
     emit(state.copyWith(status: ResidencesStateStatus.loading));
 
     final result = await residencesRepository.get();
-
-    // await Future.delayed(const Duration(seconds: 4));
 
     emit(
       state.copyWith(

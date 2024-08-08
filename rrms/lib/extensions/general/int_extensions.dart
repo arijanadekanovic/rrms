@@ -17,6 +17,6 @@ extension IntExtensions on int? {
 
   int get value => this ?? 0;
 
-  String spValue(String titleIfLessThan1, String titleIfGreaterThan1) => value <= 1 ? titleIfLessThan1 : titleIfGreaterThan1;
+  String spValue(String titleIfLessThanOrEqualTo1, String titleIfGreaterThan1) => value <= 1 ? titleIfLessThanOrEqualTo1 : titleIfGreaterThan1;
   int? get orNull => this == 0 ? null : this;
 }

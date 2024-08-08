@@ -34,7 +34,6 @@ class RRMSAppBar extends StatelessWidget implements PreferredSizeWidget {
               : IconButton(
                   icon: Icon(
                     Icons.chevron_left,
-                    color: context.textStyle.color,
                     size: 30,
                   ),
                   onPressed: () => context.pop(),
@@ -48,7 +47,7 @@ class RRMSAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (title.isNotNullOrEmpty) {
           return Text(
             title.value,
-            style: titleTextStyle ?? (primary ? context.textStyle.t32700 : context.textStyle.t18700),
+            // style: titleTextStyle ?? (primary ? context.textStyle.t32700 : context.textStyle.t18700),
           );
         }
 

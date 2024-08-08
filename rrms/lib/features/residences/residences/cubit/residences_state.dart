@@ -5,7 +5,7 @@ enum ResidencesStateStatus {
   loaded,
 }
 
-class ResidencesState extends Event {
+class ResidencesState {
   final ResidencesStateStatus status;
   final List<ResidenceResponseModel> residences;
 

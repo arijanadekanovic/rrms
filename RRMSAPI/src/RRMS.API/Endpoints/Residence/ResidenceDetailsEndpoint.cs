@@ -1,33 +1,37 @@
 using MediatR;
-using RRMS.Application.Features.Residence.Queries.ResidencesQuery;
+using RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
 using RRMS.Domain.Enums;
 
 namespace RRMS.API.Endpoints.Residence;
 
-internal static class ResidencesEndpoint
+internal static class ResidenceDetailsEndpoint
 {
-    internal static IEndpointRouteBuilder MapResidencesEndpoint(this IEndpointRouteBuilder routeGroupBuilder)
+    internal static IEndpointRouteBuilder MapResidenceDetailsEndpoint(this IEndpointRouteBuilder routeGroupBuilder)
     {
         routeGroupBuilder
-            .MapGet("/residences", Residences)
-            .RequireAuthorization()
-            .Produces<List<ResidenceResponse>>();
+            .MapGet("/details/{id}", ResidenceDetails)
+            // .RequireAuthorization()
+            .Produces<ResidenceDetailsResponse>();
 
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Residences(ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> ResidenceDetails(int id, ISender sender, CancellationToken cancellationToken)
     {
-        var query = new ResidencesQuery();
+        var query = new ResidenceDetailsQuery
+        {
+            Id = id,
+        };
 
         var result = await sender.Send(query, cancellationToken);
 
         return result.ToHttpResult
         (
-            x => x.Select(x => new ResidenceResponse
+            x => new ResidenceDetailsResponse
             {
                 Id = x.Id,
                 Name = x.Name,
+                Description = x.Description,
                 Address = x.Address,
                 Rooms = x.Rooms,
                 Size = x.Size,
@@ -35,15 +39,16 @@ internal static class ResidencesEndpoint
                 Type = x.Type,
                 ThumbnailUrl = x.ThumbnailUrl,
                 City = x.City,
-            }).ToList()
+            }
         );
     }
 }
 
-public record ResidenceResponse
+public record ResidenceDetailsResponse
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Description { get; set; }
     public string Address { get; set; }
     public int Rooms { get; set; }
     public double Size { get; set; }

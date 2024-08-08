@@ -31,7 +31,7 @@ extension DoubleExtensions on double? {
 
   String formatPriceWithoutSign([int numberOfDecimals = 2]) => formatPrice(numberOfDecimals).replaceAll('-', '');
 
-  String formatPriceWithCurrency([String currency = '\$']) => '${formatPrice()} $currency';
+  String formatPriceWithCurrency([String currency = '\$']) => '$currency${formatPrice()}';
 
   double get value => this ?? 0.0;
 }

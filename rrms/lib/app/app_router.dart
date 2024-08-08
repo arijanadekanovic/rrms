@@ -11,6 +11,12 @@ GoRouter appRouter = GoRouter(
           path: SignUpPage.route.withoutFirstSlash,
           builder: (_, state) => const SignUpPage(),
         ),
+        GoRoute(
+          path: ResidenceDetailsPage.route.withoutFirstSlash,
+          builder: (_, state) => ResidenceDetailsPage(
+            residence: state.extra as ResidenceResponseModel,
+          ),
+        ),
       ],
     ),
   ],

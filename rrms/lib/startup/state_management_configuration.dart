@@ -31,6 +31,7 @@ class StateManagementConfiguration {
     services.registerFactoryParam((Permission permission, _) => PermissionHandlerCubit(permission: permission));
     services.registerFactoryParam((String url, _) => AppPdfViewerCubit(url: url));
 
+    services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => SignInCubit(authRepository: authRepository, modelValidator: services.get<SignInRequestModelValidator>()));
     services.registerFactory(() => SignUpCubit(accountRepository: accountRepository, modelValidator: services.get<SignUpRequestModelValidator>()));

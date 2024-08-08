@@ -1,7 +1,6 @@
 generic_imports: 
   - 'package:rrms/_all.dart'
-url: 'https://9599-2a02-27b0-5500-be00-bc9a-73f6-8ebb-78ad.ngrok-free.app/swagger/v1/swagger.json' 
-# url: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json'
+url: 'https://feb4-2a02-27b0-5502-5bf0-b8d6-6ca3-9b8-3310.ngrok-free.app/swagger/v1/swagger.json' 
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'
 extensions_output_path: './lib/extensions/generated/'

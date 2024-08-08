@@ -11,4 +11,11 @@ enum ResidenceType {
   const ResidenceType([this.value = 0]);
 
   static ResidenceType? parse(int? index) => ResidenceType.values.firstOrDefault((x) => x.value == index);
+
+  String get title => switch (this) {
+        ResidenceType.apartment => 'Apartment',
+        ResidenceType.house => 'House',
+        ResidenceType.land => 'Land',
+        ResidenceType.bussinessSpace => 'Bussiness space',
+      };
 }
