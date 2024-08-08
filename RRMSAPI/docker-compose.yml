@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  rrms.api:
+    image: ${DOCKER_REGISTRY-}rrmsapi
+    container_name: rrms.api
+    build:
+      context: .
+      dockerfile: src/RRMS.API/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"  
+
+  rrms.storage.api:
+    image: ${DOCKER_REGISTRY-}rrmsstorageapi
+    container_name: rrms.storage.api
+    build:
+      context: .
+      dockerfile: src/Microservices/RRMS.Storage/RRMS.Storage.API/Dockerfile
+    ports:
+      - "5002:5002"
+      - "5003:5003"
+
+  rrms.database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: rrms.database
+    environment:
+      MSSQL_SA_PASSWORD: "Password1*"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+
+  rrms.dataseeder:
+    image: ${DOCKER_REGISTRY-}dataseeder
+    container_name: rrms.dataseeder
+    build:
+      context: .
+      dockerfile: src/Microservices/DataSeeder/Dockerfile
+
+  rrms.rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rrms.rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+

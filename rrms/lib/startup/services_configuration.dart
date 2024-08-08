@@ -1,0 +1,9 @@
+import 'package:rrms/_all.dart';
+
+class ServicesConfiguration {
+  static Future<void> configure() async {
+    services.registerSingleton<Toast>(ToastImpl());
+    services.registerSingleton<Logger>(ConsoleLoggerImpl());
+    services.registerSingleton<Debouncer>(DebouncerImpl());
+  }
+}

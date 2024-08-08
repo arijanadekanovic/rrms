@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>40727428-4e5d-4773-8a89-16c18f3d5fc9</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+		<PackageReference Include="Scrutor" Version="4.2.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\RRMS\RRMS.Microservices.API\RRMS.Microservices.API.csproj" />
+    <ProjectReference Include="..\..\RRMS\RRMS.Microservices.Transport\RRMS.Microservices.Transport.csproj" />
+    <ProjectReference Include="..\RRMS.Storage.Application\RRMS.Storage.Application.csproj" />
+    <ProjectReference Include="..\RRMS.Storage.Infrastructure\RRMS.Storage.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\RRMS\RRMS.Microservices.SharedKernel\RRMS.Microservices.SharedKernel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\storage-files\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,61 @@
+{
+  "profiles": {
+    "Docker Compose (All APIs)": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "rrms.api",
+      "composeLaunchUrl": "https://localhost:5001/swagger/index.html",
+      "serviceActions": {
+        "rrms.dataseeder": "DoNotStart",
+        //"rrms.storage.api": "StartWithoutDebugging",
+        //"rrms.api": "StartDebugging",
+        "rrms.storage.api": "StartDebugging",
+        "rrms.api": "StartWithoutDebugging",
+        "rrms.database": "StartWithoutDebugging",
+        "rrms.rabbitmq": "StartWithoutDebugging"
+      }
+    },
+    "Docker Compose (API)": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "rrms.api",
+      "composeLaunchUrl": "https://localhost:5001/swagger/index.html",
+      "serviceActions": {
+        "rrms.dataseeder": "DoNotStart",
+        "rrms.api": "StartDebugging",
+        "rrms.database": "StartWithoutDebugging",
+        "rrms.storage.api": "DoNotStart",
+        "rrms.rabbitmq": "DoNotStart"
+      }
+    },
+    "Docker Compose (Storage API)": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "rrms.storage.api",
+      "composeLaunchUrl": "https://localhost:5003/swagger/index.html",
+      "serviceActions": {
+        "rrms.dataseeder": "DoNotStart",
+        "rrms.api": "DoNotStart",
+        "rrms.database": "StartWithoutDebugging",
+        "rrms.storage.api": "StartDebugging",
+        "rrms.rabbitmq": "DoNotStart"
+      }
+    },
+    "Docker Compose (DataSeeder)": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "None",
+      "composeLaunchServiceName": "rrms.dataseeder",
+      "serviceActions": {
+        "rrms.dataseeder": "StartDebugging",
+        "rrms.api": "DoNotStart",
+        "rrms.database": "StartWithoutDebugging",
+        "rrms.storage.api": "DoNotStart",
+        "rrms.rabbitmq": "DoNotStart"
+      }
+    }
+  }
+}

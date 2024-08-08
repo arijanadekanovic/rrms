@@ -1,0 +1,41 @@
+generic_imports: 
+  - 'package:rrms/_all.dart'
+url: 'https://9599-2a02-27b0-5500-be00-bc9a-73f6-8ebb-78ad.ngrok-free.app/swagger/v1/swagger.json' 
+# url: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.json'
+models_output_path: './lib/domain/models/'
+enums_output_path: './lib/domain/'
+extensions_output_path: './lib/extensions/generated/'
+structure: structured # options: structured, one_folder, one_file
+request:
+  name_sufix: 'RequestModel' 
+  name_part_to_remove: 'Request' 
+  parent_folder_name: 'request_models' 
+  copyWith: true
+  fromJson: false
+  toJson: true
+response:
+  name_sufix: 'ResponseModel' 
+  name_part_to_remove: 'Response' 
+  parent_folder_name: 'response_models' 
+  copyWith: false
+  fromJson: true
+  toJson: false
+search:
+  name_sufix: 'SearchModel' 
+  name_part_to_remove: 'Search' 
+  parent_folder_name: 'search_models' 
+  copyWith: true
+  fromJson: false
+  toJson: true
+model:
+  name_sufix: 'Model' 
+  name_part_to_remove: 'Model' 
+  parent_folder_name: 'models' 
+  copyWith: true
+  fromJson: true
+  toJson: true
+enums:
+  name_sufix: ''
+  name_part_to_remove: ''
+  parent_folder_name: 'enums'
+logging: true

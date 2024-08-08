@@ -1,0 +1,25 @@
+// First level Tables that are listed below are main (AggregateRoot) tables, and indented (second level) are side tables that complete the logic around the main table
+// Can you expand on this draft for database (don't provide properties, only table names)
+
+- Users
+    - Roles
+    - UserRoles
+    - UserClaims
+    - UserTokens
+- Residences
+    - ChatMessages
+    - ResidenceImages
+    - ResidenceDocuments
+    - MaintenanceRequests
+- Residents
+    - Payments
+    - ResidentRequests
+    - ResidentDocuments
+    - Notifications 
+- Cities
+- Inspection
+- Feedback
+
+- VisitorManagement
+- PetManagement
+- RenewalRequests
