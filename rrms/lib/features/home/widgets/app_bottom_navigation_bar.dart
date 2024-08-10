@@ -44,9 +44,17 @@ class AppBottomNavigationBar extends StatelessWidget {
               ),
               Expanded(
                 child: AppBottomNavigationBarItem(
-                  icon: Icons.menu,
-                  label: 'Menu',
+                  icon: Icons.chat_bubble_outline,
+                  label: 'Chat',
                   index: 2,
+                  data: AppBottomNavigationBar.navigationKeyPayments,
+                ),
+              ),
+              Expanded(
+                child: AppBottomNavigationBarItem(
+                  icon: Icons.menu,
+                  label: 'More',
+                  index: 3,
                 ),
               ),
             ],

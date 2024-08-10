@@ -10,12 +10,19 @@ class Home extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return Scaffold(
+            drawer: Drawer(
+              backgroundColor: Colors.red,
+            ),
+            endDrawer: Drawer(
+              backgroundColor: Colors.yellow,
+            ),
             body: BlocBuilder<NavigationCubit, NavigationState>(
               builder: (context, navigationState) {
                 return switch (navigationState.index) {
                   0 => const ResidencesPage(),
                   1 => const Center(child: Text('Payments')),
-                  2 => const Center(child: Text('Menu')),
+                  2 => const Center(child: Text('Chat')),
+                  3 => const Center(child: Text('More')),
                   _ => const Center(child: Text('Invalid navigation index')),
                 };
               },

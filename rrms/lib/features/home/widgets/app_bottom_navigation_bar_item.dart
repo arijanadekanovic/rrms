@@ -28,7 +28,7 @@ class AppBottomNavigationBarItem extends StatelessWidget {
         final color = isSelected ? context.theme.bottomNavigationBarTheme.selectedItemColor : context.theme.bottomNavigationBarTheme.unselectedItemColor;
 
         return InkWell(
-          onTap: () => context.read<NavigationCubit>().update(index, data: data),
+          onTap: onTap ?? () => context.read<NavigationCubit>().update(index, data: data),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

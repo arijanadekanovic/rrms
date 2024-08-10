@@ -11,8 +11,7 @@ class ApiClientConfiguration {
       authOptions: AuthOptions(
         refreshTokenEndpoint: '/api/auth/refresh-token',
         refreshTokenBodyBuilder: (jwt, refreshToken) => {
-          'accessToken': jwt,
-          'refreshToken': refreshToken,
+          'token': refreshToken,
         },
         resolveJwt: (response) => response.data['accessToken'],
         resolveRefreshToken: (response) => response.data['refreshToken'],
