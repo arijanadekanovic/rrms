@@ -15,7 +15,7 @@ COPY ["src/RRMS.Domain/RRMS.Domain.csproj", "src/RRMS.Domain/"]
 COPY ["src/RRMS.Infrastructure/RRMS.Infrastructure.csproj", "src/RRMS.Infrastructure/"]
 RUN dotnet restore "./src/RRMS.API/RRMS.API.csproj"
 COPY . .
-WORKDIR "/src/src/RRMS.App"
+WORKDIR "/src/src/RRMS.API"
 RUN dotnet build "./RRMS.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
