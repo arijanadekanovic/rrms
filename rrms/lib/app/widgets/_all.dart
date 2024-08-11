@@ -31,6 +31,7 @@ export 'expandable_header_row.dart';
 export 'expandable_row.dart';
 export 'expandable.dart';
 export 'gradient_text.dart';
+export 'info_list_tile.dart';
 export 'line.dart';
 export 'loader.dart';
 export 'media_picker_button.dart';

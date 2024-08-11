@@ -3,7 +3,6 @@ import 'package:rrms/_all.dart';
 enum AuthStateStatus {
   authenticated,
   unAuthenticated,
-  unAuthenticating,
 }
 
 class AuthState implements Event {
@@ -11,7 +10,6 @@ class AuthState implements Event {
 
   bool get isAuthenticated => status == AuthStateStatus.authenticated;
   bool get isUnAuthenticated => status == AuthStateStatus.unAuthenticated;
-  bool get isUnAuthenticating => status == AuthStateStatus.unAuthenticating;
 
   AuthState({
     required this.status,

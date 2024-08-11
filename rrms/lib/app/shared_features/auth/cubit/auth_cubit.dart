@@ -33,6 +33,7 @@ class AuthCubit extends EventCubit<AuthState> {
   @override
   void onEvent(Object event) {
     if (event is SignInState && event.status == SignInStateStatus.submittingSuccess) check();
+    if (event is SignOutState && event.status == SignOutStateStatus.submittingSuccess) check();
   }
 
   @override

@@ -52,8 +52,8 @@ class AppBottomNavigationBar extends StatelessWidget {
               ),
               Expanded(
                 child: AppBottomNavigationBarItem(
-                  icon: Icons.menu,
-                  label: 'More',
+                  icon: Icons.person,
+                  label: 'Profile',
                   index: 3,
                 ),
               ),

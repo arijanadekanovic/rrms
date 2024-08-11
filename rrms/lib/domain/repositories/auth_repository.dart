@@ -33,6 +33,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Result> signOut() async {
     await _deAuthenticate();
 
+    await Future.delayed(const Duration(seconds: 2));
+
     return Result.success();
   }
 

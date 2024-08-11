@@ -17,8 +17,10 @@ class StateManagementConfiguration {
     services.registerSingleton(ConnectivityCubit());
     services.registerSingleton(ErrorHandlerCubit(restApiClient: restApiClient));
     services.registerSingleton(LocalizationCubit(restApiClient: restApiClient, configRepository: configRepository));
-    services.registerSingleton(AuthCubit(restApiClient: restApiClient, authRepository: authRepository));
     services.registerSingleton(ThemeCubit(configRepository: configRepository));
+
+    services.registerSingleton(AuthCubit(restApiClient: restApiClient, authRepository: authRepository));
+    services.registerSingleton(SignOutCubit(authRepository: authRepository));
 
     services.registerSingleton(ProfileCubit(accountRepository: accountRepository));
   }
