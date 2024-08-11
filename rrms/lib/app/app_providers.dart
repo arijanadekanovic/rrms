@@ -16,6 +16,7 @@ class AppProviders extends StatelessWidget {
         _<AuthCubit>(),
         _<ThemeCubit>(),
         _<NavigationCubit>(),
+        _<ProfileCubit>(),
       ],
       child: child,
     );

@@ -8,7 +8,7 @@ enum SignInStateStatus {
   validationError,
 }
 
-class SignInState extends Event {
+class SignInState implements Event {
   final SignInStateStatus status;
   final SignInRequestModel model;
   final SignInRequestModelValidator modelValidator;

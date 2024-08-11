@@ -9,6 +9,7 @@ class StateManagementConfiguration {
   static void configureSingletons() {
     final restApiClient = services.get<RestApiClient>();
     final authRepository = services.get<AuthRepository>();
+    final accountRepository = services.get<AccountRepository>();
     final configRepository = services.get<ConfigRepository>();
 
     services.registerSingleton<IEventBus>(EventBus());
@@ -16,9 +17,10 @@ class StateManagementConfiguration {
     services.registerSingleton(ConnectivityCubit());
     services.registerSingleton(ErrorHandlerCubit(restApiClient: restApiClient));
     services.registerSingleton(LocalizationCubit(restApiClient: restApiClient, configRepository: configRepository));
-
     services.registerSingleton(AuthCubit(restApiClient: restApiClient, authRepository: authRepository));
     services.registerSingleton(ThemeCubit(configRepository: configRepository));
+
+    services.registerSingleton(ProfileCubit(accountRepository: accountRepository));
   }
 
   static void configureScoped() {

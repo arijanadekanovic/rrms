@@ -47,7 +47,7 @@ class RRMSAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (title.isNotNullOrEmpty) {
           return Text(
             title.value,
-            // style: titleTextStyle ?? (primary ? context.textStyle.t32700 : context.textStyle.t18700),
+            style: titleTextStyle ?? (primary ? context.textStyle.t26500 : context.textStyle.t18500).withColor(context.theme.appBarTheme.titleTextStyle!.color!),
           );
         }
 

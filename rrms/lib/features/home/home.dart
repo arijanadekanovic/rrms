@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
                   0 => const ResidencesPage(),
                   1 => const Center(child: Text('Payments')),
                   2 => const Center(child: Text('Chat')),
-                  3 => const Center(child: Text('More')),
+                  3 => const MorePage(),
                   _ => const Center(child: Text('Invalid navigation index')),
                 };
               },
