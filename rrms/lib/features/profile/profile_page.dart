@@ -11,9 +11,7 @@ class ProfilePage extends StatelessWidget {
         primary: true,
         actions: [
           IconButton(
-            onPressed: () {
-              // TODO: Push profile edit page here
-            },
+            onPressed: () => context.push(ProfileUpdatePage.route),
             icon: Icon(Icons.edit),
           ),
           const Gap(10),

@@ -17,6 +17,10 @@ GoRouter appRouter = GoRouter(
             residence: state.extra as ResidenceResponseModel,
           ),
         ),
+        GoRoute(
+          path: ProfileUpdatePage.route.withoutFirstSlash,
+          builder: (_, state) => const ProfileUpdatePage(),
+        ),
       ],
     ),
   ],

@@ -20,6 +20,7 @@ internal static class AccountUpdateEndpoint
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
+            PhoneNumber = request.PhoneNumber,
             ProfilePhotoUrl = request.ProfilePhotoUrl,
         };
 
@@ -33,5 +34,6 @@ public sealed record AccountUpdateRequest
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public string PhoneNumber { get; set; }
     public string ProfilePhotoUrl { get; set; }
 }

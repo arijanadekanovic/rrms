@@ -41,6 +41,7 @@ public sealed class AccountUpdateCommandHandler : ICommandHandler<AccountUpdateC
 
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
+        user.PhoneNumber = request.PhoneNumber;
         user.ProfilePhotoUrl = request.ProfilePhotoUrl;
 
         await _databaseContext.SaveChangesAsync(cancellationToken);

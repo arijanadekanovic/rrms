@@ -25,5 +25,6 @@ class ProfileCubit extends EventReaderCubit<ProfileState> {
   @override
   void onEvent(Object event) {
     if (event is AuthState && event.isAuthenticated) load();
+    if (event is ProfileUpdateState && event.status == ProfileUpdateStateStatus.submittingSuccess) load();
   }
 }
