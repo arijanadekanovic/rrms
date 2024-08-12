@@ -14,7 +14,7 @@ class ResidencesPage extends StatelessWidget {
           child: BlocBuilder<ResidencesCubit, ResidencesState>(
             builder: (context, residencesState) {
               if (residencesState.status == ResidencesStateStatus.loading) {
-                return Loader();
+                return ResidencesShimmer();
               }
 
               return ListView.separated(
