@@ -19,8 +19,14 @@ class ResidencesPage extends StatelessWidget {
 
               return ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 15),
-                itemCount: residencesState.residences.count,
-                itemBuilder: (context, index) => ResidenceListTile(residence: residencesState.residences[index]),
+                itemCount: residencesState.residences.count + 1,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return ResidencesFilters();
+                  }
+
+                  return ResidenceListTile(residence: residencesState.residences[index - 1]);
+                },
                 separatorBuilder: (BuildContext context, int index) => const Gap(15),
               );
             },

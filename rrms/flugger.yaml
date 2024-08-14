@@ -1,6 +1,6 @@
 generic_imports: 
   - 'package:rrms/_all.dart'
-url: 'https://feb4-2a02-27b0-5502-5bf0-b8d6-6ca3-9b8-3310.ngrok-free.app/swagger/v1/swagger.json' 
+url: 'https://f023-2a02-27b0-5500-76f0-30a3-bc0e-7c23-9d8f.ngrok-free.app/swagger/v1/swagger.json' 
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'
 extensions_output_path: './lib/extensions/generated/'

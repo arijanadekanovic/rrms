@@ -21,10 +21,20 @@ public sealed class ResidencesQueryHandler : IQueryHandler<ResidencesQuery, List
 
     public async Task<Result<List<ResidenceQueryResult>>> Handle(ResidencesQuery request, CancellationToken cancellationToken)
     {
+        var searchTerm = request.SearchTerm?.ToLower();
+
         var residences = await _databaseContext.Residences
-            .Where(x => !x.IsDeleted)
-            .Include(x => x.City)
-            .ToListAsync();
+                .Where(x => !x.IsDeleted)
+                .Where(x => string.IsNullOrEmpty(searchTerm) || x.Name.ToLower().StartsWith(searchTerm))
+                .Where(x => request.CityId == null || x.CityId == request.CityId)
+                .Where(x => request.PriceFrom == null || x.RentPrice >= request.PriceFrom)
+                .Where(x => request.PriceTo == null || x.RentPrice <= request.PriceTo)
+                .Where(x => request.SizeFrom == null || x.Size >= request.SizeFrom)
+                .Where(x => request.SizeTo == null || x.Size <= request.SizeTo)
+                .Where(x => request.NumberOfRooms == null || x.Rooms == request.NumberOfRooms)
+                .Where(x => request.Type == null || x.Type == request.Type)
+                .Include(x => x.City)
+                .ToListAsync();
 
         return residences.Select(x => new ResidenceQueryResult
         {

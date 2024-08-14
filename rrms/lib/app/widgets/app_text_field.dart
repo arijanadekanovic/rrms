@@ -10,7 +10,11 @@ class AppTextField extends StatefulWidget {
   final String? obscuringCharacter;
   final EdgeInsetsGeometry? margin;
   final Widget? prefixIcon;
+  final Widget? sufixIcon;
   final bool showSufixIcon;
+  final BorderRadius? borderRadius;
+  final Color? borderColor;
+  final double? height;
 
   const AppTextField({
     super.key,
@@ -23,7 +27,11 @@ class AppTextField extends StatefulWidget {
     this.margin = const EdgeInsets.only(bottom: 20),
     this.obscuringCharacter,
     this.prefixIcon,
+    this.sufixIcon,
     this.showSufixIcon = false,
+    this.borderRadius,
+    this.borderColor,
+    this.height,
   });
 
   @override
@@ -49,6 +57,17 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
+    InputBorder? maybeWithBorderRadius(InputBorder? inputBorder) {
+      if (widget.borderRadius != null) {
+        return OutlineInputBorder(
+          borderRadius: widget.borderRadius!,
+          borderSide: inputBorder?.borderSide.copyWith(color: widget.borderColor) ?? BorderSide(color: widget.borderColor ?? context.theme.inputDecorationTheme.border!.borderSide.color),
+        );
+      }
+
+      return inputBorder?.copyWith(borderSide: inputBorder.borderSide.copyWith(color: widget.borderColor));
+    }
+
     return Container(
       margin: widget.margin,
       child: Column(
@@ -59,42 +78,49 @@ class _AppTextFieldState extends State<AppTextField> {
             Text(widget.label.value, style: context.textStyle.t14500),
             const Gap(10),
           },
-          TextField(
-            controller: controller,
-            onChanged: (value) => widget.onChanged?.call(value),
-            style: context.textStyle.t14500,
-            decoration: InputDecoration(
-              hintText: widget.label ?? widget.hint ?? '',
-              prefixIcon: widget.prefixIcon,
-              fillColor: context.theme.inputDecorationTheme.fillColor,
-              suffixIcon: () {
-                final isEmpty = controller.text.isNullOrEmpty;
+          SizedBox(
+            height: widget.height,
+            child: TextField(
+              controller: controller,
+              onChanged: (value) => widget.onChanged?.call(value),
+              style: context.textStyle.t14500,
+              decoration: InputDecoration(
+                hintText: widget.label ?? widget.hint ?? '',
+                prefixIcon: widget.prefixIcon,
+                fillColor: context.theme.inputDecorationTheme.fillColor,
+                suffixIcon: () {
+                  if (widget.sufixIcon != null) {
+                    return widget.sufixIcon;
+                  }
 
-                if (isEmpty || !widget.showSufixIcon) {
-                  return null;
-                }
+                  final isEmpty = controller.text.isNullOrEmpty;
 
-                return InkWell(
-                  onTap: () {
-                    controller.clear();
-                    setState(() => widget.onChanged?.call(''));
-                  },
-                  child: Icon(
-                    Icons.close,
-                    size: 16,
-                    color: context.secondaryTextStyle.color,
-                  ),
-                );
-              }(),
-              focusedBorder: context.theme.inputDecorationTheme.focusedBorder,
-              errorBorder: context.theme.inputDecorationTheme.errorBorder,
-              focusedErrorBorder: context.theme.inputDecorationTheme.focusedErrorBorder,
-              disabledBorder: context.theme.inputDecorationTheme.disabledBorder,
-              enabledBorder: context.theme.inputDecorationTheme.enabledBorder,
-              border: context.theme.inputDecorationTheme.border,
+                  if (isEmpty || !widget.showSufixIcon) {
+                    return null;
+                  }
+
+                  return InkWell(
+                    onTap: () {
+                      controller.clear();
+                      setState(() => widget.onChanged?.call(''));
+                    },
+                    child: Icon(
+                      Icons.close,
+                      size: 16,
+                      color: context.secondaryTextStyle.color,
+                    ),
+                  );
+                }(),
+                focusedBorder: maybeWithBorderRadius(context.theme.inputDecorationTheme.focusedBorder),
+                errorBorder: maybeWithBorderRadius(context.theme.inputDecorationTheme.errorBorder),
+                focusedErrorBorder: maybeWithBorderRadius(context.theme.inputDecorationTheme.focusedErrorBorder),
+                disabledBorder: maybeWithBorderRadius(context.theme.inputDecorationTheme.disabledBorder),
+                enabledBorder: maybeWithBorderRadius(context.theme.inputDecorationTheme.enabledBorder),
+                border: maybeWithBorderRadius(context.theme.inputDecorationTheme.border),
+              ),
+              obscureText: widget.obscureText,
+              obscuringCharacter: widget.obscuringCharacter ?? '•',
             ),
-            obscureText: widget.obscureText,
-            obscuringCharacter: widget.obscuringCharacter ?? '•',
           ),
         ],
       ),

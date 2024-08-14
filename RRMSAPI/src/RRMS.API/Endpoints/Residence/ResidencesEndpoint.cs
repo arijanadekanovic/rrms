@@ -10,15 +10,26 @@ internal static class ResidencesEndpoint
     {
         routeGroupBuilder
             .MapGet("/residences", Residences)
-            .RequireAuthorization()
+            //.RequireAuthorization()
+            .Accepts<ResidencesRequest>("application/octet-stream")
             .Produces<List<ResidenceResponse>>();
 
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Residences(ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> Residences([AsParameters] ResidencesRequest request, ISender sender, CancellationToken cancellationToken)
     {
-        var query = new ResidencesQuery();
+        var query = new ResidencesQuery
+        {
+            SearchTerm = request.SearchTerm,
+            CityId = request.CityId,
+            PriceFrom = request.PriceFrom,
+            PriceTo = request.PriceTo,
+            SizeFrom = request.SizeFrom,
+            SizeTo = request.SizeTo,
+            NumberOfRooms = request.NumberOfRooms,
+            Type = request.Type,
+        };
 
         var result = await sender.Send(query, cancellationToken);
 
@@ -38,6 +49,18 @@ internal static class ResidencesEndpoint
             }).ToList()
         );
     }
+}
+
+public class ResidencesRequest
+{
+    public string SearchTerm { get; set; }
+    public int? CityId { get; set; }
+    public double? PriceFrom { get; set; }
+    public double? PriceTo { get; set; }
+    public double? SizeFrom { get; set; }
+    public double? SizeTo { get; set; }
+    public int? NumberOfRooms { get; set; }
+    public ResidenceType? Type { get; set; }
 }
 
 public record ResidenceResponse
