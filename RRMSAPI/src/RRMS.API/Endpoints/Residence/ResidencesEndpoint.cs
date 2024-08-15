@@ -11,7 +11,6 @@ internal static class ResidencesEndpoint
         routeGroupBuilder
             .MapGet("/residences", Residences)
             //.RequireAuthorization()
-            .Accepts<ResidencesRequest>("application/octet-stream")
             .Produces<List<ResidenceResponse>>();
 
         return routeGroupBuilder;
