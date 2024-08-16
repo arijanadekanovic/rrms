@@ -38,4 +38,3 @@ public class DatabaseContext : DbContext, IDatabaseContext
         modelBuilder.SetQueryFilterOnAllEntities<IAuditEntity>(x => !x.IsDeleted);
     }
 }
-
