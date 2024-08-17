@@ -1,43 +1,38 @@
 ﻿using MediatR;
 using RRMS.Application.Features.Payment.Queries.PaymentsQuery;
-using RRMS.Domain.Entities;
 
 namespace RRMS.API.Endpoints.Payment
 {
     internal static class PaymentsEndpoint
     {
-        internal static RouteGroupBuilder MapPaymentEndpoints(this RouteGroupBuilder routeGroupBuilder)
+        internal static RouteGroupBuilder MapPaymentsEndpoints(this RouteGroupBuilder routeGroupBuilder)
         {
-            var paymentRouteGroupBuilder = routeGroupBuilder
-                .MapGroup("payment");
-            paymentRouteGroupBuilder
+            routeGroupBuilder
                 .MapGet("/payments", Payments)
-                //.RequireAuthorization()
-                .Produces<List<PaymentsResponse>>();
+                .RequireAuthorization()
+                .Produces<List<PaymentResponse>>();
 
-            return paymentRouteGroupBuilder;
+            return routeGroupBuilder;
         }
 
         private static async Task<IResult> Payments([AsParameters] PaymentsRequest request, ISender sender, CancellationToken cancellationToken)
         {
             var query = new PaymentsQuery
             {
-                ResidentId = request.ResidentId,
-                //ResidenceId = request.ResidenceId,
-                FromDate = request.FromDate,
-                ToDate = request.ToDate
+                FromDateUtc = request.FromDateUtc,
+                ToDateUtc = request.ToDateUtc
             };
 
             var result = await sender.Send(query, cancellationToken);
 
             return result.ToHttpResult
             (
-                x => x.Select(p => new PaymentsResponse
+                x => x.Select(y => new PaymentResponse
                 {
-                    Amount = p.Amount,
-                    ResidenceName = p.ResidenceName,
-                    ResidentName = p.ResidentName,
-                    PaymentDate = p.PaymentDate
+                    Amount = y.Amount,
+                    ResidenceName = y.ResidenceName,
+                    ResidentName = y.ResidentName,
+                    PaymentDateUtc = y.PaymentDateUtc
                 }).ToList()
             );
         }
@@ -45,17 +40,17 @@ namespace RRMS.API.Endpoints.Payment
     }
 }
 
-public record PaymentsResponse
+public class PaymentsRequest
+{
+    public DateTime? FromDateUtc { get; set; }
+    public DateTime? ToDateUtc { get; set; }
+}
+
+public record PaymentResponse
 {
     public double Amount { get; set; }
     public string ResidenceName { get; set; }
     public string ResidentName { get; set; }
-    public DateTime PaymentDate { get; set; }
+    public DateTime PaymentDateUtc { get; set; }
 }
-public class PaymentsRequest
-{
-    public int? ResidentId { get; set; }
-    //public int? ResidenceId { get; set; }
-    public DateTime? FromDate { get; set; }
-    public DateTime? ToDate { get; set; }
-}
+

@@ -1,17 +1,14 @@
-﻿using RRMS.API.Endpoints.Residence;
-
-namespace RRMS.API.Endpoints.Payment.Builder
+﻿namespace RRMS.API.Endpoints.Payment.Builder
 {
     internal static class PaymentEndpointsBuilder
     {
-        internal static RouteGroupBuilder MapResidenceEndpoints(this RouteGroupBuilder routeGroupBuilder)
+        internal static RouteGroupBuilder MapPaymentEndpoints(this RouteGroupBuilder routeGroupBuilder)
         {
             var residenceRouteGroupBuilder = routeGroupBuilder
                 .MapGroup("payment");
 
             residenceRouteGroupBuilder
-                .MapResidenceDetailsEndpoint()
-                .MapResidencesEndpoint();
+                .MapPaymentsEndpoints();
 
             return residenceRouteGroupBuilder;
         }

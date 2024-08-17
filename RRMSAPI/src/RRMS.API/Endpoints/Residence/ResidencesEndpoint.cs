@@ -10,7 +10,7 @@ internal static class ResidencesEndpoint
     {
         routeGroupBuilder
             .MapGet("/residences", Residences)
-            //.RequireAuthorization()
+            .RequireAuthorization()
             .Produces<List<ResidenceResponse>>();
 
         return routeGroupBuilder;
