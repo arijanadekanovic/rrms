@@ -1,4 +1,6 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/domain/repositories/payments_repository.dart';
+import 'package:rrms/features/payments/payments/cubits/_all.dart';
 
 class StateManagementConfiguration {
   static void configure() {
@@ -29,6 +31,7 @@ class StateManagementConfiguration {
     final authRepository = services.get<AuthRepository>();
     final accountRepository = services.get<AccountRepository>();
     final residencesRepository = services.get<ResidencesRepository>();
+    final paymentsRepository = services.get<PaymentsRepository>();
 
     services.registerFactoryParam((int? index, _) => NavigationCubit(index: index.value));
     services.registerFactoryParam((bool? isVisible, _) => VisibilityCubit(isVisible: isVisible.value));
@@ -37,6 +40,7 @@ class StateManagementConfiguration {
 
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
+    services.registerFactory(() => PaymentsCubit(paymentsRepository: paymentsRepository));
     services.registerFactory(() => SignInCubit(authRepository: authRepository, modelValidator: services.get<SignInRequestModelValidator>()));
     services.registerFactory(() => SignUpCubit(accountRepository: accountRepository, modelValidator: services.get<SignUpRequestModelValidator>()));
     services.registerFactory(() => ProfileUpdateCubit(accountRepository: accountRepository, modelValidator: services.get<AccountUpdateRequestModelValidator>()));

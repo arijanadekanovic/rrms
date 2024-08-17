@@ -1,4 +1,5 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/domain/repositories/payments_repository.dart';
 
 class RepositoriesConfiguration {
   static Future configure() async {
@@ -20,6 +21,11 @@ class RepositoriesConfiguration {
     );
     services.registerSingleton<ResidencesRepository>(
       ResidencesRepositoryImpl(
+        restApiClient: services.get<RestApiClient>(),
+      ),
+    );
+    services.registerSingleton<PaymentsRepository>(
+      PaymentsRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),
       ),
     );

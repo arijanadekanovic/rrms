@@ -1,4 +1,5 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/features/payments/payments/payments_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -20,7 +21,7 @@ class Home extends StatelessWidget {
               builder: (context, navigationState) {
                 return switch (navigationState.index) {
                   0 => const ResidencesPage(),
-                  1 => const Center(child: Text('Payments')),
+                  1 => const PaymentsPage(residenceName: 'residenceName'),
                   2 => const Center(child: Text('Chat')),
                   3 => const ProfilePage(),
                   _ => const Center(child: Text('Invalid navigation index')),
