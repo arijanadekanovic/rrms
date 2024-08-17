@@ -31,7 +31,7 @@ namespace RRMS.Application.Features.Payment.Queries.PaymentsQuery
                     .ThenInclude(r => r.User)
                     .Include(p => p.Resident)
                     .ThenInclude(r => r.Residence)
-                    //.Where(p => p.Resident.User.Id == _currentUser.Id)
+                    .Where(p => p.Resident.User.Id == _currentUser.Id)
                     .AsQueryable();
 
                 if (request.ResidentId.HasValue)
