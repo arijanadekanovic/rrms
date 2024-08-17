@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:rrms/_all.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -11,6 +10,8 @@ class PaymentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: This widget should be payments history list (with a CTA button to initiate a new payment on new page, what is currently on this page)
+
     return AppScaffold(
       appBar: AppBar(
         title: Text('Pay your rent for: $residenceName'),

@@ -9,18 +9,18 @@ enum PaymentsStateStatus {
 
 class PaymentsState {
   final PaymentsStateStatus status;
-  final List<PaymentsResponseModel> payments;
+  final List<PaymentResponseModel> payments;
   final String? errorMessage;
 
   PaymentsState({
     required this.status,
-    this.payments = const [], 
+    this.payments = const [],
     this.errorMessage,
   });
 
   PaymentsState copyWith({
     PaymentsStateStatus? status,
-    List<PaymentsResponseModel>? payments,
+    List<PaymentResponseModel>? payments,
     String? errorMessage,
   }) {
     return PaymentsState(
