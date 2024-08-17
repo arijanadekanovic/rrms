@@ -16,7 +16,7 @@ internal static class ResidencesEndpoint
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Residences([AsParameters] ResidencesRequest request, ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> Residences([AsParameters] ResidencesSearchRequest request, ISender sender, CancellationToken cancellationToken)
     {
         var query = new ResidencesQuery
         {
@@ -50,7 +50,7 @@ internal static class ResidencesEndpoint
     }
 }
 
-public class ResidencesRequest
+public class ResidencesSearchRequest
 {
     public string SearchTerm { get; set; }
     public int? CityId { get; set; }

@@ -15,7 +15,7 @@ internal static class PaymentsEndpoint
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Payments([AsParameters] PaymentsRequest request, ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> Payments([AsParameters] PaymentsSearchRequest request, ISender sender, CancellationToken cancellationToken)
     {
         var query = new PaymentsQuery
         {
@@ -39,7 +39,7 @@ internal static class PaymentsEndpoint
 
 }
 
-public class PaymentsRequest
+public class PaymentsSearchRequest
 {
     public DateTime? FromDateUtc { get; set; }
     public DateTime? ToDateUtc { get; set; }

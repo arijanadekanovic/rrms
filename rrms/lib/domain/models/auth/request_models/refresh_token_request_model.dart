@@ -15,7 +15,7 @@ class RefreshTokenRequestModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'token': token,
+      if(token != null) 'token': token,
     };
   }
 }

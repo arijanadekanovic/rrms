@@ -38,6 +38,16 @@ public static class StringValuesExtensions
         return int.TryParse(value, out int result) ? result : null;
     }
 
+    public static double ToDoubleOrDefault(this StringValues value)
+    {
+        return double.TryParse(value, out double parsedValue) ? parsedValue : default;
+    }
+
+    public static double? ToNullableDoubleOrDefault(this StringValues value)
+    {
+        return double.TryParse(value, out double result) ? result : null;
+    }
+
     public static Guid? ToGuidOrDefault(this StringValues value)
     {
         return Guid.TryParse(value, out Guid parsedValue) ? parsedValue : null;

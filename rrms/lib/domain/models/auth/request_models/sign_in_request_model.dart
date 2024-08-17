@@ -19,8 +19,8 @@ class SignInRequestModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'emailOrUserName': emailOrUserName,
-      'password': password,
+      if(emailOrUserName != null) 'emailOrUserName': emailOrUserName,
+      if(password != null) 'password': password,
     };
   }
 }

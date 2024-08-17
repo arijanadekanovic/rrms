@@ -27,10 +27,10 @@ class AccountUpdateRequestModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'firstName': firstName,
-      'lastName': lastName,
-      'phoneNumber': phoneNumber,
-      'profilePhotoUrl': profilePhotoUrl,
+      if(firstName != null) 'firstName': firstName,
+      if(lastName != null) 'lastName': lastName,
+      if(phoneNumber != null) 'phoneNumber': phoneNumber,
+      if(profilePhotoUrl != null) 'profilePhotoUrl': profilePhotoUrl,
     };
   }
 }

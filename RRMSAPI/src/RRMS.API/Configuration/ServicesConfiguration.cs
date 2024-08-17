@@ -4,6 +4,7 @@ using RRMS.Infrastructure.Configuration;
 using RRMS.Microservices.API.Configuration.Extensions;
 using RRMS.Microservices.API.Options;
 using RRMS.Microservices.Infrastructure.Options;
+using System.Reflection;
 
 namespace RRMS.API.Configuration;
 
@@ -23,7 +24,7 @@ public static class ServicesConfiguration
             .AddHttpClient()
             .AddMemoryCache()
             .AddEndpointsApiExplorer()
-            .ConfigureSwaggerApi("v1", "RRMS API")
+            .ConfigureSwaggerApi("v1", "RRMS API", Assembly.GetExecutingAssembly().GetName().Name)
             .ConfigureCORS(corsOptions)
             .ConfigureMassTransit()
             .AddControllers();

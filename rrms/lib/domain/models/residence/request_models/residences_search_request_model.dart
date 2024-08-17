@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ResidencesRequestModel {
+class ResidencesSearchRequestModel {
   final String? searchTerm;
   final int? cityId;
   final double? priceFrom;
@@ -10,7 +10,7 @@ class ResidencesRequestModel {
   final int? numberOfRooms;
   final ResidenceType? type;
 
-  ResidencesRequestModel({
+  ResidencesSearchRequestModel({
     this.searchTerm,
     this.cityId,
     this.priceFrom,
@@ -21,7 +21,7 @@ class ResidencesRequestModel {
     this.type,
   });
 
-  ResidencesRequestModel copyWith({
+  ResidencesSearchRequestModel copyWith({
     String? searchTerm,
     int? cityId,
     double? priceFrom,
@@ -31,7 +31,7 @@ class ResidencesRequestModel {
     int? numberOfRooms,
     ResidenceType? type,
   }) {
-    return ResidencesRequestModel(
+    return ResidencesSearchRequestModel(
       searchTerm: searchTerm ?? this.searchTerm,
       cityId: cityId ?? this.cityId,
       priceFrom: priceFrom ?? this.priceFrom,
@@ -45,14 +45,14 @@ class ResidencesRequestModel {
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      'searchTerm': searchTerm,
-      'cityId': cityId,
-      'priceFrom': priceFrom,
-      'priceTo': priceTo,
-      'sizeFrom': sizeFrom,
-      'sizeTo': sizeTo,
-      'numberOfRooms': numberOfRooms,
-      'type': type,
+      if (searchTerm != null) 'searchTerm': searchTerm,
+      if (cityId != null) 'cityId': cityId,
+      if (priceFrom != null) 'priceFrom': priceFrom,
+      if (priceTo != null) 'priceTo': priceTo,
+      if (sizeFrom != null) 'sizeFrom': sizeFrom,
+      if (sizeTo != null) 'sizeTo': sizeTo,
+      if (numberOfRooms != null) 'numberOfRooms': numberOfRooms,
+      if (type != null) 'type': type,
     };
   }
 }

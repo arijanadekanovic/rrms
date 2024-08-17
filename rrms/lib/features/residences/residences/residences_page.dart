@@ -13,7 +13,7 @@ class ResidencesPage extends StatelessWidget {
           create: (context) => services.get<ResidencesCubit>()..load(),
           child: BlocBuilder<ResidencesCubit, ResidencesState>(
             builder: (context, residencesState) {
-              if (residencesState.status == ResidencesStateStatus.loading) {
+              if (residencesState.status == ResidencesStateStatus.loading && residencesState.residences.isNullOrEmpty) {
                 return ResidencesShimmer();
               }
 

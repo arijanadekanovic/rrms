@@ -25,7 +25,7 @@ public sealed class ResidencesQueryHandler : IQueryHandler<ResidencesQuery, List
 
         var residences = await _databaseContext.Residences
                 .Where(x => !x.IsDeleted)
-                .Where(x => string.IsNullOrEmpty(searchTerm) || x.Name.ToLower().StartsWith(searchTerm))
+                .Where(x => string.IsNullOrEmpty(searchTerm) || x.Name.ToLower().Contains(searchTerm))
                 .Where(x => request.CityId == null || x.CityId == request.CityId)
                 .Where(x => request.PriceFrom == null || x.RentPrice >= request.PriceFrom)
                 .Where(x => request.PriceTo == null || x.RentPrice <= request.PriceTo)

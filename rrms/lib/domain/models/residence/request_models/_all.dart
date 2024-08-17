@@ -1,1 +1,1 @@
-export 'residences_request_model.dart';
+export 'residences_search_request_model.dart';

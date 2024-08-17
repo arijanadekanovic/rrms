@@ -4,6 +4,7 @@ using RRMS.Microservices.Infrastructure.Options;
 using RRMS.Storage.API.Configuration.Extensions;
 using RRMS.Storage.Application.Configuration;
 using RRMS.Storage.Infrastructure.Configuration;
+using System.Reflection;
 
 namespace RRMS.Storage.API.Configuration;
 
@@ -23,7 +24,7 @@ public static class ServicesConfiguration
             .AddHttpClient()
             .AddMemoryCache()
             .AddEndpointsApiExplorer()
-            .ConfigureSwaggerApi("v1", "RRMS Account API")
+            .ConfigureSwaggerApi("v1", "RRMS Account API", Assembly.GetExecutingAssembly().GetName().Name)
             .ConfigureCORS(corsOptions)
             .ConfigureMassTransit()
             .AddControllers();

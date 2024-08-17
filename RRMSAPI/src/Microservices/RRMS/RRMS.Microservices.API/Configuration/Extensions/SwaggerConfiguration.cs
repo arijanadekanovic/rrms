@@ -6,11 +6,13 @@ namespace RRMS.Microservices.API.Configuration.Extensions;
 
 public static class SwaggerConfiguration
 {
-    public static IServiceCollection ConfigureSwaggerApi(this IServiceCollection services, string version, string title)
+    public static IServiceCollection ConfigureSwaggerApi(this IServiceCollection services, string version, string title, string assemblyName)
     {
         services.AddSwaggerGen(options =>
         {
             options.CustomSchemaIds(type => type.ToString());
+            options.SupportNonNullableReferenceTypes();
+            options.EnableAnnotations();
 
             options.SwaggerDoc(version, new OpenApiInfo
             {
@@ -42,6 +44,10 @@ public static class SwaggerConfiguration
                     Array.Empty<string>()
                 }
             });
+
+            var xmlFilename = $"{assemblyName}.xml";
+            var path = Path.Combine(AppContext.BaseDirectory, xmlFilename);
+            options.IncludeXmlComments(path);
         });
 
         return services;

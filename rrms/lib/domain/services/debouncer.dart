@@ -1,4 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:rrms/_all.dart';
+
+Debouncer get debouncer => services.get<Debouncer>();
 
 abstract class Debouncer {
   void debounce(
