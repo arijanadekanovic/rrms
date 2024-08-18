@@ -15,7 +15,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   bottom_picker: ^2.8.0
   cached_network_image: ^3.3.1
-  connectivity_plus: ^6.0.3
+  connectivity_plus: ^6.0.5
   easy_debounce: ^2.0.3
   equatable: ^2.0.5
   expandable: ^5.0.1
@@ -50,9 +50,9 @@ dev_dependencies:
   analyzer: ^6.4.1
   build_runner: ^2.4.9
   flutter_lints: ^4.0.0
-  # flugger: ^0.1.5
-  flugger: 
-    path: S:/Development/Projects/flugger
+  flugger: ^0.1.6
+  # flugger: 
+  #   path: S:/Development/Projects/flugger
   
 
 flutter:
