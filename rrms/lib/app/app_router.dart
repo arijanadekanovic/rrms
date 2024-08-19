@@ -1,7 +1,5 @@
 import 'package:rrms/_all.dart';
 
-import '../features/notifications/notifications_page.dart';
-
 GoRouter appRouter = GoRouter(
   errorBuilder: (_, state) => const AppNavigation(),
   routes: <RouteBase>[

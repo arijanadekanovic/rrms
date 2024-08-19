@@ -11,7 +11,29 @@ class NotificationsPage extends StatelessWidget {
       appBar: const RRMSAppBar(
         title: 'Notifications',
       ),
-      body: Text('Notifications Page'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: BlocProvider(
+          create: (context) => services.get<NotificationsCubit>()..load(),
+          child: BlocBuilder<NotificationsCubit, NotificationsState>(
+            builder: (context, notificationsState) {
+              if (notificationsState.status == NotificationsStateStatus.loading && notificationsState.notifications.isNullOrEmpty) {
+                return Loader();
+                // return NotificationsShimmer();
+              }
+
+              return ListView.separated(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                itemCount: notificationsState.notifications.count,
+                itemBuilder: (context, index) {
+                  return NotificationListTile(notification: notificationsState.notifications[index]);
+                },
+                separatorBuilder: (BuildContext context, int index) => const Gap(15),
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }
