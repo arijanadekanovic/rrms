@@ -1,5 +1,7 @@
 import 'package:rrms/_all.dart';
 
+import '../features/notifications/notifications_page.dart';
+
 GoRouter appRouter = GoRouter(
   errorBuilder: (_, state) => const AppNavigation(),
   routes: <RouteBase>[
@@ -16,6 +18,10 @@ GoRouter appRouter = GoRouter(
           builder: (_, state) => ResidenceDetailsPage(
             residence: state.extra as ResidenceResponseModel,
           ),
+        ),
+        GoRoute(
+          path: NotificationsPage.route.withoutFirstSlash,
+          builder: (_, state) => const NotificationsPage(),
         ),
         GoRoute(
           path: ProfileUpdatePage.route.withoutFirstSlash,
