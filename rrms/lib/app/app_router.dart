@@ -18,6 +18,10 @@ GoRouter appRouter = GoRouter(
           ),
         ),
         GoRoute(
+          path: NotificationsPage.route.withoutFirstSlash,
+          builder: (_, state) => const NotificationsPage(),
+        ),
+        GoRoute(
           path: ProfileUpdatePage.route.withoutFirstSlash,
           builder: (_, state) => const ProfileUpdatePage(),
         ),

@@ -27,6 +27,7 @@ class HomeAppBar extends StatelessWidget {
         IconButton(
           onPressed: () {
             // TODO: Push new notifications list page here
+            context.push(NotificationsPage.route);
           },
           icon: Icon(
             Icons.notifications_none_rounded,

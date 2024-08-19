@@ -50,9 +50,7 @@ dev_dependencies:
   analyzer: ^6.4.1
   build_runner: ^2.4.9
   flutter_lints: ^4.0.0
-  flugger: ^0.1.6
-  # flugger: 
-  #   path: S:/Development/Projects/flugger
+  flugger: ^0.1.8
   
 
 flutter:

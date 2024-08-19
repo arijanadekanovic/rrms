@@ -26,6 +26,7 @@ namespace RRMS.Application.Features.Payment.Queries.PaymentsQuery
         public async Task<Result<List<PaymentQueryResult>>> Handle(PaymentsQuery request, CancellationToken cancellationToken)
         {
             var payments = await _databaseContext.Payments
+                .Where(x => !x.IsDeleted)
                 .Where(x => x.Resident.User.Id == _currentUser.Id)
                 .Where(x => request.FromDateUtc == null || x.CreatedOnUtc >= request.FromDateUtc)
                 .Where(x => request.ToDateUtc == null || x.CreatedOnUtc <= request.ToDateUtc)
