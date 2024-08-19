@@ -1,5 +1,10 @@
 generic_imports: 
   - 'package:rrms/_all.dart'
+models_to_ignore: 
+  - 'NotificationType'
+  - 'ResidenceType'
+  - 'SignUpRequestModel'
+  - 'PaymentResponseModel'
 url: 'https://486d-213-91-110-31.ngrok-free.app/swagger/v1/swagger.json' 
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'

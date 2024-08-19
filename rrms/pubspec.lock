@@ -397,10 +397,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flugger
-      sha256: c541a81da7a801f146cd1f933bee91b7ef246764b82ab38f00ab4a9096a55b19
+      sha256: f06ff6ee8a3c162ab5d2c276d949d54ebfaba7d60eff238275ca9c07755f6453
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.6"
+    version: "0.1.8"
   flutter:
     dependency: "direct main"
     description: flutter
