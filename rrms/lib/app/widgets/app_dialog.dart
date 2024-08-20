@@ -6,6 +6,7 @@ Future<bool?> showAppDialog(
 ) async {
   return await showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (context) => AppDialog(model: model),
   );
 }
@@ -87,7 +88,7 @@ class AppDialog extends StatelessWidget {
                         Expanded(
                           child: Text(
                             model.title.value,
-                            style: context.textStyle.t20600,
+                            style: context.textStyle.t18500,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

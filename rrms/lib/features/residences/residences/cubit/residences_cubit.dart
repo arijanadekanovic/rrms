@@ -20,4 +20,8 @@ class ResidencesCubit extends Cubit<ResidencesState> {
       ),
     );
   }
+
+  void updateSearchModel(ResidencesSearchRequestModel searchModel) {
+    emit(state.copyWith(searchModel: searchModel));
+  }
 }

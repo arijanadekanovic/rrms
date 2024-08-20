@@ -12,6 +12,7 @@ class StateManagementConfiguration {
     final authRepository = services.get<AuthRepository>();
     final accountRepository = services.get<AccountRepository>();
     final configRepository = services.get<ConfigRepository>();
+    final citiesRepository = services.get<CitiesRepository>();
 
     services.registerSingleton<IEventBus>(EventBus());
 
@@ -24,6 +25,7 @@ class StateManagementConfiguration {
     services.registerSingleton(SignOutCubit(authRepository: authRepository));
 
     services.registerSingleton(ProfileCubit(accountRepository: accountRepository));
+    services.registerSingleton(CitiesCubit(citiesRepository: citiesRepository));
   }
 
   static void configureScoped() {

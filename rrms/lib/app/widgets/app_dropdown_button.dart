@@ -3,6 +3,7 @@ import 'package:rrms/_all.dart';
 class AppDropdownButton extends StatelessWidget {
   final String? title;
   final String? label;
+  final String? hint;
   final Widget? child;
   final String? errorMessage;
   final void Function()? onTap;
@@ -17,6 +18,7 @@ class AppDropdownButton extends StatelessWidget {
     super.key,
     this.title,
     this.label,
+    this.hint,
     this.child,
     this.errorMessage,
     this.onTap,
@@ -33,6 +35,10 @@ class AppDropdownButton extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (label.isNotNullOrEmpty) ...{
+          Text(label.value, style: context.textStyle.t14500),
+          const Gap(10),
+        },
         Stack(
           clipBehavior: Clip.none,
           children: [
@@ -57,13 +63,13 @@ class AppDropdownButton extends StatelessWidget {
                   shrinkWrap
                       ? child ??
                           Text(
-                            title ?? label.value,
+                            title ?? hint.value,
                             style: title.isNotNullOrEmpty ? context.textStyle.t16400 : context.secondaryTextStyle.t16400,
                           )
                       : Expanded(
                           child: child ??
                               Text(
-                                title ?? label.value,
+                                title ?? hint.value,
                                 style: title.isNotNullOrEmpty ? context.textStyle.t16400 : context.secondaryTextStyle.t16400,
                               ),
                         ),

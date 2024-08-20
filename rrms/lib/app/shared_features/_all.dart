@@ -3,6 +3,7 @@ export 'app_pdf_viewer/_all.dart';
 export 'app_url_launcher/_all.dart';
 export 'app_webview/_all.dart';
 export 'auth/_all.dart';
+export 'cities/_all.dart';
 export 'connectivity/_all.dart';
 export 'error_handler/_all.dart';
 export 'event_bus/_all.dart';

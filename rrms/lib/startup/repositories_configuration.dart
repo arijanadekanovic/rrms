@@ -33,5 +33,10 @@ class RepositoriesConfiguration {
         restApiClient: services.get<RestApiClient>(),
       ),
     );
+    services.registerSingleton<CitiesRepository>(
+      CitiesRepositoryImpl(
+        restApiClient: services.get<RestApiClient>(),
+      ),
+    );
   }
 }
