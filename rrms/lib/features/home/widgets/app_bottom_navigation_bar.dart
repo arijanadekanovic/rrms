@@ -20,8 +20,8 @@ class AppBottomNavigationBar extends StatelessWidget {
           ),
         ),
       ),
-      child: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, authState) {
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, profileState) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -34,14 +34,15 @@ class AppBottomNavigationBar extends StatelessWidget {
                   data: AppBottomNavigationBar.navigationKeyResidences,
                 ),
               ),
-              Expanded(
-                child: AppBottomNavigationBarItem(
-                  icon: Icons.payment_outlined,
-                  label: 'Payments',
-                  index: 1,
-                  data: AppBottomNavigationBar.navigationKeyPayments,
+              if (profileState.isResident)
+                Expanded(
+                  child: AppBottomNavigationBarItem(
+                    icon: Icons.payment_outlined,
+                    label: 'Payments',
+                    index: 1,
+                    data: AppBottomNavigationBar.navigationKeyPayments,
+                  ),
                 ),
-              ),
               Expanded(
                 child: AppBottomNavigationBarItem(
                   icon: Icons.chat_bubble_outline,

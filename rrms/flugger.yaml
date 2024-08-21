@@ -3,6 +3,7 @@ generic_imports:
 models_to_ignore: 
   - 'NotificationType'
   - 'ResidenceType'
+  - 'AccountDetailsResponseModel'
   - 'SignUpRequestModel'
   - 'PaymentResponseModel'
 url: 'https://8ebc-2a02-27b0-5504-f670-dc9f-e03f-2e61-95e8.ngrok-free.app/swagger/v1/swagger.json' 

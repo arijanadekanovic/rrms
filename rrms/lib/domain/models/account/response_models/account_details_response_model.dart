@@ -8,7 +8,7 @@ class AccountDetailsResponseModel {
   final String? username;
   final String? phoneNumber;
   final String? profilePhotoUrl;
-  final List<String>? roles;
+  final List<AppRole>? roles;
 
   AccountDetailsResponseModel({
     this.id,
@@ -30,7 +30,7 @@ class AccountDetailsResponseModel {
       username: json.parseValue('username'),
       phoneNumber: json.parseValue('phoneNumber'),
       profilePhotoUrl: json.parseValue('profilePhotoUrl'),
-      roles: json.parseList('roles'),
+      roles: json['roles'].map<AppRole>((x) => AppRole.parse(x)).toList(),
     );
   }
 }
