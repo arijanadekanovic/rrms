@@ -39,4 +39,5 @@ export 'more_button.dart';
 export 'rrms_app_bar.dart';
 export 'rrms_basic_app_bar.dart';
 export 'orientation_layout_builder.dart';
+export 'residence_type_form_field.dart';
 export 'responsive_layout_builder.dart';

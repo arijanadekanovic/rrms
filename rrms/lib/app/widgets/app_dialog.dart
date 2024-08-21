@@ -6,7 +6,6 @@ Future<bool?> showAppDialog(
 ) async {
   return await showDialog(
     context: context,
-    barrierDismissible: false,
     builder: (context) => AppDialog(model: model),
   );
 }
