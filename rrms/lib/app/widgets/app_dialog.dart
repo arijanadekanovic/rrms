@@ -87,7 +87,7 @@ class AppDialog extends StatelessWidget {
                         Expanded(
                           child: Text(
                             model.title.value,
-                            style: context.textStyle.t20600,
+                            style: context.textStyle.t18500,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),

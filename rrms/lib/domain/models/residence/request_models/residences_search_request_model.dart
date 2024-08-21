@@ -52,7 +52,7 @@ class ResidencesSearchRequestModel {
       if (sizeFrom != null) 'sizeFrom': sizeFrom,
       if (sizeTo != null) 'sizeTo': sizeTo,
       if (numberOfRooms != null) 'numberOfRooms': numberOfRooms,
-      if (type != null) 'type': type,
+      if (type != null) 'type': type?.index,
     };
   }
 }

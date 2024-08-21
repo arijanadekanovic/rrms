@@ -28,7 +28,7 @@ class AppBottomNavigationBar extends StatelessWidget {
             children: [
               Expanded(
                 child: AppBottomNavigationBarItem(
-                  icon: Icons.house,
+                  icon: Icons.home,
                   label: 'Residences',
                   index: 0,
                   data: AppBottomNavigationBar.navigationKeyResidences,
