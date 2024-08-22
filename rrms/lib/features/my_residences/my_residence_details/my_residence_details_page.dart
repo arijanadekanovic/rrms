@@ -40,7 +40,7 @@ class MyResidenceDetailsPage extends StatelessWidget {
               child: Row(
                 children: [
                   _TabButton(text: 'Overview', index: 0),
-                  _TabButton(text: 'Tenants', index: 1),
+                  _TabButton(text: 'Residents', index: 1),
                   _TabButton(text: 'Payments', index: 2),
                 ],
               ),
