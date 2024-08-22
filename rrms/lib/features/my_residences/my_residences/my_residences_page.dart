@@ -10,24 +10,46 @@ class MyResidencesPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(
-          create: (context) => services.get<MyResidencesCubit>()..load(),
-          child: BlocBuilder<MyResidencesCubit, MyResidencesState>(
+          create: (context) => services.get<ResidencesCubit>()..load(ResidencesSearchRequestModel(ownedByMe: true)),
+          child: BlocBuilder<ResidencesCubit, ResidencesState>(
             builder: (context, residencesState) {
-              if (residencesState.status == MyResidencesStateStatus.loading && residencesState.myResidences.isNullOrEmpty) {
+              if (residencesState.status == ResidencesStateStatus.loading && residencesState.residences.isNullOrEmpty) {
                 return ResidencesShimmer();
               }
 
               return ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 15),
-                itemCount: residencesState.myResidences.count,
+                itemCount: residencesState.residences.count,
                 itemBuilder: (context, index) {
-                  return MyResidenceListTile(myResidence: residencesState.myResidences[index]);
+                  final residence = residencesState.residences[index];
+
+                  return ResidenceListTile(
+                    onTap: () => context.push(MyResidenceDetailsPage.route, extra: residence),
+                    residence: residence,
+                  );
                 },
                 separatorBuilder: (BuildContext context, int index) => const Gap(15),
               );
             },
           ),
         ),
+      ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Button(
+            onTap: () {
+              // TODO: PUSH RESIDENCE ADD PAGE
+            },
+            primary: true,
+            shrinkWrap: true,
+            borderRadius: 50,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }

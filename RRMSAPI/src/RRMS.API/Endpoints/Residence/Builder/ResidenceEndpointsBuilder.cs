@@ -8,7 +8,6 @@ internal static class ResidenceEndpointsBuilder
             .MapGroup("residence");
 
         residenceRouteGroupBuilder
-            .MapMyResidencesEndpoint()
             .MapResidenceDetailsEndpoint()
             .MapResidencesEndpoint();
 

@@ -18,6 +18,12 @@ GoRouter appRouter = GoRouter(
           ),
         ),
         GoRoute(
+          path: MyResidenceDetailsPage.route.withoutFirstSlash,
+          builder: (_, state) => MyResidenceDetailsPage(
+            residence: state.extra as ResidenceResponseModel,
+          ),
+        ),
+        GoRoute(
           path: NotificationsPage.route.withoutFirstSlash,
           builder: (_, state) => const NotificationsPage(),
         ),

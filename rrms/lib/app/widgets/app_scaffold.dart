@@ -4,12 +4,14 @@ class AppScaffold extends StatelessWidget {
   final Widget? appBar;
   final Widget? body;
   final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
 
   const AppScaffold({
     super.key,
     this.appBar,
     this.body,
     this.bottomNavigationBar,
+    this.floatingActionButton,
   });
 
   @override
@@ -22,6 +24,7 @@ class AppScaffold extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
     );
   }
 }

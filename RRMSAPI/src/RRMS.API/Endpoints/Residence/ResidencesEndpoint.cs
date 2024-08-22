@@ -28,6 +28,7 @@ internal static class ResidencesEndpoint
             SizeTo = request.SizeTo,
             NumberOfRooms = request.NumberOfRooms,
             Type = request.Type,
+            OwnedByMe = request.OwnedByMe,
         };
 
         var result = await sender.Send(query, cancellationToken);
@@ -60,6 +61,7 @@ public class ResidencesSearchRequest
     public double? SizeTo { get; set; }
     public int? NumberOfRooms { get; set; }
     public ResidenceType? Type { get; set; }
+    public bool? OwnedByMe { get; set; }
 }
 
 public record ResidenceResponse

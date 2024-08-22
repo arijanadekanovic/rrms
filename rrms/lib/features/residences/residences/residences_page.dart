@@ -25,7 +25,12 @@ class ResidencesPage extends StatelessWidget {
                     return ResidencesFilters();
                   }
 
-                  return ResidenceListTile(residence: residencesState.residences[index - 1]);
+                  final residence = residencesState.residences[index - 1];
+
+                  return ResidenceListTile(
+                    onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+                    residence: residence,
+                  );
                 },
                 separatorBuilder: (BuildContext context, int index) => const Gap(15),
               );
