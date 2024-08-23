@@ -3,6 +3,7 @@ import 'package:rrms/_all.dart';
 abstract class ResidencesRepository {
   Future<Result<List<ResidenceResponseModel>>> get(ResidencesSearchRequestModel searchModel);
   Future<Result<ResidenceDetailsResponseModel>> getById(int id);
+  Future<Result> delete(int id);
 }
 
 class ResidencesRepositoryImpl implements ResidencesRepository {
@@ -29,6 +30,13 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
       '/api/residence/details/$id',
       parser: (data) => ResidenceDetailsResponseModel.fromJson(data),
     );
+
+    return result;
+  }
+
+  @override
+  Future<Result> delete(int id) async {
+    final result = await restApiClient.delete('/api/residence/$id');
 
     return result;
   }

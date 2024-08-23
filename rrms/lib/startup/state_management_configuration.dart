@@ -42,6 +42,7 @@ class StateManagementConfiguration {
     services.registerFactoryParam((String url, _) => AppPdfViewerCubit(url: url));
 
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
+    services.registerFactory(() => ResidenceDeleteCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidentsCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => NotificationsCubit(notificationsRepository: notificationsRepository));

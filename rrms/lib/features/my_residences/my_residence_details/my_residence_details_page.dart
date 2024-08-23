@@ -22,12 +22,7 @@ class MyResidenceDetailsPage extends StatelessWidget {
             },
             icon: Icon(Icons.edit),
           ),
-          IconButton(
-            onPressed: () {
-              // TODO: SHOW WARNING DIALOG TO DELETE RESIDENCE
-            },
-            icon: Icon(Icons.delete, color: context.appTheme.danger),
-          ),
+          ResidenceDeleteButton(id: residence.id.value),
           const Gap(10),
         ],
       ),
