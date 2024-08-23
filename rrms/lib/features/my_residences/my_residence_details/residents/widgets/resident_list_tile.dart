@@ -41,6 +41,21 @@ class ResidentListTile extends StatelessWidget {
                   style: context.textStyle.t14600.withColor(resident.status?.color(context.appTheme) ?? Colors.black),
                 ),
               ],
+            ),
+            const Gap(20),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    resident.contractStartDate.format(),
+                    style: context.textStyle.t14500,
+                  ),
+                ),
+                Text(
+                  resident.contractEndDate.format(),
+                  style: context.textStyle.t14500,
+                ),
+              ],
             )
           ],
         ),
