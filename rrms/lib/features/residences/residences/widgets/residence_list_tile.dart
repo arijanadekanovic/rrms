@@ -2,16 +2,18 @@ import 'package:rrms/_all.dart';
 
 class ResidenceListTile extends StatelessWidget {
   final ResidenceResponseModel residence;
+  final void Function()? onTap;
 
   const ResidenceListTile({
     super.key,
     required this.residence,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Clickable(
-      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+      onTap: onTap,
       borderRadius: BorderRadius.circular(10),
       child: Container(
         padding: EdgeInsets.all(15),

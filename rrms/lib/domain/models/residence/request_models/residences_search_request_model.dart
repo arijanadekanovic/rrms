@@ -9,6 +9,7 @@ class ResidencesSearchRequestModel {
   final double? sizeTo;
   final int? numberOfRooms;
   final ResidenceType? type;
+  final bool? ownedByMe;
 
   ResidencesSearchRequestModel({
     this.searchTerm,
@@ -19,6 +20,7 @@ class ResidencesSearchRequestModel {
     this.sizeTo,
     this.numberOfRooms,
     this.type,
+    this.ownedByMe,
   });
 
   ResidencesSearchRequestModel copyWith({
@@ -30,6 +32,7 @@ class ResidencesSearchRequestModel {
     double? sizeTo,
     int? numberOfRooms,
     ResidenceType? type,
+    bool? ownedByMe,
   }) {
     return ResidencesSearchRequestModel(
       searchTerm: searchTerm ?? this.searchTerm,
@@ -40,6 +43,7 @@ class ResidencesSearchRequestModel {
       sizeTo: sizeTo ?? this.sizeTo,
       numberOfRooms: numberOfRooms ?? this.numberOfRooms,
       type: type ?? this.type,
+      ownedByMe: ownedByMe ?? this.ownedByMe,
     );
   }
 
@@ -53,6 +57,7 @@ class ResidencesSearchRequestModel {
       if (sizeTo != null) 'sizeTo': sizeTo,
       if (numberOfRooms != null) 'numberOfRooms': numberOfRooms,
       if (type != null) 'type': type?.index,
+      if (ownedByMe != null) 'ownedByMe': ownedByMe,
     };
   }
 }

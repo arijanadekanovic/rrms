@@ -13,7 +13,6 @@ class ResidencesFilters extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: _SearchTextField()),
-            _HistoryButton(),
             _FiltersButton(),
           ],
         ),
@@ -55,24 +54,6 @@ class _SearchTextField extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
-  }
-}
-
-class _HistoryButton extends StatelessWidget {
-  const _HistoryButton();
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
-        Icons.history,
-        size: 28,
-        color: context.appTheme.accentColor,
-      ),
-      onPressed: () {
-        // TODO: PUSH RESIDENCES HISTORY FOR CURRENT USER (WHERE THEY WERE RESIDENT)
       },
     );
   }

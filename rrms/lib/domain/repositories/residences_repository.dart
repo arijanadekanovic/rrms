@@ -17,7 +17,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
     final result = await restApiClient.get<List<ResidenceResponseModel>>(
       '/api/residence/residences',
       queryParameters: searchModel.toJson(),
-      parser: (data) => data.map<ResidenceResponseModel>((x) => ResidenceResponseModel.fromJson(x)).toList(),
+      parser: (data) => parseList(data, ResidenceResponseModel.fromJson),
     );
 
     return result;

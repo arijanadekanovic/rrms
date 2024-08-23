@@ -42,7 +42,7 @@ extension MapStringDynamicX on Map<String, dynamic>? {
     return (this == null || this?[key] == null) ? null : parser?.call(this![key]) ?? this![key];
   }
 
-  List<T> parseList<T>(String key, [T Function(Map<String, dynamic> map)? parser]) {
+  List<T> parseList<T>(String key, [T Function(dynamic map)? parser]) {
     return this?[key]?.map<T>((x) => parser?.call(x) ?? x as T)?.toList() ?? [];
   }
 }
@@ -78,4 +78,3 @@ List<T> parseList<T>(List<dynamic>? map, [T Function(Map<String, dynamic> map)? 
 }
 
 TimeOfDay? parseTimeOfDay(String? value) => value != null ? TimeOfDay(hour: int.parse(value.split(':')[0]), minute: int.parse(value.split(':')[1])) : null;
-  

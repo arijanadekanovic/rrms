@@ -1,7 +1,8 @@
 import 'package:rrms/_all.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
-  static const String navigationKeyResidences = 'app-bottom-navigation-bar-apartments';
+  static const String navigationKeyResidences = 'app-bottom-navigation-bar-residences';
+  static const String navigationKeyMyResidences = 'app-bottom-navigation-bar-my-residences';
   static const String navigationKeyPayments = 'app-bottom-navigation-bar-payments';
 
   const AppBottomNavigationBar({
@@ -20,8 +21,8 @@ class AppBottomNavigationBar extends StatelessWidget {
           ),
         ),
       ),
-      child: BlocBuilder<AuthCubit, AuthState>(
-        builder: (context, authState) {
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, profileState) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -34,19 +35,29 @@ class AppBottomNavigationBar extends StatelessWidget {
                   data: AppBottomNavigationBar.navigationKeyResidences,
                 ),
               ),
-              Expanded(
-                child: AppBottomNavigationBarItem(
-                  icon: Icons.payment_outlined,
-                  label: 'Payments',
-                  index: 1,
-                  data: AppBottomNavigationBar.navigationKeyPayments,
+              if (profileState.isResident)
+                Expanded(
+                  child: AppBottomNavigationBarItem(
+                    icon: Icons.payment_outlined,
+                    label: 'Payments',
+                    index: 1,
+                    data: AppBottomNavigationBar.navigationKeyPayments,
+                  ),
                 ),
-              ),
+              if (profileState.isLandlord)
+                Expanded(
+                  child: AppBottomNavigationBarItem(
+                    icon: Icons.home_outlined,
+                    label: 'My Residences',
+                    index: 2,
+                    data: AppBottomNavigationBar.navigationKeyMyResidences,
+                  ),
+                ),
               Expanded(
                 child: AppBottomNavigationBarItem(
                   icon: Icons.chat_bubble_outline,
                   label: 'Chat',
-                  index: 2,
+                  index: 3,
                   data: AppBottomNavigationBar.navigationKeyPayments,
                 ),
               ),
@@ -54,7 +65,7 @@ class AppBottomNavigationBar extends StatelessWidget {
                 child: AppBottomNavigationBarItem(
                   icon: Icons.person,
                   label: 'Profile',
-                  index: 3,
+                  index: 4,
                 ),
               ),
             ],

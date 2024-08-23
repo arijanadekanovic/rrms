@@ -13,4 +13,5 @@ public sealed record ResidencesQuery() : IQuery<List<ResidenceQueryResult>>
     public double? SizeTo { get; set; }
     public int? NumberOfRooms { get; set; }
     public ResidenceType? Type { get; set; }
+    public bool? OwnedByMe { get; set; }
 }

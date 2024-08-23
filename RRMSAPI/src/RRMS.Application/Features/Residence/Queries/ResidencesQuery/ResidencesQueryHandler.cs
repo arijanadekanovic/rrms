@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RRMS.Application.Abstractions.Persistance;
+using RRMS.Microservices.Application.Abstractions.Services.Identity;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
@@ -8,15 +9,19 @@ namespace RRMS.Application.Features.Residence.Queries.ResidencesQuery;
 public sealed class ResidencesQueryHandler : IQueryHandler<ResidencesQuery, List<ResidenceQueryResult>>
 {
     private readonly IDatabaseContext _databaseContext;
+    private readonly ICurrentUser _currentUser;
 
     public ResidencesQueryHandler
     (
-        IDatabaseContext databaseContext
+        IDatabaseContext databaseContext,
+        ICurrentUser currentUser
     )
     {
         ArgumentNullException.ThrowIfNull(databaseContext);
+        ArgumentNullException.ThrowIfNull(currentUser);
 
         _databaseContext = databaseContext;
+        _currentUser = currentUser;
     }
 
     public async Task<Result<List<ResidenceQueryResult>>> Handle(ResidencesQuery request, CancellationToken cancellationToken)
@@ -25,6 +30,7 @@ public sealed class ResidencesQueryHandler : IQueryHandler<ResidencesQuery, List
 
         var residences = await _databaseContext.Residences
                 .Where(x => !x.IsDeleted)
+                .Where(x => request.OwnedByMe == null || request.OwnedByMe == false || (request.OwnedByMe == true && x.OwnerId == _currentUser.Id))
                 .Where(x => string.IsNullOrEmpty(searchTerm) || x.Name.ToLower().Contains(searchTerm))
                 .Where(x => request.CityId == null || x.CityId == request.CityId)
                 .Where(x => request.PriceFrom == null || x.RentPrice >= request.PriceFrom)

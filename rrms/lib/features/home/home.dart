@@ -22,8 +22,9 @@ class Home extends StatelessWidget {
                 return switch (navigationState.index) {
                   0 => const ResidencesPage(),
                   1 => const PaymentsPage(residenceName: 'residenceName'),
-                  2 => const Center(child: Text('Chat')),
-                  3 => const ProfilePage(),
+                  2 => const MyResidencesPage(),
+                  3 => const Center(child: Text('Chat')),
+                  4 => const ProfilePage(),
                   _ => const Center(child: Text('Invalid navigation index')),
                 };
               },

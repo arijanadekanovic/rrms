@@ -15,8 +15,11 @@ class AuthState implements Event {
     required this.status,
   });
 
-  factory AuthState.initial() => AuthState(status: AuthStateStatus.unAuthenticated);
+  factory AuthState.initial() => AuthState(
+        status: AuthStateStatus.unAuthenticated,
+      );
 
+  @override
   AuthState copyWith({
     AuthStateStatus? status,
   }) =>
