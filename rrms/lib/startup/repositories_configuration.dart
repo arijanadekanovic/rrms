@@ -23,6 +23,11 @@ class RepositoriesConfiguration {
         restApiClient: services.get<RestApiClient>(),
       ),
     );
+    services.registerSingleton<ResidentsRepository>(
+      ResidentsRepositoryImpl(
+        restApiClient: services.get<RestApiClient>(),
+      ),
+    );
     services.registerSingleton<NotificationsRepository>(
       NotificationsRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),

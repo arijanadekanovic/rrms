@@ -32,6 +32,7 @@ class StateManagementConfiguration {
     final authRepository = services.get<AuthRepository>();
     final accountRepository = services.get<AccountRepository>();
     final residencesRepository = services.get<ResidencesRepository>();
+    final residentsRepository = services.get<ResidentsRepository>();
     final notificationsRepository = services.get<NotificationsRepository>();
     final paymentsRepository = services.get<PaymentsRepository>();
 
@@ -42,6 +43,7 @@ class StateManagementConfiguration {
 
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
+    services.registerFactory(() => ResidentsCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => NotificationsCubit(notificationsRepository: notificationsRepository));
     services.registerFactory(() => PaymentsCubit(paymentsRepository: paymentsRepository));
     services.registerFactory(() => SignInCubit(authRepository: authRepository, modelValidator: services.get<SignInRequestModelValidator>()));

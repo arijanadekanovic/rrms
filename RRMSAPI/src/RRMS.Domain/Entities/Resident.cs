@@ -5,8 +5,8 @@ namespace RRMS.Domain.Entities;
 
 public class Resident : AggregateRoot
 {
-    public DateTime ContractStartDate { get; set; }
-    public DateTime? ContractEndDate { get; set; }
+    public DateTime ContractStartDateUtc { get; set; }
+    public DateTime? ContractEndDateUtc { get; set; }
     public ResidentStatus Status { get; set; }
 
     public string UserId { get; set; }

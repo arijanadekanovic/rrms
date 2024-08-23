@@ -81,9 +81,44 @@ internal static class ResidenceSeeder
                     new Resident
                     {
                         UserId = resident.Id,
+                        Status = ResidentStatus.Rejected,
+                        ContractStartDateUtc = new DateTime(2015, 8, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2016, 8, (1 + i) % 28),
+                    },
+                    new Resident
+                    {
+                        UserId = resident.Id,
                         Status = ResidentStatus.ContractExpired,
-                        ContractStartDate = new DateTime(2020, 8, (1 + i) % 28),
-                        ContractEndDate = new DateTime(2021, 8, (1 + i) % 28),
+                        ContractStartDateUtc = new DateTime(2015, 8, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2016, 8, (1 + i) % 28),
+                    },
+                    new Resident
+                    {
+                        UserId = resident.Id,
+                        Status = ResidentStatus.ContractExpired,
+                        ContractStartDateUtc = new DateTime(2016, 8, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2017, 8, (1 + i) % 28),
+                    },
+                    new Resident
+                    {
+                        UserId = resident.Id,
+                        Status = ResidentStatus.ContractExpired,
+                        ContractStartDateUtc = new DateTime(2017, 8, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2018, 8, (1 + i) % 28),
+                    },
+                    new Resident
+                    {
+                        UserId = resident.Id,
+                        Status = ResidentStatus.Active,
+                        ContractStartDateUtc = new DateTime(2024, 7, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2025, 7, (1 + i) % 28),
+                    },
+                    new Resident
+                    {
+                        UserId = resident.Id,
+                        Status = ResidentStatus.PendingRequest,
+                        ContractStartDateUtc = new DateTime(2025, 9, (1 + i) % 28),
+                        ContractEndDateUtc = new DateTime(2026, 9, (1 + i) % 28),
                     },
                 },
             };
