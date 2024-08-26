@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
               builder: (context, navigationState) {
                 return switch (navigationState.index) {
                   0 => const ResidencesPage(),
-                  1 => const PaymentsPage(residenceName: 'residenceName'),
+                  1 => const PaymentsPage(),
                   2 => const MyResidencesPage(),
                   3 => const Center(child: Text('Chat')),
                   4 => const ProfilePage(),
