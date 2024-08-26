@@ -31,6 +31,10 @@ GoRouter appRouter = GoRouter(
           path: ProfileUpdatePage.route.withoutFirstSlash,
           builder: (_, state) => const ProfileUpdatePage(),
         ),
+        GoRoute(
+          path: ResidenceAddPage.route.withoutFirstSlash,
+          builder: (_, state) => const ResidenceAddPage(),
+        ),
       ],
     ),
   ],

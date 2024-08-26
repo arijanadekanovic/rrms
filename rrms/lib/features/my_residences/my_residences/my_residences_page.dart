@@ -38,9 +38,7 @@ class MyResidencesPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Button(
-            onTap: () {
-              // TODO: PUSH RESIDENCE ADD PAGE
-            },
+            onTap: () => context.push(ResidenceAddPage.route),
             primary: true,
             shrinkWrap: true,
             borderRadius: 50,

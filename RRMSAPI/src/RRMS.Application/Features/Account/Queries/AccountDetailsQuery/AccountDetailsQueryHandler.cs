@@ -5,7 +5,7 @@ using RRMS.Microservices.Application.Abstractions.Services.Identity;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Account.Queries.AccountDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed class AccountDetailsQueryHandler : IQueryHandler<AccountDetailsQuery, AccountDetailsQueryResult>
 {

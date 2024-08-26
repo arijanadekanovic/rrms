@@ -1,6 +1,6 @@
 using RRMS.Microservices.SharedKernel.Messaging;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed record ResidenceDetailsQuery() : IQuery<ResidenceDetailsQueryResult>
 {

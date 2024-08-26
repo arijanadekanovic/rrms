@@ -20,6 +20,7 @@ class AppTextFormField extends StatefulWidget {
   final int maxLines;
   final FocusNode? focusNode;
   final TextEditingController? controller;
+  final TextInputType? textInputType;
 
   const AppTextFormField({
     super.key,
@@ -42,6 +43,7 @@ class AppTextFormField extends StatefulWidget {
     this.maxLines = 1,
     this.focusNode,
     this.controller,
+    this.textInputType,
   });
 
   @override
@@ -79,6 +81,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         onChanged: (value) => widget.onChanged?.call(value),
         style: context.textStyle.t14500,
         validator: widget.validator,
+        keyboardType: widget.textInputType,
         decoration: InputDecoration(
           hintText: widget.hint,
           hintStyle: context.secondaryTextStyle.t14500.copyWith(overflow: TextOverflow.ellipsis),

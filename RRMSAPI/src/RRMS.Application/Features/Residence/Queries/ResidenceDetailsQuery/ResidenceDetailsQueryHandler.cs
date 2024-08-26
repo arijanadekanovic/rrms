@@ -4,7 +4,7 @@ using RRMS.Domain.Errors;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed class ResidenceDetailsQueryHandler : IQueryHandler<ResidenceDetailsQuery, ResidenceDetailsQueryResult>
 {

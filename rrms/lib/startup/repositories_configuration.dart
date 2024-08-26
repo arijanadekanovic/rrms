@@ -21,6 +21,7 @@ class RepositoriesConfiguration {
     services.registerSingleton<ResidencesRepository>(
       ResidencesRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),
+        mediaStorageService: services.get<MediaStorageService>(),
       ),
     );
     services.registerSingleton<ResidentsRepository>(

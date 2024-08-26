@@ -1,6 +1,6 @@
 using RRMS.Microservices.SharedKernel.Messaging;
 
-namespace RRMS.Application.Features.Account.Commands.AccountUpdateCommand;
+namespace RRMS.Application.Features;
 
 public sealed record AccountUpdateCommand : ICommand
 {

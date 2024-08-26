@@ -1,6 +1,6 @@
 using RRMS.Domain.Enums;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed record ResidenceDetailsQueryResult
 {

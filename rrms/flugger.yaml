@@ -8,6 +8,7 @@ models_to_ignore:
   - 'SignUpRequestModel'
   - 'PaymentResponseModel'
   - 'ResidentResponseModel'
+  - 'ResidenceAddRequestModel'
 url: 'https://f2b9-2a02-27b0-5500-eeb0-bd37-9eef-7bd5-209c.ngrok-free.app/swagger/v1/swagger.json' 
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'

@@ -49,6 +49,7 @@ class StateManagementConfiguration {
     services.registerFactory(() => PaymentsCubit(paymentsRepository: paymentsRepository));
     services.registerFactory(() => SignInCubit(authRepository: authRepository, modelValidator: services.get<SignInRequestModelValidator>()));
     services.registerFactory(() => SignUpCubit(accountRepository: accountRepository, modelValidator: services.get<SignUpRequestModelValidator>()));
+    services.registerFactory(() => ResidenceAddCubit(residencesRepository: residencesRepository, modelValidator: services.get<ResidenceAddRequestModelValidator>()));
     services.registerFactory(() => ProfileUpdateCubit(accountRepository: accountRepository, modelValidator: services.get<AccountUpdateRequestModelValidator>()));
   }
 }

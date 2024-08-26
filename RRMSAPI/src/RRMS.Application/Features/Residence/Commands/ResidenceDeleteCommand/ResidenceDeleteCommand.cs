@@ -1,6 +1,6 @@
 using RRMS.Microservices.SharedKernel.Messaging;
 
-namespace RRMS.Application.Features.Residence.Commands.ResidenceDeleteCommand;
+namespace RRMS.Application.Features;
 
 public sealed record ResidenceDeleteCommand : ICommand
 {

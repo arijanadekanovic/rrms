@@ -6,7 +6,7 @@ using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 using RRMS.Microservices.Transport.Messages.Account.ProfilePhotoChanged;
 
-namespace RRMS.Application.Features.Account.Commands.AccountUpdateCommand;
+namespace RRMS.Application.Features;
 
 public sealed class AccountUpdateCommandHandler : ICommandHandler<AccountUpdateCommand>
 {

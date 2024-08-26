@@ -27,6 +27,7 @@ class ResidencesCubit extends EventReaderCubit<ResidencesState> {
 
   @override
   void onEvent(Object event) {
+    if (event is ResidenceAddState && event.status == ResidenceAddStateStatus.submittingSuccess) load();
     if (event is ResidenceDeleteState && event.status == ResidenceDeleteStateStatus.submittingSuccess) load();
   }
 }

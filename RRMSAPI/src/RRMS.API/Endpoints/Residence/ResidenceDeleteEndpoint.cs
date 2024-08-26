@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Residence.Commands.ResidenceDeleteCommand;
+using RRMS.Application.Features;
 using RRMS.Microservices.SharedKernel.Constants;
 
 namespace RRMS.API.Endpoints.Residence;
