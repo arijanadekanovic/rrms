@@ -26,7 +26,7 @@ class PaymentsRepositoryImpl implements PaymentsRepository {
   @override
   Future<Result<List<PaymentResponseModel>>> get() async {
     final result = await restApiClient.get<List<PaymentResponseModel>>(
-      '/api/payments',
+      '/api/payment/payments',
       parser: (data) => data.map<PaymentResponseModel>((x) => PaymentResponseModel.fromJson(x)).toList(),
     );
 
