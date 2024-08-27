@@ -43,7 +43,7 @@ class MyResidenceDetailsPage extends StatelessWidget {
             Expanded(
               child: BlocBuilder<NavigationCubit, NavigationState>(
                 builder: (context, navigationState) => switch (navigationState.index) {
-                  0 => ResidenceDetailsContent(residence: residence),
+                  0 => ResidenceDetailsContent(residence: residence, allowActions: false),
                   1 => ResidentsContent(residenceId: residence.id.value),
                   _ => const SizedBox(),
                 },

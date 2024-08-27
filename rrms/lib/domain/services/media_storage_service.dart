@@ -20,6 +20,7 @@ class MediaStorageServiceImpl implements MediaStorageService {
           'file': await MultipartFile.fromFile(fileInfo.path),
         },
       ),
+      parser: (data) => data['url'],
       options: RestApiClientRequestOptions(
         contentType: Headers.multipartFormDataContentType,
       ),

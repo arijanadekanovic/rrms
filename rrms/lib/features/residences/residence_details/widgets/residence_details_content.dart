@@ -2,10 +2,12 @@ import 'package:rrms/_all.dart';
 
 class ResidenceDetailsContent extends StatelessWidget {
   final ResidenceResponseModel residence;
+  final bool allowActions;
 
   const ResidenceDetailsContent({
     super.key,
     required this.residence,
+    this.allowActions = true,
   });
 
   @override
@@ -61,31 +63,33 @@ class ResidenceDetailsContent extends StatelessWidget {
                 Text('Description:', style: context.textStyle.t14500),
                 const Gap(10),
                 Text(details.description.value, style: context.textStyle.t14500),
-                const Gap(40),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Button(
-                        textStyle: context.textStyle.t16600,
-                        padding: EdgeInsets.all(10),
-                        primary: true,
-                        text: 'Message',
-                        onTap: () {},
+                if (allowActions) ...[
+                  const Gap(40),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Button(
+                          textStyle: context.textStyle.t16600,
+                          padding: EdgeInsets.all(10),
+                          primary: true,
+                          text: 'Message',
+                          onTap: () {},
+                        ),
                       ),
-                    ),
-                    const Gap(30),
-                    Expanded(
-                      child: Button(
-                        textStyle: context.textStyle.t16600,
-                        padding: EdgeInsets.all(10),
-                        primary: true,
-                        color: context.appTheme.blue,
-                        text: 'Rent',
-                        onTap: () {},
+                      const Gap(30),
+                      Expanded(
+                        child: Button(
+                          textStyle: context.textStyle.t16600,
+                          padding: EdgeInsets.all(10),
+                          primary: true,
+                          color: context.appTheme.blue,
+                          text: 'Rent',
+                          onTap: () {},
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ],
             );
           },

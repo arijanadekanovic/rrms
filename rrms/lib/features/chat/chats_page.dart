@@ -8,6 +8,7 @@ class ChatsPage extends StatelessWidget {
     return AppScaffold(
       appBar: RRMSAppBar(
         title: 'Chats',
+        primary: true,
       ),
       body: ListView(
         padding: EdgeInsets.all(0),

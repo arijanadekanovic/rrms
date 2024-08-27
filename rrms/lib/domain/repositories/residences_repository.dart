@@ -40,10 +40,8 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
   @override
   Future<Result> add(ResidenceAddRequestModel model) async {
     if (model.thumbnail != null) {
-      // final thumbnailUrlResult = await mediaStorageService.upload(model.thumbnail!);
-      // model.thumbnailUrl = thumbnailUrlResult.data;
-
-      model.thumbnailUrl = 'https://localhost:5003/storage-files/9cbe4c2c-8117-427e-b770-76cf8c5a1a8f.jpg';
+      final thumbnailUrlResult = await mediaStorageService.upload(model.thumbnail!);
+      model.thumbnailUrl = thumbnailUrlResult.data;
 
       final result = await restApiClient.post(
         '/api/residence/add',

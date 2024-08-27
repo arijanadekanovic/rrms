@@ -18,7 +18,7 @@ class MyResidencesPage extends StatelessWidget {
               }
 
               return ListView.separated(
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 65),
                 itemCount: residencesState.residences.count,
                 itemBuilder: (context, index) {
                   final residence = residencesState.residences[index];
