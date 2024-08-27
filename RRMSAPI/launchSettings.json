@@ -10,8 +10,8 @@
         "rrms.dataseeder": "DoNotStart",
         //"rrms.storage.api": "StartWithoutDebugging",
         //"rrms.api": "StartDebugging",
-        "rrms.storage.api": "StartDebugging",
-        "rrms.api": "StartWithoutDebugging",
+        "rrms.storage.api": "StartWithoutDebugging",
+        "rrms.api": "StartDebugging",
         "rrms.database": "StartWithoutDebugging",
         "rrms.rabbitmq": "StartWithoutDebugging"
       }

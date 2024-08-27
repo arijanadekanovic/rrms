@@ -1,8 +1,9 @@
 using RRMS.Domain.Enums;
+using RRMS.Microservices.SharedKernel.Messaging;
 
 namespace RRMS.Application.Features;
 
-public sealed record ResidenceDetailsQueryResult
+public sealed record ResidenceUpdateCommand : ICommand
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -13,11 +14,5 @@ public sealed record ResidenceDetailsQueryResult
     public double RentPrice { get; set; }
     public ResidenceType Type { get; set; }
     public string ThumbnailUrl { get; set; }
-    public ResidenceDetailsCityQueryResult City { get; set; }
-}
-
-public sealed record ResidenceDetailsCityQueryResult
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
+    public int CityId { get; set; }
 }

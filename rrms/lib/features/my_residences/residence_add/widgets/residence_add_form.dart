@@ -15,7 +15,7 @@ class ResidenceAddForm extends StatelessWidget {
         listener: (context, residenceAddState) {
           if (residenceAddState.status == ResidenceAddStateStatus.submittingSuccess) {
             toast.success('You have successfully added a residence!');
-            context.popToBottom();
+            context.pop();
           }
 
           if (residenceAddState.status == ResidenceAddStateStatus.validationError) {

@@ -43,7 +43,11 @@ public sealed class ResidenceDetailsQueryHandler : IQueryHandler<ResidenceDetail
             RentPrice = residence.RentPrice,
             Type = residence.Type,
             ThumbnailUrl = residence.ThumbnailUrl,
-            City = residence.City.Name,
+            City = new ResidenceDetailsCityQueryResult
+            {
+                Id = residence.City.Id,
+                Name = residence.City.Name,
+            }
         };
     }
 }

@@ -17,9 +17,7 @@ class MyResidenceDetailsPage extends StatelessWidget {
         title: residence.name,
         actions: [
           IconButton(
-            onPressed: () {
-              // TODO: PUSH RESIDENCE UPDATE PAGE
-            },
+            onPressed: () => context.push(ResidenceUpdatePage.route, extra: residence.id),
             icon: Icon(Icons.edit),
           ),
           ResidenceDeleteButton(id: residence.id.value),

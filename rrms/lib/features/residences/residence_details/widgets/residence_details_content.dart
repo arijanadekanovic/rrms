@@ -41,7 +41,7 @@ class ResidenceDetailsContent extends StatelessWidget {
                 ),
                 _DetailsItemListTile(
                   title: 'Location',
-                  text: '${details.city}, ${details.address}',
+                  text: '${details.city?.name}, ${details.address}',
                 ),
                 _DetailsItemListTile(
                   title: 'Rooms',
