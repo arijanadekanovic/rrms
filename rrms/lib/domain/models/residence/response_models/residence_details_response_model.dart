@@ -10,7 +10,7 @@ class ResidenceDetailsResponseModel {
   final double? rentPrice;
   final ResidenceType? type;
   final String? thumbnailUrl;
-  final String? city;
+  final ResidenceDetailsCityResponseModel? city;
 
   ResidenceDetailsResponseModel({
     this.id,
@@ -36,7 +36,7 @@ class ResidenceDetailsResponseModel {
       rentPrice: json.parseDouble('rentPrice'),
       type: json.parseEnum('type', ResidenceType.parse),
       thumbnailUrl: json.parseValue('thumbnailUrl'),
-      city: json.parseValue('city'),
+      city: json.parse('city', ResidenceDetailsCityResponseModel.fromJson),
     );
   }
 }

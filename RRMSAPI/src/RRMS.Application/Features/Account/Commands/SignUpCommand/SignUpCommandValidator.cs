@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RRMS.Application.Features.Account.Commands.SignUpCommand;
+namespace RRMS.Application.Features;
 
 public sealed class SignUpCommandValidator : AbstractValidator<SignUpCommand>
 {

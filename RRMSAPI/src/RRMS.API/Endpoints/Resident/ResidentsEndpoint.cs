@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Resident.Queries.ResidentsQuery;
+using RRMS.Application.Features;
 using RRMS.Domain.Enums;
 
 namespace RRMS.API.Endpoints.Resident;

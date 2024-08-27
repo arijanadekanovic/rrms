@@ -1,6 +1,6 @@
 using RRMS.Microservices.SharedKernel.Messaging;
 
-namespace RRMS.Application.Features.Auth.Commands.SignInCommand;
+namespace RRMS.Application.Features;
 
 public sealed record SignInCommand : ICommand<SignInCommandResult>
 {

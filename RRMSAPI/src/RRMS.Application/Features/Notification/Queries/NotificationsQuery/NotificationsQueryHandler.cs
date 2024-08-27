@@ -4,7 +4,7 @@ using RRMS.Microservices.Application.Abstractions.Services.Identity;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Residence.Queries.NotificationsQuery;
+namespace RRMS.Application.Features;
 
 public sealed class NotificationsQueryHandler : IQueryHandler<NotificationsQuery, List<NotificationQueryResult>>
 {

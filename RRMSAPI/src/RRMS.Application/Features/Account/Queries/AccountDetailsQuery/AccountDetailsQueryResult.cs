@@ -1,4 +1,4 @@
-namespace RRMS.Application.Features.Account.Queries.AccountDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed record AccountDetailsQueryResult
 {

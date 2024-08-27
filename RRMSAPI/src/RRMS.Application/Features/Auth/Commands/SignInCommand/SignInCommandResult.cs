@@ -1,4 +1,4 @@
-namespace RRMS.Application.Features.Auth.Commands.SignInCommand;
+namespace RRMS.Application.Features;
 
 public sealed record SignInCommandResult
 {

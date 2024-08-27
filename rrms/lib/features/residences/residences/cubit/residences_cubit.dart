@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ResidencesCubit extends Cubit<ResidencesState> {
+class ResidencesCubit extends EventReaderCubit<ResidencesState> {
   final ResidencesRepository residencesRepository;
 
   ResidencesCubit({
@@ -23,5 +23,11 @@ class ResidencesCubit extends Cubit<ResidencesState> {
 
   void updateSearchModel(ResidencesSearchRequestModel searchModel) {
     emit(state.copyWith(searchModel: searchModel));
+  }
+
+  @override
+  void onEvent(Object event) {
+    if (event is ResidenceAddState && event.status == ResidenceAddStateStatus.submittingSuccess) load();
+    if (event is ResidenceDeleteState && event.status == ResidenceDeleteStateStatus.submittingSuccess) load();
   }
 }

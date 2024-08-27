@@ -6,7 +6,7 @@ using RRMS.Microservices.SharedKernel.Constants;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Account.Commands.SignUpCommand;
+namespace RRMS.Application.Features;
 
 public sealed class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 {

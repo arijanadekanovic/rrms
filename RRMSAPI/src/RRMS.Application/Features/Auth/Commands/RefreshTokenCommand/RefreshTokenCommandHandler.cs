@@ -3,7 +3,7 @@ using RRMS.Domain.Errors;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Auth.Commands.RefreshTokenCommand;
+namespace RRMS.Application.Features;
 
 public sealed class RefreshTokenCommandHandler : ICommandHandler<RefreshTokenCommand, RefreshTokenCommandResult>
 {

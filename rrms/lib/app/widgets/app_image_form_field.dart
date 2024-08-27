@@ -145,15 +145,6 @@ class _ImageActions extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child: PickImageAction(
-            onChanged: onChanged,
-            cropAspectRatio: cropAspectRatio,
-            useCropper: useCropper,
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
           child: CancelImageAction(onClear: onClear),
         ),
       ],
@@ -222,21 +213,12 @@ class _ImageAction extends StatelessWidget {
     return Clickable(
       onTap: onTap,
       borderRadius: BorderRadius.circular(50),
-      child: PhysicalModel(
-        color: Colors.white,
-        elevation: 5,
-        borderRadius: BorderRadius.circular(50),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          padding: const EdgeInsets.all(5),
-          child: Icon(
-            icon,
-            size: 12,
-            color: context.appTheme.secondaryTextStyle.color,
-          ),
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        child: Icon(
+          icon,
+          size: 24,
+          color: context.appTheme.accentColor,
         ),
       ),
     );

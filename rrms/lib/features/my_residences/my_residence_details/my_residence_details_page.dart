@@ -17,17 +17,10 @@ class MyResidenceDetailsPage extends StatelessWidget {
         title: residence.name,
         actions: [
           IconButton(
-            onPressed: () {
-              // TODO: PUSH RESIDENCE UPDATE PAGE
-            },
+            onPressed: () => context.push(ResidenceUpdatePage.route, extra: residence.id),
             icon: Icon(Icons.edit),
           ),
-          IconButton(
-            onPressed: () {
-              // TODO: SHOW WARNING DIALOG TO DELETE RESIDENCE
-            },
-            icon: Icon(Icons.delete, color: context.appTheme.danger),
-          ),
+          ResidenceDeleteButton(id: residence.id.value),
           const Gap(10),
         ],
       ),
@@ -48,7 +41,7 @@ class MyResidenceDetailsPage extends StatelessWidget {
             Expanded(
               child: BlocBuilder<NavigationCubit, NavigationState>(
                 builder: (context, navigationState) => switch (navigationState.index) {
-                  0 => ResidenceDetailsContent(residence: residence),
+                  0 => ResidenceDetailsContent(residence: residence, allowActions: false),
                   1 => ResidentsContent(residenceId: residence.id.value),
                   _ => const SizedBox(),
                 },

@@ -18,7 +18,7 @@ class MyResidencesPage extends StatelessWidget {
               }
 
               return ListView.separated(
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 65),
                 itemCount: residencesState.residences.count,
                 itemBuilder: (context, index) {
                   final residence = residencesState.residences[index];
@@ -38,9 +38,7 @@ class MyResidencesPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Button(
-            onTap: () {
-              // TODO: PUSH RESIDENCE ADD PAGE
-            },
+            onTap: () => context.push(ResidenceAddPage.route),
             primary: true,
             shrinkWrap: true,
             borderRadius: 50,

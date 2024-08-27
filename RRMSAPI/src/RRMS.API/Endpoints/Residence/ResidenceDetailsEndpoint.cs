@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+using RRMS.Application.Features;
 using RRMS.Domain.Enums;
 
 namespace RRMS.API.Endpoints.Residence;
@@ -10,7 +10,7 @@ internal static class ResidenceDetailsEndpoint
     {
         routeGroupBuilder
             .MapGet("/details/{id}", ResidenceDetails)
-            // .RequireAuthorization()
+            .RequireAuthorization()
             .Produces<ResidenceDetailsResponse>();
 
         return routeGroupBuilder;
@@ -38,7 +38,11 @@ internal static class ResidenceDetailsEndpoint
                 RentPrice = x.RentPrice,
                 Type = x.Type,
                 ThumbnailUrl = x.ThumbnailUrl,
-                City = x.City,
+                City = new ResidenceDetailsCityResponse
+                {
+                    Id = x.City.Id,
+                    Name = x.City.Name,
+                }
             }
         );
     }
@@ -55,5 +59,11 @@ public record ResidenceDetailsResponse
     public double RentPrice { get; set; }
     public ResidenceType Type { get; set; }
     public string ThumbnailUrl { get; set; }
-    public string City { get; set; }
+    public ResidenceDetailsCityResponse City { get; set; }
+}
+
+public record ResidenceDetailsCityResponse
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
 }

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RRMS.Application.Features.Auth.Commands.RefreshTokenCommand;
+namespace RRMS.Application.Features;
 
 public sealed class RefreshTokenCommandValidator : AbstractValidator<RefreshTokenCommand>
 {
