@@ -5,3 +5,4 @@ export 'notifications/_all.dart';
 export 'payments/_all.dart';
 export 'profile/_all.dart';
 export 'residences/_all.dart';
+export 'chat/_all.dart';
