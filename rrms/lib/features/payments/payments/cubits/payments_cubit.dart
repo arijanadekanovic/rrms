@@ -28,4 +28,25 @@ class PaymentsCubit extends Cubit<PaymentsState> {
       );
     }
   }
+
+  Future<void> processPayment(double amount) async {
+    emit(state.copyWith(status: PaymentsStateStatus.processing));
+
+    try {
+      final result = await paymentsRepository.processPayment(amount);
+      emit(
+        state.copyWith(
+          status: PaymentsStateStatus.success,
+          payments: state.payments + [result.data!],
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: PaymentsStateStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
+  }
 }
