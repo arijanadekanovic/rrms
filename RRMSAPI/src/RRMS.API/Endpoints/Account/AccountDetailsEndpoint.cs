@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Account.Queries.AccountDetailsQuery;
+using RRMS.Application.Features;
 
 namespace RRMS.API.Endpoints.Account;
 

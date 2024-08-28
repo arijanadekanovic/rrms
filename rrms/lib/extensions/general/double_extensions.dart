@@ -7,7 +7,7 @@ extension DoubleExtensions on double? {
     formatter.maximumFractionDigits = numberOfDecimals;
     formatter.minimumFractionDigits = numberOfDecimals;
 
-    return formatter.format(value);
+    return (value - value.toInt()) == 0 ? value.toStringAsFixed(0) : formatter.format(value);
   }
 
   String formatPrice([int numberOfDecimals = 2]) {

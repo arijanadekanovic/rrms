@@ -1,7 +1,7 @@
 using RRMS.Domain.Enums;
 using RRMS.Microservices.SharedKernel.Messaging;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidencesQuery;
+namespace RRMS.Application.Features;
 
 public sealed record ResidencesQuery() : IQuery<List<ResidenceQueryResult>>
 {

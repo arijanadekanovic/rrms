@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.City.Queries.CitiesQuery;
+using RRMS.Application.Features;
 
 namespace RRMS.API.Endpoints.City;
 

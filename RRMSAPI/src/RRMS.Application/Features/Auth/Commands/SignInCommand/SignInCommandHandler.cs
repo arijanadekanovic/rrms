@@ -8,7 +8,7 @@ using RRMS.Domain.Errors;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Auth.Commands.SignInCommand;
+namespace RRMS.Application.Features;
 
 public sealed class SignInCommandHandler : ICommandHandler<SignInCommand, SignInCommandResult>
 {

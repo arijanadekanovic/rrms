@@ -1,4 +1,4 @@
-namespace RRMS.Application.Features.City.Queries.CitiesQuery;
+namespace RRMS.Application.Features;
 
 public sealed record CityQueryResult
 {

@@ -42,12 +42,15 @@ class StateManagementConfiguration {
     services.registerFactoryParam((String url, _) => AppPdfViewerCubit(url: url));
 
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
+    services.registerFactory(() => ResidenceDeleteCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidentsCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => NotificationsCubit(notificationsRepository: notificationsRepository));
     services.registerFactory(() => PaymentsCubit(paymentsRepository: paymentsRepository));
     services.registerFactory(() => SignInCubit(authRepository: authRepository, modelValidator: services.get<SignInRequestModelValidator>()));
     services.registerFactory(() => SignUpCubit(accountRepository: accountRepository, modelValidator: services.get<SignUpRequestModelValidator>()));
+    services.registerFactory(() => ResidenceAddCubit(residencesRepository: residencesRepository, modelValidator: services.get<ResidenceAddRequestModelValidator>()));
     services.registerFactory(() => ProfileUpdateCubit(accountRepository: accountRepository, modelValidator: services.get<AccountUpdateRequestModelValidator>()));
+    services.registerFactory(() => ResidenceUpdateCubit(residencesRepository: residencesRepository, modelValidator: services.get<ResidenceUpdateRequestModelValidator>()));
   }
 }

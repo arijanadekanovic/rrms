@@ -5,5 +5,6 @@ class ServicesConfiguration {
     services.registerSingleton<Toast>(ToastImpl());
     services.registerSingleton<Logger>(ConsoleLoggerImpl());
     services.registerSingleton<Debouncer>(DebouncerImpl());
+    services.registerSingleton<MediaStorageService>(MediaStorageServiceImpl(restApiClient: services.get<RestApiClient>()));
   }
 }

@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RRMS.Application.Features.Account.Commands.AccountUpdateCommand;
+namespace RRMS.Application.Features;
 
 public sealed class AccountUpdateCommandValidator : AbstractValidator<AccountUpdateCommand>
 {

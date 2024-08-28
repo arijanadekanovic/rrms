@@ -1,4 +1,4 @@
-namespace RRMS.Application.Features.Auth.Commands.RefreshTokenCommand;
+namespace RRMS.Application.Features;
 
 public sealed record RefreshTokenCommandResult
 {

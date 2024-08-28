@@ -3,7 +3,7 @@ using RRMS.Application.Abstractions.Persistance;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.City.Queries.CitiesQuery;
+namespace RRMS.Application.Features;
 
 public sealed class CitiesQueryHandler : IQueryHandler<CitiesQuery, List<CityQueryResult>>
 {

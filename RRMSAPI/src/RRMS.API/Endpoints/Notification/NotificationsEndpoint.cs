@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Residence.Queries.NotificationsQuery;
+using RRMS.Application.Features;
 using RRMS.Domain.Enums;
 
 namespace RRMS.API.Endpoints.Notification;

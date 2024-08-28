@@ -4,7 +4,7 @@ using RRMS.Domain.Errors;
 using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed class ResidenceDetailsQueryHandler : IQueryHandler<ResidenceDetailsQuery, ResidenceDetailsQueryResult>
 {
@@ -43,7 +43,11 @@ public sealed class ResidenceDetailsQueryHandler : IQueryHandler<ResidenceDetail
             RentPrice = residence.RentPrice,
             Type = residence.Type,
             ThumbnailUrl = residence.ThumbnailUrl,
-            City = residence.City.Name,
+            City = new ResidenceDetailsCityQueryResult
+            {
+                Id = residence.City.Id,
+                Name = residence.City.Name,
+            }
         };
     }
 }

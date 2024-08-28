@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using RRMS.Application.Features.Payment.Queries.PaymentsQuery;
+using RRMS.Application.Features;
 
 namespace RRMS.API.Endpoints.Payment;
 

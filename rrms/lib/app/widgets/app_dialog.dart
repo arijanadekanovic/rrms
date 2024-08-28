@@ -12,6 +12,7 @@ Future<bool?> showAppDialog(
 
 Future<bool?> showConfirmationAppDialog(
   BuildContext context, {
+  Widget Function(Widget)? providerBuilder,
   void Function()? onOkay,
 }) async {
   return await showAppDialog(
@@ -114,6 +115,15 @@ class AppDialog extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            if (model.showOkay)
+                              Expanded(
+                                child: Button(
+                                  onTap: () => model.onOkay?.call(),
+                                  primary: true,
+                                  text: model.okayText ?? translations.okay,
+                                ),
+                              ),
+                            if (model.showCancel) const Gap(10),
                             if (model.showCancel)
                               Expanded(
                                 child: Button(
@@ -121,15 +131,6 @@ class AppDialog extends StatelessWidget {
                                   transparent: true,
                                   text: model.cancelText ?? translations.cancel,
                                   textColor: context.primaryTextStyle.color,
-                                ),
-                              ),
-                            if (model.showCancel) const Gap(10),
-                            if (model.showOkay)
-                              Expanded(
-                                child: Button(
-                                  onTap: () => model.onOkay?.call(),
-                                  primary: true,
-                                  text: model.okayText ?? translations.okay,
                                 ),
                               ),
                           ],

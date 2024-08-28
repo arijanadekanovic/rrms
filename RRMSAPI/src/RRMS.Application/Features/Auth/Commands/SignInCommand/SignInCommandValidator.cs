@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace RRMS.Application.Features.Auth.Commands.SignInCommand;
+namespace RRMS.Application.Features;
 
 public class SignInCommandValidator : AbstractValidator<SignInCommand>
 {

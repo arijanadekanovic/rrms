@@ -6,7 +6,7 @@ using RRMS.Microservices.SharedKernel.Messaging;
 using RRMS.Microservices.SharedKernel.Primitives;
 using RRMS.Microservices.Transport.Messages.Account.AccountDelete;
 
-namespace RRMS.Application.Features.Account.Commands.AccountDeleteCommand;
+namespace RRMS.Application.Features;
 
 public sealed class AccountDeleteCommandHandler : ICommandHandler<AccountDeleteCommand>
 {

@@ -1,6 +1,6 @@
 using RRMS.Domain.Enums;
 
-namespace RRMS.Application.Features.Residence.Queries.ResidenceDetailsQuery;
+namespace RRMS.Application.Features;
 
 public sealed record ResidenceDetailsQueryResult
 {
@@ -13,5 +13,11 @@ public sealed record ResidenceDetailsQueryResult
     public double RentPrice { get; set; }
     public ResidenceType Type { get; set; }
     public string ThumbnailUrl { get; set; }
-    public string City { get; set; }
+    public ResidenceDetailsCityQueryResult City { get; set; }
+}
+
+public sealed record ResidenceDetailsCityQueryResult
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
 }

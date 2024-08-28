@@ -1,5 +1,5 @@
 using MediatR;
-using RRMS.Application.Features.Auth.Commands.SignInCommand;
+using RRMS.Application.Features;
 
 namespace RRMS.API.Endpoints.Auth;
 
