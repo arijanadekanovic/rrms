@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ResidentsCubit extends Cubit<ResidentsState> {
+class ResidentsCubit extends EventReaderCubit<ResidentsState> {
   final ResidentsRepository residentsRepository;
 
   ResidentsCubit({
@@ -19,5 +19,10 @@ class ResidentsCubit extends Cubit<ResidentsState> {
         residents: result.data,
       ),
     );
+  }
+
+  @override
+  void onEvent(Object event) {
+    if (event is ResidentStatusUpdateState && event.status == ResidentStatusUpdateStateStatus.submittingSuccess) load();
   }
 }

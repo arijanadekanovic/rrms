@@ -8,7 +8,9 @@ internal static class ResidentEndpointsBuilder
             .MapGroup("resident");
 
         residenceRouteGroupBuilder
-            .MapResidentsEndpoint();
+            .MapResidentAddEndpoint()
+            .MapResidentsEndpoint()
+            .MapResidentStatusUpdateEndpoint();
 
         return residenceRouteGroupBuilder;
     }

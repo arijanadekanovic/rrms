@@ -27,7 +27,6 @@ class ResidentsContent extends StatelessWidget {
                 final resident = residencesState.residents[index];
 
                 return ResidentListTile(
-                  // onTap: () => context.push(ResidentDetailsPage.route, extra: resident),
                   resident: resident,
                 );
               },
