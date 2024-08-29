@@ -84,7 +84,22 @@ class ResidenceDetailsContent extends StatelessWidget {
                           primary: true,
                           color: context.appTheme.blue,
                           text: 'Rent',
-                          onTap: () {},
+                          onTap: () {
+                            showAppDialog(
+                              context,
+                              AppDialogModel(
+                                title: 'Rent request',
+                                child: BlocProvider(
+                                  create: (context) => services.get<ResidentsCubit>(),
+                                  child: BlocBuilder<ResidentsCubit, ResidentsState>(
+                                    builder: (context, residentsState) {
+                                      return RentRequestTile();
+                                    },
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

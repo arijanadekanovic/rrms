@@ -31,6 +31,7 @@ class ResidentStatusUpdateActions extends StatelessWidget {
                   Expanded(
                     child: Button(
                       text: 'Accept',
+                      textStyle: context.textStyle.t16600,
                       primary: true,
                       isLoading: residentStatusUpdateState.model?.status == ResidentStatus.active && residentStatusUpdateState.status == ResidentStatusUpdateStateStatus.submitting,
                       lean: true,
@@ -46,6 +47,7 @@ class ResidentStatusUpdateActions extends StatelessWidget {
                   Expanded(
                     child: Button(
                       text: 'Reject',
+                      textStyle: context.textStyle.t16600,
                       secondary: true,
                       isLoading: residentStatusUpdateState.model?.status == ResidentStatus.rejected && residentStatusUpdateState.status == ResidentStatusUpdateStateStatus.submitting,
                       loaderColor: context.appTheme.accentColor,
