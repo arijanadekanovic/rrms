@@ -35,6 +35,7 @@ class StateManagementConfiguration {
     final residentsRepository = services.get<ResidentsRepository>();
     final notificationsRepository = services.get<NotificationsRepository>();
     final paymentsRepository = services.get<PaymentsRepository>();
+    final chatsRepository = services.get<ChatsRepository>();
 
     services.registerFactoryParam((int? index, _) => NavigationCubit(index: index.value));
     services.registerFactoryParam((bool? isVisible, _) => VisibilityCubit(isVisible: isVisible.value));
@@ -54,5 +55,6 @@ class StateManagementConfiguration {
     services.registerFactory(() => ResidenceUpdateCubit(residencesRepository: residencesRepository, modelValidator: services.get<ResidenceUpdateRequestModelValidator>()));
     services.registerFactory(() => ResidentStatusUpdateCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => ResidentAddCubit(residentsRepository: residentsRepository, modelValidator: services.get<ResidentAddRequestModelValidator>()));
+    services.registerFactory(() => ChatGroupsCubit(chatsRepository: chatsRepository));
   }
 }

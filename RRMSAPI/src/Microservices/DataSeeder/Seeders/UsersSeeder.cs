@@ -12,8 +12,8 @@ internal static class UsersSeeder
     internal static async Task Seed(IServiceProvider serviceProvider)
     {
         await SeedSuperAdmin(serviceProvider);
-        await SeedLandlord(serviceProvider);
-        await SeedResident(serviceProvider);
+        await SeedLandlords(serviceProvider);
+        await SeedResidents(serviceProvider);
     }
 
     internal static async Task SeedSuperAdmin(IServiceProvider serviceProvider)
@@ -42,56 +42,78 @@ internal static class UsersSeeder
         await SeedUser(serviceProvider, user, role);
     }
 
-    internal static async Task SeedLandlord(IServiceProvider serviceProvider)
+    internal static async Task SeedLandlords(IServiceProvider serviceProvider)
     {
         var databaseContext = serviceProvider.GetRequiredService<DatabaseContext>();
 
-        var user = new User
+        var profilePictureUrls = new List<string>
         {
-            Id = Guid.NewGuid().ToString(),
-            FirstName = "Land",
-            LastName = "Lord",
-            UserName = "landlord",
-            NormalizedUserName = "landlord".ToUpper(),
-            Email = "landlord@rrms.com",
-            NormalizedEmail = "landlord@rrms.com".ToUpper(),
-            EmailConfirmed = true,
-            PhoneNumber = "+38761559444",
-            PhoneNumberConfirmed = true,
-            TwoFactorEnabled = false,
-            IsApproved = true,
-            ProfilePhotoUrl = "https://cdn-icons-png.flaticon.com/512/219/219969.png",
+            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjExMjAtZWxlbWVudC0xOS5wbmc.png",
+            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNS0zODUucG5n.png",
+            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNy00MDMucG5n.png",
+            "https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxLzI3OS1wYWkxNTc5LW5hbS1qb2IxNTI5LnBuZw.png",
         };
 
-        var role = await databaseContext.Roles.FirstOrDefaultAsync(x => x.Name == AppRoles.Landlord);
+        for (var i = 0; i < profilePictureUrls.Count; i++)
+        {
+            var user = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "Land",
+                LastName = $"Lord {i}",
+                UserName = $"landlord{i}",
+                NormalizedUserName = $"landlord{i}".ToUpper(),
+                Email = $"landlord{i}@rrms.com",
+                NormalizedEmail = $"landlord{i}@rrms.com".ToUpper(),
+                EmailConfirmed = true,
+                PhoneNumber = $"+3876155944{i}",
+                PhoneNumberConfirmed = true,
+                TwoFactorEnabled = false,
+                IsApproved = true,
+                ProfilePhotoUrl = profilePictureUrls[i],
+            };
 
-        await SeedUser(serviceProvider, user, role);
+            var role = await databaseContext.Roles.FirstOrDefaultAsync(x => x.Name == AppRoles.Landlord);
+
+            await SeedUser(serviceProvider, user, role);
+        }
     }
 
-    internal static async Task SeedResident(IServiceProvider serviceProvider)
+    internal static async Task SeedResidents(IServiceProvider serviceProvider)
     {
         var databaseContext = serviceProvider.GetRequiredService<DatabaseContext>();
 
-        var user = new User
+        var profilePictureUrls = new List<string>
         {
-            Id = Guid.NewGuid().ToString(),
-            FirstName = "Resi",
-            LastName = "Dent",
-            UserName = "resident",
-            NormalizedUserName = "resident".ToUpper(),
-            Email = "resident@rrms.com",
-            NormalizedEmail = "resident@rrms.com".ToUpper(),
-            EmailConfirmed = true,
-            PhoneNumber = "+38761334234",
-            PhoneNumberConfirmed = true,
-            TwoFactorEnabled = false,
-            IsApproved = true,
-            ProfilePhotoUrl = "https://icons.veryicon.com/png/o/internet--web/web-interface-flat/6606-male-user.png",
+            "https://photos.peopleimages.com/picture/202306/2833489-shot-of-a-young-man-looking-unsure-against-isolated-on-png-background-fit_400_400.jpg",
+            "https://photos.peopleimages.com/picture/202306/2831326-studio-shot-of-a-well-dressed-man-isolated-on-a-png-background-fit_400_400.jpg",
+            "https://photos.peopleimages.com/picture/202306/2831360-studio-shot-of-a-handsome-and-well-dressed-young-man-isolated-on-a-png-background-fit_400_400.jpg",
+            "https://image.pngaaa.com/922/1151922-small.png",
         };
 
-        var role = await databaseContext.Roles.FirstOrDefaultAsync(x => x.Name == AppRoles.Resident);
+        for (var i = 0; i < profilePictureUrls.Count; i++)
+        {
+            var user = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                FirstName = "Resi",
+                LastName = $"Dent {i}",
+                UserName = $"resident{i}",
+                NormalizedUserName = $"resident{i}".ToUpper(),
+                Email = $"resident{i}@rrms.com",
+                NormalizedEmail = $"resident{i}@rrms.com".ToUpper(),
+                EmailConfirmed = true,
+                PhoneNumber = $"+3876133423{i}",
+                PhoneNumberConfirmed = true,
+                TwoFactorEnabled = false,
+                IsApproved = true,
+                ProfilePhotoUrl = profilePictureUrls[i],
+            };
 
-        await SeedUser(serviceProvider, user, role);
+            var role = await databaseContext.Roles.FirstOrDefaultAsync(x => x.Name == AppRoles.Resident);
+
+            await SeedUser(serviceProvider, user, role);
+        }
     }
 
     internal static async Task SeedUser(IServiceProvider serviceProvider, User user, Role role, string password = "demo")

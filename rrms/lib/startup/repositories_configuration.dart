@@ -1,4 +1,5 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/domain/repositories/chats_repository.dart';
 
 class RepositoriesConfiguration {
   static Future configure() async {
@@ -41,6 +42,11 @@ class RepositoriesConfiguration {
     );
     services.registerSingleton<CitiesRepository>(
       CitiesRepositoryImpl(
+        restApiClient: services.get<RestApiClient>(),
+      ),
+    );
+    services.registerSingleton<ChatsRepository>(
+      ChatsRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),
       ),
     );
