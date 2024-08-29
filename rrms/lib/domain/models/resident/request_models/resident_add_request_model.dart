@@ -1,30 +1,32 @@
+import 'package:rrms/_all.dart';
+
 class ResidentAddRequestModel {
-  final DateTime? contractStartDateUtc;
-  final DateTime? contractEndDateUtc;
+  final DateTime? contractStartDate;
+  final DateTime? contractEndDate;
   final int? residenceId;
 
   ResidentAddRequestModel({
-    this.contractStartDateUtc,
-    this.contractEndDateUtc,
+    this.contractStartDate,
+    this.contractEndDate,
     this.residenceId,
   });
 
   ResidentAddRequestModel copyWith({
-    DateTime? contractStartDateUtc,
-    DateTime? contractEndDateUtc,
+    DateTime? contractStartDate,
+    DateTime? contractEndDate,
     int? residenceId,
   }) {
     return ResidentAddRequestModel(
-      contractStartDateUtc: contractStartDateUtc ?? this.contractStartDateUtc,
-      contractEndDateUtc: contractEndDateUtc ?? this.contractEndDateUtc,
+      contractStartDate: contractStartDate ?? this.contractStartDate,
+      contractEndDate: contractEndDate ?? this.contractEndDate,
       residenceId: residenceId ?? this.residenceId,
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
-      if (contractStartDateUtc != null) 'contractStartDateUtc': contractStartDateUtc,
-      if (contractEndDateUtc != null) 'contractEndDateUtc': contractEndDateUtc,
+      if (contractStartDate != null) 'contractStartDateUtc': contractStartDate?.toUtc().toJson(),
+      if (contractEndDate != null) 'contractEndDateUtc': contractEndDate?.toUtc().toJson(),
       if (residenceId != null) 'residenceId': residenceId,
     };
   }

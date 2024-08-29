@@ -1,9 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:intl/intl.dart';
 
 import 'package:rrms/_all.dart';
-
-extension _DateTimeIntExtensions on int {}
 
 extension DateTimeExtensions on DateTime? {
   String format([String pattern = 'dd.MM.yyyy']) => this != null ? DateFormat(pattern).format(this!).toString() : '';
