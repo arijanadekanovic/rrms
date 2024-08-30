@@ -1,7 +1,7 @@
 import 'package:rrms/_all.dart';
 
 AppSettings developmentAppSettings = AppSettings(
-  mainApiUrl: 'https://1129-31-216-185-61.ngrok-free.app',
-  storageApiUrl: 'https://b15d-31-216-185-61.ngrok-free.app',
+  mainApiUrl: 'https://fd03-109-163-169-234.ngrok-free.app',
+  storageApiUrl: 'https://2838-109-163-169-234.ngrok-free.app',
   // resetStorage: true,
 );
