@@ -41,6 +41,8 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
             ResidenceName = p.Resident.Residence.Name,
             ResidentName = $"{p.Resident.User.FirstName} {p.Resident.User.LastName}",
             PaymentDateUtc = p.CreatedOnUtc
-        }).ToList();
+        })
+        .OrderBy(p => p.CreatedOnUtc)
+        .ToList();
     }
 }
