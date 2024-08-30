@@ -63,33 +63,54 @@ class ResidenceDetailsContent extends StatelessWidget {
                 Text('Description:', style: context.textStyle.t14500),
                 const Gap(10),
                 Text(details.description.value, style: context.textStyle.t14500),
-                if (allowActions) ...[
-                  const Gap(40),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Button(
-                          textStyle: context.textStyle.t16600,
-                          padding: EdgeInsets.all(10),
-                          primary: true,
-                          text: 'Message',
-                          onTap: () {},
-                        ),
-                      ),
-                      const Gap(30),
-                      Expanded(
-                        child: Button(
-                          textStyle: context.textStyle.t16600,
-                          padding: EdgeInsets.all(10),
-                          primary: true,
-                          color: context.appTheme.blue,
-                          text: 'Rent',
-                          onTap: () {},
-                        ),
-                      ),
-                    ],
+                if (allowActions)
+                  BlocBuilder<ProfileCubit, ProfileState>(
+                    builder: (context, profileState) {
+                      if (!profileState.isResident) {
+                        return const SizedBox();
+                      }
+
+                      return Column(
+                        children: [
+                          const Gap(40),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Button(
+                                  textStyle: context.textStyle.t16600,
+                                  padding: EdgeInsets.all(10),
+                                  primary: true,
+                                  text: 'Message',
+                                  onTap: () {},
+                                ),
+                              ),
+                              const Gap(30),
+                              Expanded(
+                                child: Button(
+                                  textStyle: context.textStyle.t16600,
+                                  padding: EdgeInsets.all(10),
+                                  primary: true,
+                                  color: context.appTheme.blue,
+                                  text: 'Rent',
+                                  onTap: () {
+                                    showAppDialog(
+                                      context,
+                                      AppDialogModel(
+                                        title: 'Rent request',
+                                        child: ResidentAddForm(
+                                          residenceId: details.id.value,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                ],
               ],
             );
           },

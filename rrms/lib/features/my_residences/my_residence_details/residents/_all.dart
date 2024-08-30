@@ -1,2 +1,2 @@
-export 'cubit/_all.dart';
-export 'widgets/_all.dart';
+export 'resident_status_update/_all.dart';
+export 'residents/_all.dart';

@@ -1,11 +1,13 @@
 import 'package:rrms/_all.dart';
 
-class ChatListTile extends StatelessWidget {
+class ChatGroupListTile extends StatelessWidget {
   final void Function()? onTap;
+  final ChatGroupResponseModel chatGroup;
 
-  const ChatListTile({
+  const ChatGroupListTile({
     super.key,
     this.onTap,
+    required this.chatGroup,
   });
 
   @override
@@ -23,7 +25,7 @@ class ChatListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CachedImage(
-              url: 'https://spng.pngfind.com/pngs/s/500-5008297_lars-christian-larsen-user-profile-image-png-transparent.png',
+              url: chatGroup.chatPartnerProfilePictureUrl,
               borderRadius: BorderRadius.circular(100),
               height: 60,
               width: 60,
@@ -37,13 +39,13 @@ class ChatListTile extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'John Doe',
+                          chatGroup.chatPartnerName.value,
                           style: context.textStyle.t14500,
                         ),
                       ),
                       Text(
-                        '14.30',
-                        style: context.textStyle.t14400,
+                        chatGroup.lastMessageDateTime.formatDateTime(),
+                        style: context.textStyle.t12400,
                       ),
                     ],
                   ),
@@ -52,18 +54,19 @@ class ChatListTile extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'How much is the rent?',
+                          chatGroup.lastMessage.value,
                           style: context.secondaryTextStyle.t12500,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: context.appTheme.blue,
+                      if (!chatGroup.seen.value)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: Icon(
+                            Icons.circle,
+                            size: 10,
+                            color: context.appTheme.blue,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ],

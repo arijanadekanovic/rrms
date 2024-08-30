@@ -19,5 +19,6 @@ class ModelValidatorsConfiguration {
     services.registerSingleton<SignUpRequestModelValidator>(SignUpRequestModelValidator(textRequiredValidator: textRequiredValidator, emailValidator: emailValidator, passwordValidator: passwordValidator));
     services.registerSingleton<ResidenceAddRequestModelValidator>(ResidenceAddRequestModelValidator(valueRequiredValidator: valueRequiredValidator, textRequiredValidator: textRequiredValidator));
     services.registerSingleton<ResidenceUpdateRequestModelValidator>(ResidenceUpdateRequestModelValidator(valueRequiredValidator: valueRequiredValidator, textRequiredValidator: textRequiredValidator));
+    services.registerSingleton<ResidentAddRequestModelValidator>(ResidentAddRequestModelValidator(valueRequiredValidator: valueRequiredValidator));
   }
 }
