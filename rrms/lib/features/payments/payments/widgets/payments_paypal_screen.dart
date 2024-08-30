@@ -15,8 +15,7 @@ class PayPalScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => PaymentsCubit(
-          paymentsRepository: services.get<
-              PaymentsRepository>(),
+          paymentsRepository: services.get<PaymentsRepository>(),
         ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -51,33 +50,22 @@ class PayPalScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     BlocConsumer<PaymentsCubit, PaymentsState>(
-                      listener: (context, state) {
-                        if (state.status == PaymentsStateStatus.success) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Payment successful!')),
-                          );
-                          Navigator.of(context).pop();
-                        } else if (state.status ==
-                            PaymentsStateStatus.failure) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(
-                                    'Payment failed: ${state.errorMessage}')),
-                          );
-                        }
-                      },
+                      listener: (context, state) {},
                       builder: (context, state) {
                         return SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               final double? amount =
                                   double.tryParse(amountController.text);
                               if (amount != null) {
                                 context
                                     .read<PaymentsCubit>()
                                     .processPayment(amount);
+                                final Uri url = Uri.parse('https://paypal.com');
+                                if (!await launchUrl(url)) {
+                                  throw Exception('Could not launch');
+                                }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
