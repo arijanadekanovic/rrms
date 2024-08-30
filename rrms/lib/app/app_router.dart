@@ -1,4 +1,5 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/features/chat/chat_messages/chat_messages_page.dart';
 
 GoRouter appRouter = GoRouter(
   errorBuilder: (_, state) => const AppNavigation(),
@@ -38,6 +39,12 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: ResidenceUpdatePage.route.withoutFirstSlash,
           builder: (_, state) => ResidenceUpdatePage(id: state.extra as int),
+        ),
+        GoRoute(
+          path: ChatMessagesPage.route.withoutFirstSlash,
+          builder: (_, state) => ChatMessagesPage(
+            searchModel: state.extra as ChatMessagesSearchRequestModel,
+          ),
         ),
       ],
     ),

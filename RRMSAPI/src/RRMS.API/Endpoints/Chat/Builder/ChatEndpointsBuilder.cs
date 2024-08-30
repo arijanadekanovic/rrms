@@ -8,7 +8,8 @@ internal static class ChatEndpointsBuilder
             .MapGroup("chat");
 
         routeGroupBuilder
-            .MapChatGroupsEndpoint();
+            .MapChatGroupsEndpoint()
+            .MapChatMessagesEndpoint();
 
         return routeGroupBuilder;
     }

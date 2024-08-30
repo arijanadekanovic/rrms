@@ -1,5 +1,4 @@
 import 'package:rrms/_all.dart';
-import 'package:rrms/domain/repositories/chats_repository.dart';
 
 class RepositoriesConfiguration {
   static Future configure() async {
