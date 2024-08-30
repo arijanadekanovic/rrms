@@ -4,13 +4,14 @@
     {
         internal static RouteGroupBuilder MapPaymentEndpoints(this RouteGroupBuilder routeGroupBuilder)
         {
-            var residenceRouteGroupBuilder = routeGroupBuilder
+            var paymentRouteGroupBuilder = routeGroupBuilder
                 .MapGroup("payment");
 
-            residenceRouteGroupBuilder
-                .MapPaymentsEndpoints();
+            paymentRouteGroupBuilder
+                .MapPaymentsEndpoint()
+                .MapPaymentsAddEndpoint();
 
-            return residenceRouteGroupBuilder;
+            return paymentRouteGroupBuilder;
         }
     }
 }

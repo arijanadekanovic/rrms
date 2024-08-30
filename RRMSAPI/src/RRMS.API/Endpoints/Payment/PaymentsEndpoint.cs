@@ -5,7 +5,7 @@ namespace RRMS.API.Endpoints.Payment;
 
 internal static class PaymentsEndpoint
 {
-    internal static RouteGroupBuilder MapPaymentsEndpoints(this RouteGroupBuilder routeGroupBuilder)
+    internal static RouteGroupBuilder MapPaymentsEndpoint(this RouteGroupBuilder routeGroupBuilder)
     {
         routeGroupBuilder
             .MapGet("/payments", Payments)
@@ -38,7 +38,6 @@ internal static class PaymentsEndpoint
     }
 
 }
-
 public class PaymentsSearchRequest
 {
     public DateTime? FromDateUtc { get; set; }
@@ -52,4 +51,3 @@ public record PaymentResponse
     public string ResidentName { get; set; }
     public DateTime PaymentDateUtc { get; set; }
 }
-

@@ -1,81 +1,93 @@
 import 'package:rrms/_all.dart';
+import 'package:rrms/features/payments/payments/cubits/payments_cubit.dart';
+import 'package:rrms/features/payments/payments/cubits/payments_state.dart';
+import 'package:rrms/features/payments/payments/widgets/payments_history.dart';
+import 'package:rrms/features/payments/payments/widgets/payments_options_modal.dart';
+import 'package:rrms/features/payments/payments/widgets/payments_paypal_screen.dart';
+import 'package:rrms/features/payments/payments/widgets/payments_upload_modal.dart';
 
 class PaymentsPage extends StatelessWidget {
-  final String residenceName;
-
-  const PaymentsPage({
-    super.key,
-    required this.residenceName,
-  });
+  const PaymentsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: This widget should be payments history list (with a CTA button to initiate a new payment on new page, what is currently on this page)
-
-    return AppScaffold(
-      appBar: AppBar(
-        title: Text('Pay your rent for: $residenceName'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Securely pay your monthly rent using your PayPal account',
-                style: context.textStyle.t14500,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  color: context.appTheme.cardBackgroundColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/paypal.png', // Assuming you have this image in your assets
-                      height: 50,
-                    ),
-                    const SizedBox(height: 20),
-                    AppTextField(
-                      hint: 'Enter rent amount',
-                      borderRadius: BorderRadius.circular(10),
-                      height: 50, // Set height of AppTextField
-                      // Adjust other properties as needed
-                    ),
-                    const SizedBox(height: 0), // Space between TextField and Button
-                    SizedBox(
-                      width: double.infinity, // Makes the button width same as AppTextField
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Handle payment logic here
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue, // Set button background color to blue
-                          minimumSize: Size.fromHeight(50), // Make the button height same as TextField
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text(
-                          'Pay Now',
-                          style: TextStyle(
-                            color: Colors.white, // Set button text color to white
-                            fontSize: 16, // Adjust font size if necessary
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+    return BlocProvider(
+      create: (context) => PaymentsCubit(
+        paymentsRepository: services.get<PaymentsRepository>(),
+      )..loadPayments(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Pay your rent'),
         ),
+        body: BlocBuilder<PaymentsCubit, PaymentsState>(
+          builder: (context, state) {
+            if (state.status == PaymentsStateStatus.processing) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state.status == PaymentsStateStatus.failure) {
+              return Center(child: Text('Error: ${state.errorMessage}'));
+            } else if (state.status == PaymentsStateStatus.success && state.payments.isNotEmpty) {
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: state.payments.length,
+                itemBuilder: (context, index) {
+                  return TransactionCard(
+                    onTap: () => _showPaymentOptions(context),
+                    payment: state.payments[index],
+                  );
+                },
+              );
+            } else {
+              return const Center(child: Text('No payments found.'));
+            }
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _showPaymentOptions(context),
+          backgroundColor: const Color(0xFFF38B72),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: const Icon(Icons.add, color: Color.fromARGB(255, 253, 220, 220)),
+        ),
+      ),
+    );
+  }
+
+  void _showPaymentOptions(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) { 
+        return PaymentOptionsModal(
+          onUploadTap: () {
+            Navigator.of(context).pop();
+            _showUploadModal(context);
+          },
+          onPayPalTap: () {
+            _showPayPalScreen(context);
+          },
+        );
+      },
+    );
+  }
+
+  void _showUploadModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return UploadModal(
+          onUploadTap: () {
+            Navigator.of(context).pop(); // Implement logic for upload
+          },
+        );
+      },
+    );
+  }
+
+  void _showPayPalScreen(BuildContext context) {
+    Navigator.of(context).pop();
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PayPalScreen(),
       ),
     );
   }
