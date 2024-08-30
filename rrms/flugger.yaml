@@ -11,7 +11,7 @@ models_to_ignore:
   - 'ResidenceAddRequestModel'
   - 'ResidenceDetailsResponseModel'
   - 'ResidenceDetailsCityResponseModel'
-url: 'https://33db-31-216-185-61.ngrok-free.app/swagger/v1/swagger.json' 
+url: 'https://1129-31-216-185-61.ngrok-free.app/swagger/v1/swagger.json' 
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'
 extensions_output_path: './lib/extensions/generated/'
