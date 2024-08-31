@@ -38,6 +38,7 @@ internal static class ResidenceDetailsEndpoint
                 RentPrice = x.RentPrice,
                 Type = x.Type,
                 ThumbnailUrl = x.ThumbnailUrl,
+                OwnerId = x.OwnerId,
                 City = new ResidenceDetailsCityResponse
                 {
                     Id = x.City.Id,
@@ -59,6 +60,7 @@ public record ResidenceDetailsResponse
     public double RentPrice { get; set; }
     public ResidenceType Type { get; set; }
     public string ThumbnailUrl { get; set; }
+    public string OwnerId { get; set; }
     public ResidenceDetailsCityResponse City { get; set; }
 }
 
