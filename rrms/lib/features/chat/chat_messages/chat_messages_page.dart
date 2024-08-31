@@ -1,18 +1,32 @@
 import 'package:rrms/_all.dart';
 
-class ChatMessagesPage extends StatelessWidget {
+class ChatMessagesPage extends StatefulWidget {
   static const route = '/chat-messages';
   final ChatMessagesSearchRequestModel searchModel;
 
-  const ChatMessagesPage({
+  ChatMessagesPage({
     super.key,
     required this.searchModel,
   });
 
   @override
+  State<ChatMessagesPage> createState() => _ChatMessagesPageState();
+}
+
+class _ChatMessagesPageState extends State<ChatMessagesPage> {
+  final scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => services.get<ChatMessagesCubit>()..load(searchModel),
+      create: (context) => services.get<ChatMessagesCubit>()..load(widget.searchModel),
       child: AppScaffold(
         appBar: BlocBuilder<ChatMessagesCubit, ChatMessagesState>(
           builder: (context, chatMessagesState) {
@@ -41,70 +55,48 @@ class ChatMessagesPage extends StatelessWidget {
             );
           },
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: BlocBuilder<ChatMessagesCubit, ChatMessagesState>(
-              builder: (context, chatMessagesState) {
-                // if (chatMessagesState.status == ChatMessagesStateStatus.loading && (chatMessagesState.chatMessages?.chatMessages).isNullOrEmpty) {
-                //   return Loader();
-                //   // return ChatMessagesShimmer();
-                // }
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: BlocConsumer<ChatMessagesCubit, ChatMessagesState>(
+            listener: (context, chatMessagesState) {
+              if (chatMessagesState.status == ChatMessagesStateStatus.loaded) {
+                WidgetsBinding.instance.addPostFrameCallback((_) => scrollController.jumpTo(scrollController.position.maxScrollExtent));
+              }
+            },
+            builder: (context, chatMessagesState) {
+              // if (chatMessagesState.status == ChatMessagesStateStatus.loading && (chatMessagesState.chatMessages?.chatMessages).isNullOrEmpty) {
+              //   return Loader();
+              //   // return ChatMessagesShimmer();
+              // }
 
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.separated(
-                        padding: EdgeInsets.zero,
-                        itemCount: (chatMessagesState.chatMessages?.chatMessages).count,
-                        itemBuilder: (context, index) {
-                          final chatMessage = chatMessagesState.chatMessages?.chatMessages?[index];
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      controller: scrollController,
+                      padding: EdgeInsets.only(bottom: 15),
+                      itemCount: (chatMessagesState.chatMessages?.chatMessages).count,
+                      itemBuilder: (context, index) {
+                        final chatMessage = chatMessagesState.chatMessages?.chatMessages?[index];
 
-                          if (chatMessage == null) {
-                            return const SizedBox();
-                          }
+                        if (chatMessage == null) {
+                          return const SizedBox();
+                        }
 
-                          return ChatMessageTile(chatMessage: chatMessage);
-                        },
-                        separatorBuilder: (BuildContext context, int index) => const Gap(15),
-                      ),
+                        return ChatMessageTile(chatMessage: chatMessage);
+                      },
+                      separatorBuilder: (BuildContext context, int index) => const Gap(15),
                     ),
-                    MessageFormField(),
-                  ],
-                );
-              },
-            ),
+                  ),
+                  ChatMessageAddFormField(
+                    chatPartnerId: widget.searchModel.chatPartnerId.value,
+                    residenceId: widget.searchModel.residenceId.value,
+                  ),
+                ],
+              );
+            },
           ),
         ),
-      ),
-    );
-  }
-}
-
-class MessageFormField extends StatelessWidget {
-  const MessageFormField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 15),
-      child: Row(
-        children: [
-          Expanded(
-            child: AppTextFormField(
-              hint: 'Type a message',
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.send,
-              color: context.appTheme.blue,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:rrms/_all.dart';
 abstract class ChatsRepository {
   Future<Result<List<ChatGroupResponseModel>>> getChatGroups();
   Future<Result<ChatMessagesResponseModel>> getChatMessages(ChatMessagesSearchRequestModel searchModel);
+  Future<Result> addChatMessage(ChatMessageAddRequestModel model);
 }
 
 class ChatsRepositoryImpl implements ChatsRepository {
@@ -28,6 +29,16 @@ class ChatsRepositoryImpl implements ChatsRepository {
       '/api/chat/chat-messages',
       queryParameters: searchModel.toJson(),
       parser: (data) => ChatMessagesResponseModel.fromJson(data),
+    );
+
+    return result;
+  }
+
+  @override
+  Future<Result> addChatMessage(ChatMessageAddRequestModel model) async {
+    final result = await restApiClient.post(
+      '/api/chat/add',
+      data: model.toJson(),
     );
 
     return result;

@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ChatMessagesCubit extends Cubit<ChatMessagesState> {
+class ChatMessagesCubit extends EventReaderCubit<ChatMessagesState> {
   final ChatsRepository chatsRepository;
 
   ChatMessagesCubit({
@@ -21,7 +21,8 @@ class ChatMessagesCubit extends Cubit<ChatMessagesState> {
     );
   }
 
-  void updateSearchModel(ChatMessagesSearchRequestModel searchModel) {
-    emit(state.copyWith(searchModel: searchModel));
+  @override
+  void onEvent(Object event) {
+    if (event is ChatMessageAddState && event.status == ChatMessageAddStateStatus.submittingSuccess) load();
   }
 }
