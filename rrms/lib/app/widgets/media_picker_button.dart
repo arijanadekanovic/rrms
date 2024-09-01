@@ -27,6 +27,7 @@ class MediaPickerButton extends StatelessWidget {
   final void Function(List<FileInfo> items)? onMediaCropped;
   final EdgeInsetsGeometry? padding;
   final double? borderRadius;
+  final bool allowMultiple;
 
   const MediaPickerButton({
     super.key,
@@ -39,6 +40,7 @@ class MediaPickerButton extends StatelessWidget {
     this.onMediaCropped,
     this.padding,
     this.borderRadius,
+    this.allowMultiple = true,
   });
 
   @override
@@ -143,6 +145,7 @@ class MediaPickerButton extends StatelessWidget {
 
     final result = await FilePicker.platform.pickFiles(
       type: fileConfig!.fileType ?? FileType.custom,
+      allowMultiple: allowMultiple,
       allowedExtensions: fileConfig!.allowedExtensions,
     );
 

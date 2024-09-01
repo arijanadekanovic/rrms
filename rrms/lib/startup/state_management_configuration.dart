@@ -1,5 +1,4 @@
 import 'package:rrms/_all.dart';
-import 'package:rrms/features/payments/payments/cubits/_all.dart';
 
 class StateManagementConfiguration {
   static void configure() {
@@ -55,6 +54,7 @@ class StateManagementConfiguration {
     services.registerFactory(() => ResidenceUpdateCubit(residencesRepository: residencesRepository, modelValidator: services.get<ResidenceUpdateRequestModelValidator>()));
     services.registerFactory(() => ResidentStatusUpdateCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => ResidentAddCubit(residentsRepository: residentsRepository, modelValidator: services.get<ResidentAddRequestModelValidator>()));
+    services.registerFactory(() => PaymentAddCubit(paymentsRepository: paymentsRepository));
     services.registerFactory(() => ChatGroupsCubit(chatsRepository: chatsRepository));
   }
 }

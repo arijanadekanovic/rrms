@@ -9,6 +9,7 @@ class AccountDetailsResponseModel {
   final String? phoneNumber;
   final String? profilePhotoUrl;
   final List<AppRole>? roles;
+  final AccountDetailsResidentResponseModel? residentInfo;
 
   AccountDetailsResponseModel({
     this.id,
@@ -19,6 +20,7 @@ class AccountDetailsResponseModel {
     this.phoneNumber,
     this.profilePhotoUrl,
     this.roles,
+    this.residentInfo,
   });
 
   factory AccountDetailsResponseModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class AccountDetailsResponseModel {
       phoneNumber: json.parseValue('phoneNumber'),
       profilePhotoUrl: json.parseValue('profilePhotoUrl'),
       roles: json['roles'].map<AppRole>((x) => AppRole.parse(x)).toList(),
+      residentInfo: json.parse('residentInfo', AccountDetailsResidentResponseModel.fromJson),
     );
   }
 }
