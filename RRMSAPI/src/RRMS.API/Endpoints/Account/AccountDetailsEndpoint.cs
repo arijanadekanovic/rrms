@@ -36,12 +36,12 @@ internal static class AccountDetailsEndpoint
                 PhoneNumber = x.PhoneNumber,
                 ProfilePhotoUrl = x.ProfilePhotoUrl,
                 Roles = x.Roles,
-                ResidentInfo = new AccountDetailsResidentResponse
+                ResidentInfo = x.ResidentInfo != null ? new AccountDetailsResidentResponse
                 {
                     ResidentId = x.ResidentInfo.ResidentId,
                     ResidenceId = x.ResidentInfo.ResidenceId,
                     ResidencePrice = x.ResidentInfo.ResidencePrice,
-                }
+                } : null,
             }
         );
     }
