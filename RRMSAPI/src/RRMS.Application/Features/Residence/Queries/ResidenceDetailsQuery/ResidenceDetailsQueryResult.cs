@@ -13,6 +13,7 @@ public sealed record ResidenceDetailsQueryResult
     public double RentPrice { get; set; }
     public ResidenceType Type { get; set; }
     public string ThumbnailUrl { get; set; }
+    public string OwnerId { get; set; }
     public ResidenceDetailsCityQueryResult City { get; set; }
 }
 

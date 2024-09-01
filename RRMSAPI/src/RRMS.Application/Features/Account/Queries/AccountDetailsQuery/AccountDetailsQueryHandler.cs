@@ -56,12 +56,12 @@ public sealed class AccountDetailsQueryHandler : IQueryHandler<AccountDetailsQue
             PhoneNumber = user.PhoneNumber,
             ProfilePhotoUrl = user.ProfilePhotoUrl,
             Roles = user.UserRoles.Select(x => x.Role.NormalizedName),
-            ResidentInfo = new AccountDetailsResidentQueryResult
+            ResidentInfo = resident != null ? new AccountDetailsResidentQueryResult
             {
                 ResidentId = resident.Id,
-                ResidenceId   = resident.ResidenceId,
+                ResidenceId = resident.ResidenceId,
                 ResidencePrice = resident.Residence.RentPrice,
-            }
+            } : null,
         };
     }
 }

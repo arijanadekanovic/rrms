@@ -10,13 +10,23 @@ class PaymentAddDialog extends StatelessWidget {
       builder: (context, profileState) {
         final amount = profileState.accountDetails?.residentInfo?.residencePrice ?? 0;
         final residentId = profileState.accountDetails?.residentInfo?.residentId ?? 0;
-        var fileIfo;
+
         return BlocProvider(
           create: (context) => services.get<PaymentAddCubit>()
             ..init(
-              PaymentAddRequestModel(amount: amount, residentId: residentId, paymentMethod: PaymentMethod.slip, slip: fileIfo),
+              PaymentAddRequestModel(
+                amount: amount,
+                residentId: residentId,
+                paymentMethod: PaymentMethod.slip,
+              ),
             ),
-          child: BlocBuilder<PaymentAddCubit, PaymentAddState>(
+          child: BlocConsumer<PaymentAddCubit, PaymentAddState>(
+            listener: (context, paymentAddState) {
+              if (paymentAddState.status == PaymentAddStateStatus.submittingSuccess) {
+                toast.success('Successfully added a new payment slip');
+                context.pop();
+              }
+            },
             builder: (context, paymentAddState) {
               return Column(
                 mainAxisSize: MainAxisSize.min,

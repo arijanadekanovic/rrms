@@ -49,7 +49,7 @@ public sealed class ChatGroupsQueryHandler : IQueryHandler<ChatGroupsQuery, List
                 LastMessageDateTimeUtc = x.LastOrDefault().CreatedOnUtc,
                 Seen = x.LastOrDefault().Seen,
             })
-            .OrderBy(x => x.LastMessageDateTimeUtc)
+            .OrderByDescending(x => x.LastMessageDateTimeUtc)
             .OrderByDescending(x => x.Seen)
             .ToList();
 

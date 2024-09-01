@@ -39,6 +39,12 @@ GoRouter appRouter = GoRouter(
           path: ResidenceUpdatePage.route.withoutFirstSlash,
           builder: (_, state) => ResidenceUpdatePage(id: state.extra as int),
         ),
+        GoRoute(
+          path: ChatMessagesPage.route.withoutFirstSlash,
+          builder: (_, state) => ChatMessagesPage(
+            searchModel: state.extra as ChatMessagesSearchRequestModel,
+          ),
+        ),
       ],
     ),
   ],

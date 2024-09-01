@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class ChatGroupsCubit extends Cubit<ChatGroupsState> {
+class ChatGroupsCubit extends EventReaderCubit<ChatGroupsState> {
   final ChatsRepository chatsRepository;
 
   ChatGroupsCubit({
@@ -18,5 +18,10 @@ class ChatGroupsCubit extends Cubit<ChatGroupsState> {
         chatGroups: result.data,
       ),
     );
+  }
+
+  @override
+  void onEvent(Object event) {
+    if (event is ChatMessageAddState && event.status == ChatMessageAddStateStatus.submittingSuccess) load();
   }
 }
