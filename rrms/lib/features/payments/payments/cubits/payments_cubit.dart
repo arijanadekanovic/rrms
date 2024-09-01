@@ -49,4 +49,42 @@ class PaymentsCubit extends Cubit<PaymentsState> {
       );
     }
   }
+
+// Future<void> addSlip(ProcessPaymentRequestModel slipUrl) async {
+//     emit(state.copyWith(status: PaymentsStateStatus.processing, isImageUploadInProgress: true));
+
+//     try {
+//       if (slipUrl != null) {
+//         final thumbnailUrlResult = await paymentsRepository.addSlip(slipUrl);
+//         slipUrl = thumbnailUrlResult.data;
+//       }
+
+//       // Kreirajte model za zahtev
+//       final model = ProcessPaymentRequestModel(
+//         amount: amount,
+//         slipUrl: slipUrl,
+//       );
+
+//       final result = await paymentsRepository.addSlip(model);
+
+//       if (result.isSuccess) {
+//         emit(state.copyWith(
+//           status: PaymentsStateStatus.success,
+//           isImageUploadInProgress: false,
+//         ));
+//       } else {
+//         emit(state.copyWith(
+//           status: PaymentsStateStatus.failure,
+//           errorMessage: 'Failed to add payment slip.',
+//           isImageUploadInProgress: false,
+//         ));
+//       }
+//     } catch (e) {
+//       emit(state.copyWith(
+//         status: PaymentsStateStatus.failure,
+//         errorMessage: e.toString(),
+//         isImageUploadInProgress: false,
+//       ));
+//     }
+//   }
 }
