@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:rrms/domain/models/payment/response_models/payment_response_model.dart';
 
-class TransactionCard extends StatelessWidget {
-  final VoidCallback onTap;
+class PaymentHistory extends StatelessWidget {
   final PaymentResponseModel payment;
 
-  const TransactionCard({
+  const PaymentHistory({
     Key? key,
-    required this.onTap,
     required this.payment,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
