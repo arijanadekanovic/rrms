@@ -24,8 +24,7 @@ class PaymentsPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               itemCount: state.payments.length,
               itemBuilder: (context, index) {
-                return TransactionCard(
-                  onTap: () => _showPaymentOptions(context),
+                return PaymentHistory(
                   payment: state.payments[index],
                 );
               },
