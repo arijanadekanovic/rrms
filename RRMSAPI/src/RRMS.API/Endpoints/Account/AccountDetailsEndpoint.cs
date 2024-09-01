@@ -35,7 +35,13 @@ internal static class AccountDetailsEndpoint
                 Username = x.Username,
                 PhoneNumber = x.PhoneNumber,
                 ProfilePhotoUrl = x.ProfilePhotoUrl,
-                Roles = x.Roles
+                Roles = x.Roles,
+                ResidentInfo = new AccountDetailsResidentResponse
+                {
+                    ResidentId = x.ResidentInfo.ResidentId,
+                    ResidenceId = x.ResidentInfo.ResidenceId,
+                    ResidencePrice = x.ResidentInfo.ResidencePrice,
+                }
             }
         );
     }
@@ -51,4 +57,12 @@ public sealed record AccountDetailsResponse
     public string PhoneNumber { get; set; }
     public string ProfilePhotoUrl { get; set; }
     public IEnumerable<string> Roles { get; set; }
+    public AccountDetailsResidentResponse ResidentInfo { get; set; }
+}
+
+public sealed record AccountDetailsResidentResponse
+{
+    public int ResidentId { get; set; }
+    public int ResidenceId { get; set; }
+    public double ResidencePrice { get; set; }
 }
