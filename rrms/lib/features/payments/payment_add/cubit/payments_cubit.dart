@@ -1,5 +1,4 @@
 import 'package:rrms/_all.dart';
-import 'package:rrms/features/payments/payments/cubit/payments_state.dart';
 
 class PaymentsCubit extends Cubit<PaymentsState> {
   final PaymentsRepository paymentsRepository;
