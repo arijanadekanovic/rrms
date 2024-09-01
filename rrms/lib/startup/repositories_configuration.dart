@@ -37,6 +37,7 @@ class RepositoriesConfiguration {
     services.registerSingleton<PaymentsRepository>(
       PaymentsRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),
+        mediaStorageService: services.get<MediaStorageService>(),
       ),
     );
     services.registerSingleton<CitiesRepository>(

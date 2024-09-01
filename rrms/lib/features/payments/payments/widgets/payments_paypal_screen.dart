@@ -1,5 +1,3 @@
-import 'package:rrms/features/payments/payments/cubits/payments_cubit.dart';
-import 'package:rrms/features/payments/payments/cubits/payments_state.dart';
 import 'package:rrms/_all.dart';
 
 class PayPalScreen extends StatelessWidget {
@@ -55,25 +53,7 @@ class PayPalScreen extends StatelessWidget {
                         return SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () async {
-                              final double? amount =
-                                  double.tryParse(amountController.text);
-                              if (amount != null) {
-                                context
-                                    .read<PaymentsCubit>()
-                                    .processPayment(amount);
-                                final Uri url = Uri.parse('https://paypal.com');
-                                if (!await launchUrl(url)) {
-                                  throw Exception('Could not launch');
-                                }
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Please enter a valid amount.')),
-                                );
-                              }
-                            },
+                            onPressed: () async {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
                               minimumSize: const Size.fromHeight(50),
@@ -81,17 +61,15 @@ class PayPalScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            child:
-                                state.status == PaymentsStateStatus.processing
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white)
-                                    : const Text(
-                                        'Pay Now',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                            child: state.status == PaymentsStateStatus.processing
+                                ? const CircularProgressIndicator(color: Colors.white)
+                                : const Text(
+                                    'Pay Now',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
                           ),
                         );
                       },

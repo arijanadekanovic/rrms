@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RRMS.Domain.Entities;
+using RRMS.Domain.Enums;
 using RRMS.Infrastructure.Persistance;
+using RRMS.Microservices.SharedKernel.Constants;
 
 namespace DataSeeder.Seeders
 {
@@ -11,35 +13,38 @@ namespace DataSeeder.Seeders
         {
             var databaseContext = serviceProvider.GetRequiredService<DatabaseContext>();
 
-            var residentUserId = await databaseContext.Users
-               .Where(u => u.UserName == "resident")
+            var residentUsersId = await databaseContext.Residents
                .Select(u => u.Id)
-               .FirstOrDefaultAsync();
+               .ToListAsync();
 
-            if (residentUserId == null)
+            if (residentUsersId == null)
             {
-                Console.WriteLine("Resident user not found. Skipping PaymentSeeder.");
+                Console.WriteLine("Residents not found. Skipping PaymentSeeder.");
                 return;
             }
 
-            var resident = await databaseContext.Residents
-                .Where(r => r.UserId == residentUserId)
-                .FirstOrDefaultAsync();
-
-            if (resident == null)
+            foreach (var residentUserId in residentUsersId) 
             {
-                Console.WriteLine("Resident not found. Skipping PaymentSeeder.");
-                return;
-            }
-
-            for (int i = 0; i < 10; i++)
-            {
-                await databaseContext.Payments.AddAsync(new Payment
+                for (int i = 0; i < 5; i++)
                 {
-                    Amount = 100 + i * 10,
-                    ResidentId = resident.Id,
-                    CreatedOnUtc = DateTime.Now.AddDays(-i)
-                });
+                    await databaseContext.Payments.AddAsync(new Payment
+                    {
+                        Amount = 100 + i * 10,
+                        ResidentId = residentUserId,
+                        PaymentMethod = PaymentMethod.PayPal,
+                    });
+                } 
+                
+                for (int i = 5; i < 10; i++)
+                {
+                    await databaseContext.Payments.AddAsync(new Payment
+                    {
+                        Amount = 100 + i * 10,
+                        ResidentId = residentUserId,
+                        PaymentMethod = PaymentMethod.Slip,
+                        SlipUrl = "https://tourism.gov.in/sites/default/files/2019-04/dummy-pdf_2.pdf",
+                    });
+                }
             }
 
             await databaseContext.SaveChangesAsync();

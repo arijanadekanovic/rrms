@@ -27,8 +27,6 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
         var payments = await _databaseContext.Payments
             .Where(x => !x.IsDeleted)
             .Where(x => x.Resident.User.Id == _currentUser.Id)
-            .Where(x => request.FromDateUtc == null || x.CreatedOnUtc >= request.FromDateUtc)
-            .Where(x => request.ToDateUtc == null || x.CreatedOnUtc <= request.ToDateUtc)
             .Include(x => x.Resident)
             .ThenInclude(x => x.User)
             .Include(x => x.Resident)
@@ -40,7 +38,9 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
             Amount = p.Amount,
             ResidenceName = p.Resident.Residence.Name,
             ResidentName = $"{p.Resident.User.FirstName} {p.Resident.User.LastName}",
-            PaymentDateUtc = p.CreatedOnUtc
+            PaymentDateUtc = p.CreatedOnUtc,
+            PaymentMethod = p.PaymentMethod,
+            SlipUrl  = p.SlipUrl,
         })
         .OrderBy(p => p.PaymentDateUtc)
         .ToList();

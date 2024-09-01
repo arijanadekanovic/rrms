@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RRMS.Application.Abstractions.Persistance;
+using RRMS.Domain.Enums;
 using RRMS.Domain.Errors;
 using RRMS.Microservices.Application.Abstractions.Services.Identity;
 using RRMS.Microservices.SharedKernel.Messaging;
@@ -39,6 +40,12 @@ public sealed class AccountDetailsQueryHandler : IQueryHandler<AccountDetailsQue
             return Result.Failure<AccountDetailsQueryResult>(UserDomainErrors.NotFound);
         }
 
+        var resident = await _databaseContext.Residents
+            .Where(x => x.UserId == _currentUser.Id)
+            .Where(x => x.Status == ResidentStatus.Active)
+            .Include(x => x.Residence)
+            .FirstOrDefaultAsync();
+
         return new AccountDetailsQueryResult
         {
             Id = user.Id,
@@ -48,7 +55,13 @@ public sealed class AccountDetailsQueryHandler : IQueryHandler<AccountDetailsQue
             Username = user.UserName,
             PhoneNumber = user.PhoneNumber,
             ProfilePhotoUrl = user.ProfilePhotoUrl,
-            Roles = user.UserRoles.Select(x => x.Role.NormalizedName)
+            Roles = user.UserRoles.Select(x => x.Role.NormalizedName),
+            ResidentInfo = new AccountDetailsResidentQueryResult
+            {
+                ResidentId = resident.Id,
+                ResidenceId   = resident.ResidenceId,
+                ResidencePrice = resident.Residence.RentPrice,
+            }
         };
     }
 }
