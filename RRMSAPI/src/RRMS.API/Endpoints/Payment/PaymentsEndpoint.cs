@@ -16,9 +16,12 @@ internal static class PaymentsEndpoint
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Payments(ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> Payments([AsParameters] PaymentSearchRequest request, ISender sender, CancellationToken cancellationToken)
     {
-        var query = new PaymentsQuery {};
+        var query = new PaymentsQuery
+        {
+            ResidenceId = request.ResidenceId,
+        };
 
         var result = await sender.Send(query, cancellationToken);
 
@@ -35,7 +38,11 @@ internal static class PaymentsEndpoint
             }).ToList()
         );
     }
+}
 
+public record PaymentSearchRequest
+{
+    public int? ResidenceId { get; set; }
 }
 
 public record PaymentResponse

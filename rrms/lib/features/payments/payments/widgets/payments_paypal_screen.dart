@@ -52,25 +52,25 @@ class PayPalScreen extends StatelessWidget {
                       builder: (context, state) {
                         return SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () async {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
-                              minimumSize: const Size.fromHeight(50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: state.status == PaymentsStateStatus.processing
-                                ? const CircularProgressIndicator(color: Colors.white)
-                                : const Text(
-                                    'Pay Now',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                          ),
+                          // child: ElevatedButton(
+                          //   onPressed: () async {},
+                          //   style: ElevatedButton.styleFrom(
+                          //     backgroundColor: Colors.blue,
+                          //     minimumSize: const Size.fromHeight(50),
+                          //     shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(10),
+                          //     ),
+                          //   ),
+                          //   child: state.status == PaymentsStateStatus.processing
+                          //       ? const CircularProgressIndicator(color: Colors.white)
+                          //       : const Text(
+                          //           'Pay Now',
+                          //           style: TextStyle(
+                          //             color: Colors.white,
+                          //             fontSize: 16,
+                          //           ),
+                          //         ),
+                          // ),
                         );
                       },
                     ),

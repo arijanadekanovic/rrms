@@ -2,4 +2,7 @@
 
 namespace RRMS.Application.Features;
 
-public sealed record PaymentsQuery() : IQuery<List<PaymentQueryResult>> {}
+public sealed record PaymentsQuery() : IQuery<List<PaymentQueryResult>>
+{
+    public int? ResidenceId { get; set; }
+}

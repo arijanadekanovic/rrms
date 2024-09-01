@@ -1,5 +1,4 @@
 import 'package:rrms/_all.dart';
-import 'package:rrms/features/payments/payments/payments_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});

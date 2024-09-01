@@ -76,12 +76,22 @@ class ResidenceDetailsContent extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Button(
-                                  textStyle: context.textStyle.t16600,
-                                  padding: EdgeInsets.all(10),
-                                  primary: true,
-                                  text: 'Message',
-                                  onTap: () {},
+                                child: BlocBuilder<ProfileCubit, ProfileState>(
+                                  builder: (context, profileState) {
+                                    return Button(
+                                      textStyle: context.textStyle.t16600,
+                                      padding: EdgeInsets.all(10),
+                                      primary: true,
+                                      text: 'Message',
+                                      onTap: () => context.push(
+                                        ChatMessagesPage.route,
+                                        extra: ChatMessagesSearchRequestModel(
+                                          residenceId: details.id,
+                                          chatPartnerId: details.ownerId,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                               const Gap(30),
