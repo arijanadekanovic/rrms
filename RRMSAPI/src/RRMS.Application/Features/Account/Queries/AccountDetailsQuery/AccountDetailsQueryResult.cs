@@ -10,4 +10,12 @@ public sealed record AccountDetailsQueryResult
     public string PhoneNumber { get; set; }
     public string ProfilePhotoUrl { get; set; }
     public IEnumerable<string> Roles { get; set; }
+    public AccountDetailsResidentQueryResult ResidentInfo { get; set; }
+}
+
+public sealed record AccountDetailsResidentQueryResult
+{
+    public int ResidentId { get; set; }
+    public int ResidenceId { get; set; }
+    public double ResidencePrice { get; set; }
 }
