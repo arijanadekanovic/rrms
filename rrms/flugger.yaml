@@ -4,6 +4,7 @@ models_to_ignore:
   - 'NotificationType'
   - 'ResidenceType'
   - 'AccountDetailsResponseModel'
+  - 'AccountDetailsResidentResponseModel'
   - 'SignUpRequestModel'
   - 'PaymentResponseModel'
   - 'ResidentResponseModel'
@@ -19,6 +20,9 @@ models_to_ignore:
   - 'ChatMessagesResponseModel'
   - 'NotificationResponseModel'
   - 'ChatMessageAddRequestModel'
+  - 'PaymentSearchRequestModel'
+  - 'PaymentAddRequestModel'
+  - 'PaymentMethod'
 generic_imports: 
   - 'package:rrms/_all.dart'
 models_output_path: './lib/domain/models/'

@@ -1,30 +1,28 @@
 import 'package:rrms/_all.dart';
 
-class PaymentsCubit extends Cubit<PaymentsState> {
+class PaymentsCubit extends EventReaderCubit<PaymentsState> {
   final PaymentsRepository paymentsRepository;
 
   PaymentsCubit({
     required this.paymentsRepository,
   }) : super(PaymentsState.initial());
 
-  Future<void> loadPayments() async {
-    emit(state.copyWith(status: PaymentsStateStatus.processing));
+  Future<void> load([PaymentSearchRequestModel? searchModel]) async {
+    emit(state.copyWith(status: PaymentsStateStatus.loading));
 
-    try {
-      final result = await paymentsRepository.get();
-      emit(
-        state.copyWith(
-          status: PaymentsStateStatus.success,
-          payments: result.data,
-        ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          status: PaymentsStateStatus.failure,
-          errorMessage: e.toString(),
-        ),
-      );
-    }
+    final result = await paymentsRepository.get(searchModel ?? state.searchModel);
+
+    emit(
+      state.copyWith(
+        status: PaymentsStateStatus.loaded,
+        searchModel: searchModel,
+        payments: result.data,
+      ),
+    );
+  }
+
+  @override
+  void onEvent(Object event) {
+    if (event is PaymentAddState && event.status == PaymentAddStateStatus.submittingSuccess) load();
   }
 }

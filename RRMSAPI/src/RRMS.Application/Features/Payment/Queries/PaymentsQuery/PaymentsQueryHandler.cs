@@ -24,14 +24,25 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
 
     public async Task<Result<List<PaymentQueryResult>>> Handle(PaymentsQuery request, CancellationToken cancellationToken)
     {
-        var payments = await _databaseContext.Payments
+        var paymentsQuery = _databaseContext.Payments
             .Where(x => !x.IsDeleted)
-            .Where(x => x.Resident.User.Id == _currentUser.Id)
             .Include(x => x.Resident)
             .ThenInclude(x => x.User)
             .Include(x => x.Resident)
-            .ThenInclude(x => x.Residence)
-            .ToListAsync(cancellationToken);
+            .ThenInclude(x => x.Residence);
+
+        if (request.ResidenceId != null)
+        {
+            paymentsQuery
+                .Where(x => x.Resident.ResidenceId == request.ResidenceId.Value);
+        }
+        else
+        {
+            paymentsQuery
+                .Where(x => x.Resident.User.Id == _currentUser.Id);
+        }
+
+        var payments = await paymentsQuery.ToListAsync(cancellationToken);
 
         return payments.Select(p => new PaymentQueryResult
         {
@@ -40,7 +51,7 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
             ResidentName = $"{p.Resident.User.FirstName} {p.Resident.User.LastName}",
             PaymentDateUtc = p.CreatedOnUtc,
             PaymentMethod = p.PaymentMethod,
-            SlipUrl  = p.SlipUrl,
+            SlipUrl = p.SlipUrl,
         })
         .OrderBy(p => p.PaymentDateUtc)
         .ToList();

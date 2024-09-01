@@ -9,33 +9,27 @@ class PaymentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PaymentsCubit(
-        paymentsRepository: services.get<PaymentsRepository>(),
-      )..loadPayments(),
+      create: (context) => services.get<PaymentsCubit>()..load(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Pay your rent'),
         ),
         body: BlocBuilder<PaymentsCubit, PaymentsState>(
           builder: (context, state) {
-            if (state.status == PaymentsStateStatus.processing) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state.status == PaymentsStateStatus.failure) {
-              return Center(child: Text('Error: ${state.errorMessage}'));
-            } else if (state.status == PaymentsStateStatus.success && state.payments.isNotEmpty) {
-              return ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: state.payments.length,
-                itemBuilder: (context, index) {
-                  return TransactionCard(
-                    onTap: () => _showPaymentOptions(context),
-                    payment: state.payments[index],
-                  );
-                },
-              );
-            } else {
-              return const Center(child: Text('No payments found.'));
+            if (state.status == PaymentsStateStatus.loading) {
+              return const Loader();
             }
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: state.payments.length,
+              itemBuilder: (context, index) {
+                return TransactionCard(
+                  onTap: () => _showPaymentOptions(context),
+                  payment: state.payments[index],
+                );
+              },
+            );
           },
         ),
         floatingActionButton: FloatingActionButton(

@@ -1,7 +1,7 @@
 import 'package:rrms/_all.dart';
 
 abstract class PaymentsRepository {
-  Future<Result<List<PaymentResponseModel>>> get();
+  Future<Result<List<PaymentResponseModel>>> get(PaymentSearchRequestModel searchModel);
   Future<Result> add(PaymentAddRequestModel model);
 }
 
@@ -30,9 +30,10 @@ class PaymentsRepositoryImpl implements PaymentsRepository {
   }
 
   @override
-  Future<Result<List<PaymentResponseModel>>> get() async {
+  Future<Result<List<PaymentResponseModel>>> get(PaymentSearchRequestModel searchModel) async {
     final result = await restApiClient.get<List<PaymentResponseModel>>(
       '/api/payment/payments',
+      queryParameters: searchModel.toJson(),
       parser: (data) => data.map<PaymentResponseModel>((x) => PaymentResponseModel.fromJson(x)).toList(),
     );
 
