@@ -1,7 +1,5 @@
 import 'package:image_picker/image_picker.dart';
 import 'package:rrms/_all.dart';
-import 'package:rrms/features/payments/payments/cubits/payments_cubit.dart';
-import 'package:rrms/features/payments/payments/cubits/payments_state.dart';
 import 'package:rrms/features/payments/payments/widgets/payments_history.dart';
 import 'package:rrms/features/payments/payments/widgets/payments_options_modal.dart';
 import 'package:rrms/features/payments/payments/widgets/payments_paypal_screen.dart';
@@ -61,8 +59,14 @@ class PaymentsPage extends StatelessWidget {
       builder: (context) {
         return PaymentOptionsModal(
           onUploadTap: () {
-            Navigator.of(context).pop();
-            _showUploadModal(context);
+            context.pop();
+            showAppDialog(
+              context,
+              AppDialogModel(
+                title: 'Add new payment',
+                child: PaymentAddDialog(),
+              ),
+            );
           },
           onPayPalTap: () {
             _showPayPalScreen(context);
