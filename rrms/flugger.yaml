@@ -1,5 +1,4 @@
-generic_imports: 
-  - 'package:rrms/_all.dart'
+url: 'https://b102-109-163-168-40.ngrok-free.app/swagger/v1/swagger.json' 
 models_to_ignore: 
   - 'ResidentStatus'
   - 'NotificationType'
@@ -20,7 +19,8 @@ models_to_ignore:
   - 'ChatMessagesResponseModel'
   - 'NotificationResponseModel'
   - 'ChatMessageAddRequestModel'
-url: 'https://6bad-109-163-174-220.ngrok-free.app/swagger/v1/swagger.json' 
+generic_imports: 
+  - 'package:rrms/_all.dart'
 models_output_path: './lib/domain/models/'
 enums_output_path: './lib/domain/'
 extensions_output_path: './lib/extensions/generated/'
