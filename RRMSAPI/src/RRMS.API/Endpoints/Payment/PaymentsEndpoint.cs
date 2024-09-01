@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using RRMS.Application.Features;
+using RRMS.Domain.Enums;
 
 namespace RRMS.API.Endpoints.Payment;
 
@@ -15,13 +16,9 @@ internal static class PaymentsEndpoint
         return routeGroupBuilder;
     }
 
-    private static async Task<IResult> Payments([AsParameters] PaymentsSearchRequest request, ISender sender, CancellationToken cancellationToken)
+    private static async Task<IResult> Payments(ISender sender, CancellationToken cancellationToken)
     {
-        var query = new PaymentsQuery
-        {
-            FromDateUtc = request.FromDateUtc,
-            ToDateUtc = request.ToDateUtc
-        };
+        var query = new PaymentsQuery {};
 
         var result = await sender.Send(query, cancellationToken);
 
@@ -32,16 +29,13 @@ internal static class PaymentsEndpoint
                 Amount = y.Amount,
                 ResidenceName = y.ResidenceName,
                 ResidentName = y.ResidentName,
-                PaymentDateUtc = y.PaymentDateUtc
+                PaymentDateUtc = y.PaymentDateUtc,
+                PaymentMethod = y.PaymentMethod,
+                SlipUrl = y.SlipUrl,
             }).ToList()
         );
     }
 
-}
-public class PaymentsSearchRequest
-{
-    public DateTime? FromDateUtc { get; set; }
-    public DateTime? ToDateUtc { get; set; }
 }
 
 public record PaymentResponse
@@ -50,4 +44,6 @@ public record PaymentResponse
     public string ResidenceName { get; set; }
     public string ResidentName { get; set; }
     public DateTime PaymentDateUtc { get; set; }
+    public string SlipUrl { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
 }
