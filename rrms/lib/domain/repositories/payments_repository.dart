@@ -2,40 +2,27 @@ import 'package:rrms/_all.dart';
 
 abstract class PaymentsRepository {
   Future<Result<List<PaymentResponseModel>>> get();
-  Future<Result<PaymentResponseModel>> processPayment(double amount);
-  Future<Result> addSlip(ProcessPaymentRequestModel model); //SlipAddRequestModel
-
+  Future<Result> add(PaymentAddRequestModel model);
 }
 
 class PaymentsRepositoryImpl implements PaymentsRepository {
   final RestApiClient restApiClient;
-   final MediaStorageService mediaStorageService;
+  final MediaStorageService mediaStorageService;
 
   PaymentsRepositoryImpl({
     required this.restApiClient,
-    required this.mediaStorageService
+    required this.mediaStorageService,
   });
-  
+
   @override
-  Future<Result<PaymentResponseModel>> processPayment(double amount) async {
-    final result = await restApiClient.post<PaymentResponseModel>(
-      '/api/payment/payments/process',
-      data: {'amount': amount},
-      parser: (data) => PaymentResponseModel.fromJson(data),
-    );
-
-    return result;
-  }
-
-    @override
-  Future<Result> addSlip(ProcessPaymentRequestModel model) async { //SlipAddRequestModel
-    //  if (model.slipUrl != null) {
-    //   final thumbnailUrlResult = await mediaStorageService.upload(model.slipUrl!);
-    //   model.slipUrl = thumbnailUrlResult.data;
-    // }
+  Future<Result> add(PaymentAddRequestModel model) async {
+    if (model.slip != null) {
+      final slipUrlResult = await mediaStorageService.upload(model.slip!);
+      model.slipUrl = slipUrlResult.data;
+    }
 
     final result = await restApiClient.post(
-      '/api/payment/addSlip',
+      '/api/payment/add',
       data: model.toJson(),
     );
 
