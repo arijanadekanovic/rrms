@@ -25,20 +25,20 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
     public async Task<Result<List<PaymentQueryResult>>> Handle(PaymentsQuery request, CancellationToken cancellationToken)
     {
         var paymentsQuery = _databaseContext.Payments
-            .Where(x => !x.IsDeleted)
             .Include(x => x.Resident)
             .ThenInclude(x => x.User)
             .Include(x => x.Resident)
-            .ThenInclude(x => x.Residence);
+            .ThenInclude(x => x.Residence)
+            .Where(x => !x.IsDeleted);
 
         if (request.ResidenceId != null)
         {
-            paymentsQuery
+            paymentsQuery = paymentsQuery
                 .Where(x => x.Resident.ResidenceId == request.ResidenceId.Value);
         }
         else
         {
-            paymentsQuery
+            paymentsQuery = paymentsQuery
                 .Where(x => x.Resident.User.Id == _currentUser.Id);
         }
 
