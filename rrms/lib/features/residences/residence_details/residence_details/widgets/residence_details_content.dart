@@ -28,104 +28,143 @@ class ResidenceDetailsContent extends StatelessWidget {
 
             final details = residenceDetailsState.details!;
 
-            return ListView(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              children: [
-                CachedImage(
-                  url: details.thumbnailUrl,
-                ),
-                const Gap(20),
-                _DetailsItemListTile(
-                  title: 'Name',
-                  text: details.name,
-                ),
-                _DetailsItemListTile(
-                  title: 'Location',
-                  text: '${details.city?.name}, ${details.address}',
-                ),
-                _DetailsItemListTile(
-                  title: 'Rooms',
-                  text: '${details.rooms} ${details.rooms.spValue('room', 'rooms')}',
-                ),
-                _DetailsItemListTile(
-                  title: 'Rooms',
-                  text: '${details.size.formatDecimals()} m2',
-                ),
-                _DetailsItemListTile(
-                  title: 'Rent',
-                  text: details.rentPrice.formatPriceWithCurrency(),
-                ),
-                _DetailsItemListTile(
-                  title: 'Type',
-                  text: details.type?.title,
-                ),
-                const Gap(10),
-                Text('Description:', style: context.textStyle.t14500),
-                const Gap(10),
-                Text(details.description.value, style: context.textStyle.t14500),
-                if (allowActions)
-                  BlocBuilder<ProfileCubit, ProfileState>(
-                    builder: (context, profileState) {
-                      if (!profileState.isResident) {
-                        return const SizedBox();
-                      }
-
-                      return Column(
-                        children: [
-                          const Gap(40),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: BlocBuilder<ProfileCubit, ProfileState>(
-                                  builder: (context, profileState) {
-                                    return Button(
-                                      textStyle: context.textStyle.t16600,
-                                      padding: EdgeInsets.all(10),
-                                      primary: true,
-                                      text: 'Message',
-                                      onTap: () => context.push(
-                                        ChatMessagesPage.route,
-                                        extra: ChatMessagesSearchRequestModel(
-                                          residenceId: details.id,
-                                          chatPartnerId: details.ownerId,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              const Gap(30),
-                              Expanded(
-                                child: Button(
-                                  textStyle: context.textStyle.t16600,
-                                  padding: EdgeInsets.all(10),
-                                  primary: true,
-                                  color: context.appTheme.blue,
-                                  text: 'Rent',
-                                  onTap: () {
-                                    showAppDialog(
-                                      context,
-                                      AppDialogModel(
-                                        title: 'Rent request',
-                                        child: ResidentAddForm(
-                                          residenceId: details.id.value,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
+            return ResponsiveLayoutBuilder(
+              small: (context, child) => ListView(
+                padding: EdgeInsets.symmetric(vertical: 15),
+                children: [
+                  CachedImage(
+                    url: details.thumbnailUrl,
                   ),
-              ],
+                  const Gap(20),
+                  _ResidenceDetailsInfo(details: details, allowActions: allowActions)
+                ],
+              ),
+              large: (context, child) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: CachedImage(
+                        url: details.thumbnailUrl,
+                      ),
+                    ),
+                    const Gap(20),
+                    Expanded(
+                      child: _ResidenceDetailsInfo(details: details, allowActions: allowActions),
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class _ResidenceDetailsInfo extends StatelessWidget {
+  const _ResidenceDetailsInfo({
+    required this.details,
+    required this.allowActions,
+  });
+
+  final ResidenceDetailsResponseModel details;
+  final bool allowActions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _DetailsItemListTile(
+          title: 'Name',
+          text: details.name,
+        ),
+        _DetailsItemListTile(
+          title: 'Location',
+          text: '${details.city?.name}, ${details.address}',
+        ),
+        _DetailsItemListTile(
+          title: 'Rooms',
+          text: '${details.rooms} ${details.rooms.spValue('room', 'rooms')}',
+        ),
+        _DetailsItemListTile(
+          title: 'Rooms',
+          text: '${details.size.formatDecimals()} m2',
+        ),
+        _DetailsItemListTile(
+          title: 'Rent',
+          text: details.rentPrice.formatPriceWithCurrency(),
+        ),
+        _DetailsItemListTile(
+          title: 'Type',
+          text: details.type?.title,
+        ),
+        const Gap(10),
+        Text('Description:', style: context.textStyle.t14500),
+        const Gap(10),
+        Text(details.description.value, style: context.textStyle.t14500),
+        if (allowActions)
+          BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, profileState) {
+              if (!profileState.isResident) {
+                return const SizedBox();
+              }
+
+              return Column(
+                children: [
+                  const Gap(40),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: BlocBuilder<ProfileCubit, ProfileState>(
+                          builder: (context, profileState) {
+                            return Button(
+                              textStyle: context.textStyle.t16600,
+                              padding: EdgeInsets.all(10),
+                              primary: true,
+                              text: 'Message',
+                              onTap: () => context.push(
+                                ChatMessagesPage.route,
+                                extra: ChatMessagesSearchRequestModel(
+                                  residenceId: details.id,
+                                  chatPartnerId: details.ownerId,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const Gap(30),
+                      Expanded(
+                        child: Button(
+                          textStyle: context.textStyle.t16600,
+                          padding: EdgeInsets.all(10),
+                          primary: true,
+                          color: context.appTheme.blue,
+                          text: 'Rent',
+                          onTap: () {
+                            showAppDialog(
+                              context,
+                              AppDialogModel(
+                                title: 'Rent request',
+                                child: ResidentAddForm(
+                                  residenceId: details.id.value,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
+      ],
     );
   }
 }

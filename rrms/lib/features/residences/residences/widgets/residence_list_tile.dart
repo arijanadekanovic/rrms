@@ -32,7 +32,6 @@ class ResidenceListTile extends StatelessWidget {
                     Expanded(
                       child: CachedImage(
                         url: residence.thumbnailUrl,
-                        // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
