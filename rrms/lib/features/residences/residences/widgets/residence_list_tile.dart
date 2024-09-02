@@ -22,7 +22,7 @@ class ResidenceListTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: SizedBox(
-          height: 110,
+          height: 124,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -65,9 +65,17 @@ class _ResidenceInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                residence.name.value,
-                style: context.textStyle.t14600,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      residence.name.value,
+                      style: context.textStyle.t14600,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
               Text(
                 residence.city.value,
