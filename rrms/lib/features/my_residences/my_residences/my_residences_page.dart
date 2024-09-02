@@ -17,18 +17,39 @@ class MyResidencesPage extends StatelessWidget {
                 return ResidencesShimmer();
               }
 
-              return ListView.separated(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 65),
-                itemCount: residencesState.residences.count,
-                itemBuilder: (context, index) {
-                  final residence = residencesState.residences[index];
+              return ResponsiveLayoutBuilder(
+                small: (context, child) => ListView.separated(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  itemCount: residencesState.residences.count,
+                  itemBuilder: (context, index) {
+                    final residence = residencesState.residences[index];
 
-                  return ResidenceListTile(
-                    onTap: () => context.push(MyResidenceDetailsPage.route, extra: residence),
-                    residence: residence,
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) => const Gap(15),
+                    return ResidenceListTile(
+                      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+                      residence: residence,
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) => const Gap(15),
+                ),
+                large: (context, child) => GridView.builder(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  itemCount: residencesState.residences.count,
+                  itemBuilder: (context, index) {
+                    final residence = residencesState.residences[index];
+
+                    return ResidenceListTile(
+                      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+                      residence: residence,
+                    );
+                  },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 1.5,
+                  ),
+                  // separatorBuilder: (BuildContext context, int index) => const Gap(15),
+                ),
               );
             },
           ),
