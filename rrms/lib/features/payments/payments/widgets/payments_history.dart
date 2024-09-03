@@ -36,7 +36,7 @@ class PaymentHistory extends StatelessWidget {
                 const SizedBox(height: 10),
                 _buildRow('assets/name.png', 'Tenant: ${payment.residentName}'),
                 const SizedBox(height: 5),
-                _buildRow('assets/date.png', 'Date: ${payment.paymentDateUtc}'),
+                _buildRow('assets/date.png', 'Date: ${payment.paymentDate}'),
                 const SizedBox(height: 5),
                 _buildRow('assets/dolar.png', '${payment.amount}\$'),
                 const SizedBox(height: 10),
