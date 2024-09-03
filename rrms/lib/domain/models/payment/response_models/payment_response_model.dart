@@ -4,7 +4,7 @@ class PaymentResponseModel {
   final double? amount;
   final String? residenceName;
   final String? residentName;
-  final DateTime? paymentDateUtc;
+  final DateTime? paymentDate;
   final String? slipUrl;
   final PaymentMethod? paymentMethod;
 
@@ -12,7 +12,7 @@ class PaymentResponseModel {
     this.amount,
     this.residenceName,
     this.residentName,
-    this.paymentDateUtc,
+    this.paymentDate,
     this.slipUrl,
     this.paymentMethod,
   });
@@ -22,7 +22,7 @@ class PaymentResponseModel {
       amount: json.parseDouble('amount'),
       residenceName: json.parseValue('residenceName'),
       residentName: json.parseValue('residentName'),
-      paymentDateUtc: json.parseDate('paymentDateUtc'),
+      paymentDate: json.parseDate('paymentDateUtc'),
       slipUrl: json.parseValue('slipUrl'),
       paymentMethod: json.parseEnum('paymentMethod', PaymentMethod.parse),
     );
