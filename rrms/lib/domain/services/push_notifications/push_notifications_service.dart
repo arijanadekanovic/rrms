@@ -2,24 +2,22 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:rrms/_all.dart';
 
 abstract class PushNotificationsService {
-  late StreamController<NotificationResponseModel> pushNotifications;
+  late StreamController<PushNotificationModel> pushNotifications;
   Future<void> init();
   Future<void> dispose();
 }
 
 class PushNotificationsServiceImpl implements PushNotificationsService {
   final RestApiClient restApiClient;
-  final DeviceInfoService deviceInfoService;
 
   StreamSubscription? _firebaseMessagingSubscription;
 
   PushNotificationsServiceImpl({
     required this.restApiClient,
-    required this.deviceInfoService,
   });
 
   @override
-  late StreamController<NotificationResponseModel> pushNotifications = StreamController<NotificationResponseModel>.broadcast();
+  late StreamController<PushNotificationModel> pushNotifications = StreamController<PushNotificationModel>.broadcast();
 
   @override
   Future<void> init() async {
@@ -35,11 +33,11 @@ class PushNotificationsServiceImpl implements PushNotificationsService {
       final message = await FirebaseMessaging.instance.getInitialMessage();
 
       if (message != null) {
-        final notification = NotificationResponseModel.fromMap(message.data);
+        final notification = PushNotificationModel.fromMap(message.data);
 
         pushNotifications.add(
           notification.copyWith(
-            notificationReceiveType: NotificationReceiveType.openedApp,
+            type: PushNotificationType.openedApp,
           ),
         );
       }
@@ -60,15 +58,11 @@ class PushNotificationsServiceImpl implements PushNotificationsService {
     restApiClient.exceptionHandler.exceptionOptions.disable();
 
     final firebaseTokenId = newToken ?? await _token;
-    final deviceIdentifier = deviceInfoService.signature();
 
-    logger.debug('DEVICE-IDENTIFIER: $deviceIdentifier');
-
-    await restApiClient.post(
-      '${appSettings.notificationsApiUrl}/api/users/enable-push-notifications',
+    await restApiClient.patch(
+      '/api/account/update-fcm-token',
       data: {
-        'firebaseTokenId': firebaseTokenId,
-        'deviceIdentifier': deviceIdentifier,
+        'fcmToken': firebaseTokenId,
       },
     );
   }
@@ -98,8 +92,8 @@ void _firebaseMessagingOnMessageHandler(RemoteMessage message) {
   logger.debug('HANDLING [ON MESSAGE] WITH MESSAGE ID: ${message.messageId}');
 
   _firebaseMessagingAddNotification(
-    NotificationResponseModel.fromMap(message.data).copyWith(
-      notificationReceiveType: NotificationReceiveType.foregroundWhileAppIsLive,
+    PushNotificationModel.fromMap(message.data).copyWith(
+      type: PushNotificationType.foregroundWhileAppIsLive,
     ),
   );
 }
@@ -108,29 +102,16 @@ void _firebaseMessagingOnMessageOpenedAppHandler(RemoteMessage message) {
   logger.debug('HANDLING [ON MESSAGE OPENED APP] WITH MESSAGE ID: ${message.messageId}');
 
   _firebaseMessagingAddNotification(
-    NotificationResponseModel.fromMap(message.data).copyWith(
-      notificationReceiveType: NotificationReceiveType.openedApp,
+    PushNotificationModel.fromMap(message.data).copyWith(
+      type: PushNotificationType.openedApp,
     ),
   );
 }
 
-void _firebaseMessagingAddNotification(NotificationResponseModel notification) {
+void _firebaseMessagingAddNotification(PushNotificationModel notification) {
   try {
     services.get<PushNotificationsService>().pushNotifications.add(notification);
   } catch (e) {
     logger.error(e.toString());
-  }
-}
-
-class MockPushNotificationsServiceImpl implements PushNotificationsService {
-  @override
-  late StreamController<NotificationResponseModel> pushNotifications = StreamController<NotificationResponseModel>.broadcast();
-
-  @override
-  Future<void> init() async {}
-
-  @override
-  Future<void> dispose() async {
-    await pushNotifications.close();
   }
 }

@@ -6,5 +6,6 @@ class ServicesConfiguration {
     services.registerSingleton<Logger>(ConsoleLoggerImpl());
     services.registerSingleton<Debouncer>(DebouncerImpl());
     services.registerSingleton<MediaStorageService>(MediaStorageServiceImpl(restApiClient: services.get<RestApiClient>()));
+    services.registerSingleton<PushNotificationsService>(PushNotificationsServiceImpl(restApiClient: services.get<RestApiClient>()));
   }
 }

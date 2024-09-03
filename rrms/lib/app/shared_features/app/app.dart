@@ -77,7 +77,9 @@ class _App extends StatelessWidget {
                   return ErrorHandlerAppWidgetListener(
                     child: DismissFocusOverlay(
                       child: ConnectivityAppWidgetListener(
-                        child: child!,
+                        child: PushNotificationsAppWidgetListener(
+                          child: child!,
+                        ),
                       ),
                     ),
                   );
