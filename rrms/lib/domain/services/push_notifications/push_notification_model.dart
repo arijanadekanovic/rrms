@@ -35,7 +35,7 @@ class PushNotificationModel {
     );
   }
 
-  factory PushNotificationModel.fromMap(Map<String, dynamic> map) {
+  factory PushNotificationModel.fromJson(Map<String, dynamic> map) {
     return PushNotificationModel(
       chatMessage: map.parse('chatMessage', ChatMessageResponseModel.fromJson),
       notification: map.parse('notification', NotificationResponseModel.fromJson),

@@ -1,4 +1,6 @@
-﻿using RRMS.API.Configuration.Extensions;
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using RRMS.API.Configuration.Extensions;
 using RRMS.Application.Configuration;
 using RRMS.Infrastructure.Configuration;
 using RRMS.Microservices.API.Configuration.Extensions;
@@ -14,6 +16,11 @@ public static class ServicesConfiguration
     {
         var accessTokenOptions = builder.Configuration.GetSection("AuthOptions:AccessTokenOptions").Get<AccessTokenOptions>();
         var corsOptions = builder.Configuration.GetSection("CORSOptions").Get<CORSOptions>();
+
+        FirebaseApp.Create(new AppOptions()
+        {
+            Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rrms-d79d6-firebase-adminsdk-y0bsn-1d06a5907e.json")),
+        });
 
         builder.Services
             .ConfigureAppOptions()

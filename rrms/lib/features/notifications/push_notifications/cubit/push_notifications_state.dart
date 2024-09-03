@@ -1,12 +1,14 @@
 import 'package:rrms/_all.dart';
 
-class PushNotificationsState {
+class PushNotificationsState implements Event {
   final List<PushNotificationModel> items;
 
-  PushNotificationModel? get notificationToOpen {
-    final lastNotification = items.lastOrDefault();
+  PushNotificationModel? get lastNotification => items.lastOrDefault();
 
-    return lastNotification?.type == PushNotificationType.openedApp ? lastNotification : null;
+  PushNotificationModel? get notificationToOpen {
+    final last = lastNotification;
+
+    return last?.type == PushNotificationType.openedApp ? last : null;
   }
 
   PushNotificationsState({

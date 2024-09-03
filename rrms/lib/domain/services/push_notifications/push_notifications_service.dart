@@ -33,13 +33,13 @@ class PushNotificationsServiceImpl implements PushNotificationsService {
       final message = await FirebaseMessaging.instance.getInitialMessage();
 
       if (message != null) {
-        final notification = PushNotificationModel.fromMap(message.data);
-
-        pushNotifications.add(
-          notification.copyWith(
-            type: PushNotificationType.openedApp,
-          ),
+        // final notification = PushNotificationModel.fromMap(message.data);
+        final notification = PushNotificationModel(
+          chatMessage: ChatMessageResponseModel.fromJson(message.data),
+          type: PushNotificationType.openedApp,
         );
+
+        pushNotifications.add(notification);
       }
 
       await _sendFCM();
@@ -89,22 +89,30 @@ class PushNotificationsServiceImpl implements PushNotificationsService {
 Future<void> _firebaseMessagingOnBackgroundMessageHandler(RemoteMessage message) async {}
 
 void _firebaseMessagingOnMessageHandler(RemoteMessage message) {
-  logger.debug('HANDLING [ON MESSAGE] WITH MESSAGE ID: ${message.messageId}');
+  logger.debug('HANDLING [ON MESSAGE] WITH MESSAGE ID: ${message.messageId} | ${message.data}');
 
   _firebaseMessagingAddNotification(
-    PushNotificationModel.fromMap(message.data).copyWith(
+    PushNotificationModel(
+      chatMessage: ChatMessageResponseModel.fromJson(message.data),
       type: PushNotificationType.foregroundWhileAppIsLive,
     ),
+    // PushNotificationModel.fromMap(message.data).copyWith(
+    //   type: PushNotificationType.foregroundWhileAppIsLive,
+    // ),
   );
 }
 
 void _firebaseMessagingOnMessageOpenedAppHandler(RemoteMessage message) {
-  logger.debug('HANDLING [ON MESSAGE OPENED APP] WITH MESSAGE ID: ${message.messageId}');
+  logger.debug('HANDLING [ON MESSAGE OPENED APP] WITH MESSAGE ID: ${message.messageId} | ${message.data}');
 
   _firebaseMessagingAddNotification(
-    PushNotificationModel.fromMap(message.data).copyWith(
-      type: PushNotificationType.openedApp,
+    PushNotificationModel(
+      chatMessage: ChatMessageResponseModel.fromJson(message.data),
+      type: PushNotificationType.foregroundWhileAppIsLive,
     ),
+    // PushNotificationModel.fromMap(message.data).copyWith(
+    //   type: PushNotificationType.openedApp,
+    // ),
   );
 }
 

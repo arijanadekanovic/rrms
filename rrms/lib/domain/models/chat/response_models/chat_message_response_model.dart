@@ -14,10 +14,13 @@ class ChatMessageResponseModel {
   });
 
   factory ChatMessageResponseModel.fromJson(Map<String, dynamic> json) {
+    print('CHAT MESSAGE JSON: ${json} | ${json.runtimeType}');
+
     return ChatMessageResponseModel(
       message: json.parseValue('message'),
-      messageDateTimeUtc: json.parseDate('messageDateTimeUtc'),
-      isMyMessage: json.parseValue('isMyMessage'),
+      // TODO: CHECK PARSING
+      // messageDateTimeUtc: json.parseDate('messageDateTimeUtc'),
+      // isMyMessage: json.parseValue('isMyMessage'),
       profilePhotoUrl: json.parseValue('profilePhotoUrl'),
     );
   }

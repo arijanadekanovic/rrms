@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class PushNotificationsCubit extends EventReaderCubit<PushNotificationsState> {
+class PushNotificationsCubit extends EventCubit<PushNotificationsState> {
   final PushNotificationsService pushNotificationsService;
 
   StreamSubscription? _pushNotificationsSubscription;

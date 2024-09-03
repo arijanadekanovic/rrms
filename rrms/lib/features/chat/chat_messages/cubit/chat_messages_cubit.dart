@@ -21,8 +21,17 @@ class ChatMessagesCubit extends EventReaderCubit<ChatMessagesState> {
     );
   }
 
+  void _add(ChatMessageResponseModel chatMessage) async {
+    print('TRYING TO ADD');
+
+    state.chatMessages?.chatMessages?.add(chatMessage);
+
+    emit(state.copyWith());
+  }
+
   @override
   void onEvent(Object event) {
     if (event is ChatMessageAddState && event.status == ChatMessageAddStateStatus.submittingSuccess) load();
+    if (event is PushNotificationsState && event.lastNotification?.chatMessage != null) _add(event.lastNotification!.chatMessage!);
   }
 }
