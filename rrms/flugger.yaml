@@ -11,6 +11,7 @@ models_to_ignore:
   - 'ResidenceAddRequestModel'
   - 'ResidenceDetailsResponseModel'
   - 'ResidenceDetailsCityResponseModel'
+  - 'ResidencesHistoryResponseModel'
   - 'ResidentAddRequestModel'
   - 'ResidentStatusUpdateRequestModel'
   - 'ResidenceUpdateRequestModel'
