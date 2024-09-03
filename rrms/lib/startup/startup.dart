@@ -14,6 +14,7 @@ class Startup {
     await RestApiClient.initFlutter();
 
     AppSettingsConfiguration.configure();
+    FirebaseConfiguration.configure();
     await StorageConfiguration.configure();
     ModelValidatorsConfiguration.configure();
     await ApiClientConfiguration.configure();

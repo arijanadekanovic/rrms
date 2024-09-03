@@ -20,6 +20,8 @@ dependencies:
   equatable: ^2.0.5
   expandable: ^5.0.1
   file_picker: ^8.0.3
+  firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.0
   fluttertoast: ^8.2.5
   flutter_cached_pdfview: ^0.4.2
   flutter_keyboard_visibility: ^6.0.0
