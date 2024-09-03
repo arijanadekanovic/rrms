@@ -12,6 +12,7 @@ internal static class ResidenceEndpointsBuilder
             .MapResidenceDeleteEndpoint()
             .MapResidenceDetailsEndpoint()
             .MapResidencesEndpoint()
+            .MapResidencesHistoryEndpoint()
             .MapResidenceUpdateEndpoint();
 
         return residenceRouteGroupBuilder;

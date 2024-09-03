@@ -1,5 +1,5 @@
 import 'package:rrms/_all.dart';
-
+import 'package:rrms/features/residences/residences_history/residences_history_page.dart';
 class ResidencesFilters extends StatelessWidget {
   const ResidencesFilters({
     super.key,
@@ -13,6 +13,7 @@ class ResidencesFilters extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: _SearchTextField()),
+            _HistoryButton(),
             _FiltersButton(),
           ],
         ),
@@ -58,6 +59,28 @@ class _SearchTextField extends StatelessWidget {
     );
   }
 }
+
+class _HistoryButton extends StatelessWidget {
+  const _HistoryButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.history,
+        size: 28,
+        color: context.appTheme.accentColor,
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ResidencesHistoryPage()),
+        );
+      },
+    );
+  }
+}
+
 
 class _FiltersButton extends StatelessWidget {
   const _FiltersButton();

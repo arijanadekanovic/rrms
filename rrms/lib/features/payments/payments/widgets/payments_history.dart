@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rrms/domain/models/payment/response_models/payment_response_model.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class PaymentHistory extends StatelessWidget {
   final PaymentResponseModel payment;
@@ -32,11 +36,11 @@ class PaymentHistory extends StatelessWidget {
                 const SizedBox(height: 10),
                 _buildRow('assets/name.png', 'Tenant: ${payment.residentName}'),
                 const SizedBox(height: 5),
-                _buildRow('assets/date.png', 'Date: ${payment.paymentDate}'),
-                const SizedBox(height: 5),
-                _buildRow('assets/phone.png', 'Phone number: +4345459563'), // Replace with real data if available
+                _buildRow('assets/date.png', 'Date: ${payment.paymentDateUtc}'),
                 const SizedBox(height: 5),
                 _buildRow('assets/dolar.png', '${payment.amount}\$'),
+                const SizedBox(height: 10),
+                if (payment.slipUrl != null && payment.slipUrl!.isNotEmpty) _buildAttachmentRow(context),
               ],
             ),
           ),
@@ -52,6 +56,98 @@ class PaymentHistory extends StatelessWidget {
         const SizedBox(width: 10),
         Text(text),
       ],
+    );
+  }
+
+  Widget _buildAttachmentRow(BuildContext context) {
+    return Row(
+      children: [
+        Icon(Icons.attach_file, size: 20),
+        const SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            _handleAttachmentTap(context, payment.slipUrl!);
+          },
+          child: Text(
+            'View Attachment',
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _handleAttachmentTap(BuildContext context, String url) async {
+    try {
+      final response = await http.get(Uri.parse(url));
+      final bytes = response.bodyBytes;
+
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File('${dir.path}/${url.split('/').last}');
+      await file.writeAsBytes(bytes, flush: true);
+
+      if (url.endsWith('.jpg') || url.endsWith('.png')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageScreen(filePath: file.path),
+          ),
+        );
+      } else if (url.endsWith('.pdf')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PDFScreen(filePath: file.path),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Unsupported file type')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load attachment')),
+      );
+    }
+  }
+}
+
+class ImageScreen extends StatelessWidget {
+  final String filePath;
+
+  const ImageScreen({Key? key, required this.filePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('View Image')),
+      body: Center(
+        child: Image.file(File(filePath)),
+      ),
+    );
+  }
+}
+
+class PDFScreen extends StatelessWidget {
+  final String filePath;
+
+  const PDFScreen({Key? key, required this.filePath}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('View PDF')),
+      body: PDFView(
+        filePath: filePath,
+        enableSwipe: true,
+        swipeHorizontal: true,
+        autoSpacing: true,
+        pageFling: true,
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:rrms/_all.dart';
 
 abstract class ResidencesRepository {
   Future<Result<List<ResidenceResponseModel>>> get(ResidencesSearchRequestModel searchModel);
+  Future<Result<List<ResidencesHistoryResponseModel>>> getHistory();
   Future<Result<ResidenceDetailsResponseModel>> getById(int id);
   Future<Result> add(ResidenceAddRequestModel model);
   Future<Result<ResidenceUpdateRequestModel>> prepareForUpdate(int id);
@@ -26,6 +27,15 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
       parser: (data) => parseList(data, ResidenceResponseModel.fromJson),
     );
 
+    return result;
+  }
+
+  @override
+  Future<Result<List<ResidencesHistoryResponseModel>>> getHistory() async {
+    final result = await restApiClient.get<List<ResidencesHistoryResponseModel>>(
+      '/api/residence/residences-history',
+      parser: (data) => data.map<ResidencesHistoryResponseModel>((x) => ResidencesHistoryResponseModel.fromJson(x)).toList(),
+    );
     return result;
   }
 
