@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using RRMS.Domain.Entities;
 using RRMS.Domain.Enums;
 using RRMS.Infrastructure.Persistance;
-using RRMS.Microservices.SharedKernel.Constants;
 
 namespace DataSeeder.Seeders
 {
@@ -13,38 +12,26 @@ namespace DataSeeder.Seeders
         {
             var databaseContext = serviceProvider.GetRequiredService<DatabaseContext>();
 
-            var residentUsersId = await databaseContext.Residents
-               .Select(u => u.Id)
+            var residents = await databaseContext.Residents
+               .Where(x => x.Status == ResidentStatus.Active)
                .ToListAsync();
 
-            if (residentUsersId == null)
+            foreach (var resident in residents)
             {
-                Console.WriteLine("Residents not found. Skipping PaymentSeeder.");
-                return;
-            }
+                await databaseContext.Payments.AddAsync(new Payment
+                {
+                    Amount = resident.Residence.RentPrice,
+                    ResidentId = resident.Id,
+                    PaymentMethod = PaymentMethod.PayPal,
+                });
 
-            foreach (var residentUserId in residentUsersId) 
-            {
-                for (int i = 0; i < 5; i++)
+                await databaseContext.Payments.AddAsync(new Payment
                 {
-                    await databaseContext.Payments.AddAsync(new Payment
-                    {
-                        Amount = 100 + i * 10,
-                        ResidentId = residentUserId,
-                        PaymentMethod = PaymentMethod.PayPal,
-                    });
-                } 
-                
-                for (int i = 5; i < 10; i++)
-                {
-                    await databaseContext.Payments.AddAsync(new Payment
-                    {
-                        Amount = 100 + i * 10,
-                        ResidentId = residentUserId,
-                        PaymentMethod = PaymentMethod.Slip,
-                        SlipUrl = "https://tourism.gov.in/sites/default/files/2019-04/dummy-pdf_2.pdf",
-                    });
-                }
+                    Amount = resident.Residence.RentPrice,
+                    ResidentId = resident.Id,
+                    PaymentMethod = PaymentMethod.Slip,
+                    SlipUrl = "https://tourism.gov.in/sites/default/files/2019-04/dummy-pdf_2.pdf",
+                });
             }
 
             await databaseContext.SaveChangesAsync();

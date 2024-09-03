@@ -6,7 +6,25 @@ Future<bool?> showAppDialog(
 ) async {
   return await showDialog(
     context: context,
-    builder: (context) => AppDialog(model: model),
+    builder: (context) => ResponsiveLayoutBuilder(
+      small: (context, child) => Padding(
+        padding: EdgeInsets.zero,
+        child: child,
+      ),
+      medium: (context, child) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: child,
+      ),
+      large: (context, child) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.screenWidth * 0.25, vertical: 20),
+        child: child,
+      ),
+      xLarge: (context, child) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.screenWidth * 0.25, vertical: 20),
+        child: child,
+      ),
+      child: AppDialog(model: model),
+    ),
   );
 }
 

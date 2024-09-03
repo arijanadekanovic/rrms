@@ -22,7 +22,7 @@ class ResidenceListTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: SizedBox(
-          height: 110,
+          height: 124,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,7 +32,6 @@ class ResidenceListTile extends StatelessWidget {
                     Expanded(
                       child: CachedImage(
                         url: residence.thumbnailUrl,
-                        // url: 'https://images.adsttc.com/media/images/5be3/3a40/08a5/e549/e300/0315/newsletter/42442.jpg?1541618191',
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
@@ -65,9 +64,17 @@ class _ResidenceInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                residence.name.value,
-                style: context.textStyle.t14600,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      residence.name.value,
+                      style: context.textStyle.t14600,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
               Text(
                 residence.city.value,
