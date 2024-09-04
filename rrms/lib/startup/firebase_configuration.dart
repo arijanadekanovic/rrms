@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:rrms/startup/app_settings_configuration.dart';
+import 'package:rrms/_all.dart';
 
 class FirebaseConfiguration {
-  static Future configure() async {
-    await Firebase.initializeApp(options: appSettings.firebaseOptions);
+  static Future<void> configure() async {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   }
 }

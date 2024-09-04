@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Development",
+            "name": "Development generic (android)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
@@ -12,33 +12,34 @@
             ]
         },
         {
-            "name": "Mock",
+            "name": "Development (UBV0218423001447)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
+            "deviceId": "UBV0218423001447",
             "args": [
                 "--dart-define",
-                "environment=mock"
+                "environment=development"
             ]
         },
         {
-            "name": "Staging",
+            "name": "Development (windows)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
+            "deviceId": "Windows",
             "args": [
                 "--dart-define",
-                "environment=staging"
+                "environment=development"
             ]
-        },
+        }
+    ],
+    "compounds": [
         {
-            "name": "Production",
-            "request": "launch",
-            "type": "dart",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define",
-                "environment=production"
+            "name": "Android & Windows",
+            "configurations": [
+                "Development (UBV0218423001447)",
+                "Development (windows)"
             ]
         }
     ]

@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flutter-Launch-All",
+            "dependsOn": [
+                "Flutter-Launch-Android",
+                "Flutter-Launch-Windows"
+            ]
+        },
+        {
+            "label": "Flutter-Launch-Android",
+            "type": "shell",
+            "command": "flutter run -d EML L29"
+        },
+        {
+            "label": "Flutter-Launch-Web",
+            "type": "shell",
+            "command": "flutter run -d Windows"
+        }
+    ]
+}

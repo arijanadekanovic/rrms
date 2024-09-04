@@ -32,4 +32,5 @@ export 'extensions/_all.dart';
 export 'features/_all.dart';
 export 'l10n/_all.dart';
 export 'startup/_all.dart';
+export 'firebase_options.dart';
 export 'main.dart';

@@ -61,9 +61,7 @@ public sealed class ChatMessageAddCommandHandler : ICommandHandler<ChatMessageAd
                 Data = new Dictionary<string, string>()
                 {
                     ["message"] = chatMessage.Text,
-                    ["messageDateTimeUtc"] = chatMessage.CreatedOnUtc.ToString(),
-                    ["isMyMessage"] = "false",
-                    ["profilePhotoUrl"] = chatPartner.ProfilePhotoUrl,
+                    ["profilePhotoUrl"] = currentUser.ProfilePhotoUrl,
                 },
                 Token = chatPartner.FcmToken,
             };
