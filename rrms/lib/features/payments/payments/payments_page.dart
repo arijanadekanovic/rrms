@@ -1,7 +1,6 @@
 import 'package:rrms/_all.dart';
 import 'package:rrms/features/payments/payments/widgets/payments_history.dart';
 import 'package:rrms/features/payments/payments/widgets/payments_options_modal.dart';
-import 'package:rrms/features/payments/payments/widgets/payments_paypal_screen.dart';
 
 class PaymentsPage extends StatelessWidget {
   const PaymentsPage({super.key});
@@ -59,19 +58,11 @@ class PaymentsPage extends StatelessWidget {
             );
           },
           onPayPalTap: () {
-            _showPayPalScreen(context);
+            context.pop();
+            context.push(PaypalAppPage.route);
           },
         );
       },
-    );
-  }
-
-  void _showPayPalScreen(BuildContext context) {
-    Navigator.of(context).pop();
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const PayPalScreen(),
-      ),
     );
   }
 }

@@ -45,6 +45,10 @@ GoRouter appRouter = GoRouter(
             searchModel: state.extra as ChatMessagesSearchRequestModel,
           ),
         ),
+        GoRoute(
+          path: PaypalAppPage.route.withoutFirstSlash,
+          builder: (_, state) => PaypalAppPage(),
+        ),
       ],
     ),
   ],

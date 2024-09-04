@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rrms/app/app_bloc_observer.dart';
 import 'package:rrms/domain/models/payment/response_models/payment_response_model.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,9 +25,12 @@ class PaymentHistory extends StatelessWidget {
               children: [
                 Image.asset('assets/flat.png', height: 20, width: 20),
                 const SizedBox(width: 10),
-                Text(
-                  '${payment.residenceName}, ${payment.amount}\$',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                Expanded(
+                  child: Text(
+                    payment.residenceName ?? '',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
