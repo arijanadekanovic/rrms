@@ -11,6 +11,7 @@ internal static class AccountEndpointsBuilder
             .MapAccountDeleteEndpoint()
             .MapAccountDetailsEndpoint()
             .MapAccountUpdateEndpoint()
+            .MapAccountUpdateFcmTokenEndpoint()
             .MapSignUpEndpoint();
 
         return authRouteGroupBuilder;

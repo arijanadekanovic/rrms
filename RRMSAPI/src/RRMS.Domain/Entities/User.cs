@@ -10,6 +10,7 @@ public class User : IdentityUser<string>, IAggregateRoot<string>
     public string LastName { get; set; }
     public bool IsApproved { get; set; }
     public string ProfilePhotoUrl { get; set; }
+    public string FcmToken { get; set; }
 
     public List<UserClaim> UserClaims { get; set; }
     public List<UserRole> UserRoles { get; set; }

@@ -1,10 +1,11 @@
-url: 'https://13cd-31-216-185-61.ngrok-free.app/swagger/v1/swagger.json' 
+url: 'https://9498-2a02-27b0-5505-6fa0-a126-9dcc-990b-f010.ngrok-free.app/swagger/v1/swagger.json' 
 models_to_ignore: 
   - 'ResidentStatus'
   - 'NotificationType'
   - 'ResidenceType'
   - 'AccountDetailsResponseModel'
   - 'AccountDetailsResidentResponseModel'
+  - 'AccountUpdateFcmTokenRequestModel'
   - 'SignUpRequestModel'
   - 'PaymentResponseModel'
   - 'ResidentResponseModel'

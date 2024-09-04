@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1065194357789",
+    "project_id": "rrms-d79d6",
+    "storage_bucket": "rrms-d79d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065194357789:android:10074071b5de7a7b96b2f4",
+        "android_client_info": {
+          "package_name": "com.rs2.rrms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQoIU0f7TeDA5IAZ7BTyxFx6QV3QJWKb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

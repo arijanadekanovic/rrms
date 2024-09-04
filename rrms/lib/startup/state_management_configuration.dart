@@ -12,6 +12,7 @@ class StateManagementConfiguration {
     final accountRepository = services.get<AccountRepository>();
     final configRepository = services.get<ConfigRepository>();
     final citiesRepository = services.get<CitiesRepository>();
+    final pushNotificationsService = services.get<PushNotificationsService>();
 
     services.registerSingleton<IEventBus>(EventBus());
 
@@ -22,6 +23,7 @@ class StateManagementConfiguration {
 
     services.registerSingleton(AuthCubit(restApiClient: restApiClient, authRepository: authRepository));
     services.registerSingleton(SignOutCubit(authRepository: authRepository));
+    services.registerSingleton(PushNotificationsCubit(pushNotificationsService: pushNotificationsService));
 
     services.registerSingleton(ProfileCubit(accountRepository: accountRepository));
     services.registerSingleton(CitiesCubit(citiesRepository: citiesRepository));

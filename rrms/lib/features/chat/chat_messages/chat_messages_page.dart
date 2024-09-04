@@ -34,17 +34,40 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
               return RRMSAppBar(
                 child: Row(
                   children: [
-                    CachedImage(
-                      url: chatMessagesState.chatMessages?.chatPartnerProfilePictureUrl,
-                      height: 30,
-                      width: 30,
-                      borderRadius: BorderRadius.circular(30),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          CachedImage(
+                            url: chatMessagesState.chatMessages?.chatPartnerProfilePictureUrl,
+                            height: 30,
+                            width: 30,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          const Gap(10),
+                          Text(
+                            chatMessagesState.chatMessages?.chatPartnerName ?? '',
+                            style: context.textStyle.t16600.withColor(Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
-                    const Gap(10),
-                    Text(
-                      chatMessagesState.chatMessages?.chatPartnerName ?? '',
-                      style: context.textStyle.t16600.withColor(Colors.white),
-                    ),
+                    if (Platform.isWindows)
+                      Row(
+                        children: [
+                          Text(
+                            'Messages on windows can\'t be instant',
+                            style: context.textStyle.t16600.withColor(Colors.white),
+                          ),
+                          const Gap(20),
+                          Button(
+                            text: 'Refresh',
+                            textColor: Colors.white,
+                            primary: true,
+                            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            onTap: () => context.read<ChatMessagesCubit>().load(),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               );
