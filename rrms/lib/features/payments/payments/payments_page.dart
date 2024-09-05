@@ -9,9 +9,10 @@ class PaymentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => services.get<PaymentsCubit>()..load(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Pay your rent'),
+      child: AppScaffold(
+        appBar: RRMSAppBar(
+          title: 'Payments',
+          primary: true,
         ),
         body: BlocBuilder<PaymentsCubit, PaymentsState>(
           builder: (context, state) {

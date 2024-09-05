@@ -53,7 +53,7 @@ public sealed class PaymentQueryHandler : IQueryHandler<PaymentsQuery, List<Paym
             PaymentMethod = p.PaymentMethod,
             SlipUrl = p.SlipUrl,
         })
-        .OrderBy(p => p.PaymentDateUtc)
+        .OrderByDescending(p => p.PaymentDateUtc)
         .ToList();
     }
 }

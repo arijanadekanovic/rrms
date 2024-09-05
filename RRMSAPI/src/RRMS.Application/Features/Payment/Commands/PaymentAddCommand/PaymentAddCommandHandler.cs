@@ -29,7 +29,7 @@ public sealed class PaymentAddCommandHandler : ICommandHandler<PaymentAddCommand
         _currentUser = currentUser;
     }
 
-    public async Task<Result> Handle (PaymentAddCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(PaymentAddCommand request, CancellationToken cancellationToken)
     {
         var resident = await _databaseContext.Residents
             .Where(r => r.Id == request.ResidentId)
@@ -46,6 +46,7 @@ public sealed class PaymentAddCommandHandler : ICommandHandler<PaymentAddCommand
             Amount = request.Amount,
             ResidentId = resident.Id,
             SlipUrl = request.SlipUrl,
+            PayPalPaymentId = request.PayPalPaymentId,
             PaymentMethod = request.PaymentMethod,
         };
 

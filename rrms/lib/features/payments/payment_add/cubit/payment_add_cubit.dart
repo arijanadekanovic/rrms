@@ -15,10 +15,10 @@ class PaymentAddCubit extends EventProviderCubit<PaymentAddState> {
     emit(state.copyWith(model: model));
   }
 
-  Future<void> submit() async {
+  Future<void> submit([PaymentAddRequestModel? model]) async {
     emit(state.copyWith(status: PaymentAddStateStatus.submitting));
 
-    final result = await paymentsRepository.add(state.model);
+    final result = await paymentsRepository.add(model ?? state.model);
 
     if (result.isSuccess) {
       emit(state.copyWith(status: PaymentAddStateStatus.submittingSuccess));

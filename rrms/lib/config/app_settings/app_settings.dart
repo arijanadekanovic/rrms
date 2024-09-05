@@ -15,8 +15,8 @@ class AppSettings {
     this.resetStorage = false,
     this.appName = 'RRMS',
     this.payPalAppSettings = const PayPalAppSettings(
-      clientId: 'AQmM9GqznVlMLUiqCBMtm60lV5wOuS8QaFrEFJaBUsMb_WDyuEhOnJ8pVVlqv6agsKeRBhXxqVEJ92OU',
-      secretKey: 'EIWoOm0ErtDA2ZoRCahtfNg6zIoDiKUfgFnnCU9ua651NhCsLzHGxkuKGw-zufgzK8z2qlyalgewWVrk',
+      clientId: 'AbHQr8FP8YjRNclQTc7-nfHsyFLP0l0DFp-UCsJhfWtI0E-DYDaukjciqqFbJhefRLoMDTTVSrO3fAqH',
+      secretKey: 'EASMvGL_wHPZGj9KVn3pDt5gIsdYRuvXgP_bZdKlC6u4PmV1WKGbWwcA1o3zQZxaMZj9oPdfHzPD9R14',
     ),
     this.loggingOptions = const LoggingOptions(),
   });

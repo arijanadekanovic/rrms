@@ -5,6 +5,7 @@ class PaymentAddRequestModel {
   final int? residentId;
   String? slipUrl;
   final PaymentMethod? paymentMethod;
+  String? payPalPaymentId;
 
   final FileInfo? slip;
 
@@ -13,6 +14,7 @@ class PaymentAddRequestModel {
     this.residentId,
     this.slipUrl,
     this.paymentMethod,
+    this.payPalPaymentId,
     this.slip,
   });
 
@@ -21,6 +23,7 @@ class PaymentAddRequestModel {
     int? residentId,
     String? slipUrl,
     PaymentMethod? paymentMethod,
+    String? payPalPaymentId,
     FileInfo? slip,
   }) {
     return PaymentAddRequestModel(
@@ -28,6 +31,7 @@ class PaymentAddRequestModel {
       residentId: residentId ?? this.residentId,
       slipUrl: slipUrl ?? this.slipUrl,
       paymentMethod: paymentMethod ?? this.paymentMethod,
+      payPalPaymentId: payPalPaymentId ?? this.payPalPaymentId,
       slip: slip ?? this.slip,
     );
   }
@@ -37,7 +41,8 @@ class PaymentAddRequestModel {
       if (amount != null) 'amount': amount,
       if (residentId != null) 'residentId': residentId,
       if (slipUrl != null) 'slipUrl': slipUrl,
-      if (paymentMethod != null) 'paymentMethod': paymentMethod?.value
+      if (paymentMethod != null) 'paymentMethod': paymentMethod?.value,
+      if (payPalPaymentId != null) 'payPalPaymentId': payPalPaymentId?.value,
     };
   }
 }
