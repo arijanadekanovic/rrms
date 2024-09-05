@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rrms/app/app_bloc_observer.dart';
 import 'package:rrms/domain/models/payment/response_models/payment_response_model.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
