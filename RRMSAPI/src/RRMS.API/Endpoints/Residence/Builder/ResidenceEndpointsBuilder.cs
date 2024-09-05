@@ -13,6 +13,7 @@ internal static class ResidenceEndpointsBuilder
             .MapResidenceDetailsEndpoint()
             .MapResidencesEndpoint()
             .MapResidencesHistoryEndpoint()
+            .MapResidencesRecommendationEndpoint()
             .MapResidenceUpdateEndpoint();
 
         return residenceRouteGroupBuilder;

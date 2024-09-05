@@ -2,35 +2,26 @@
 using Microsoft.ML;
 using Microsoft.ML.Trainers;
 using RRMS.Application.Abstractions.Persistance;
-using RRMS.Application.Abstractions.Services.Identity;
 using RRMS.Domain.Entities;
 
-namespace RRMS.Infrastructure.Services.Identity.AccessTokenGenerator;
+namespace RRMS.Application.Abstractions.Services.ML;
 
-public class MLService : IMLService
+public class MLService
 {
-    private readonly IDatabaseContext _databaseContext;
-    private readonly MLContext _mlContext;
-    private ITransformer transformer;
+    private static readonly MLContext _mlContext = new MLContext();
+    private static ITransformer transformer;
 
-    public MLService(
-        IDatabaseContext databaseContext
-        )
-    {
-        ArgumentNullException.ThrowIfNull(databaseContext);
-
-        _databaseContext = databaseContext;
-        _mlContext = new MLContext();
-    }
-
-    public async Task<List<Residence>> RecommendById(int residenceId)
+    public static async Task<List<Residence>> RecommendById(IDatabaseContext databaseContext, int residenceId)
     {
         if (transformer == null)
         {
             return [];
         }
 
-        var allItems = await _databaseContext.Residences.Where(x => x.Id != residenceId).ToListAsync();
+        var allItems = await databaseContext.Residences
+            .Include(x => x.City)
+            .Where(x => x.Id != residenceId)
+            .ToListAsync();
 
         var predictionResult = new List<Tuple<Residence, float>>();
 
@@ -57,13 +48,13 @@ public class MLService : IMLService
         return finalResult;
     }
 
-    public async Task StartTraining()
+    public static async Task StartTraining(IDatabaseContext databaseContext)
     {
         var est = BuildModel();
-        await Train(est);
+        await Train(est, databaseContext);
     }
 
-    public MatrixFactorizationTrainer BuildModel()
+    public static MatrixFactorizationTrainer BuildModel()
     {
         //STEP 1: Create MLContext to be shared across the model creation workflow objects
         MLContext mlContext = new MLContext();
@@ -86,9 +77,9 @@ public class MLService : IMLService
         return est;
     }
 
-    public async Task Train(MatrixFactorizationTrainer est)
+    public static async Task Train(MatrixFactorizationTrainer est, IDatabaseContext databaseContext)
     {
-        var tempData = await _databaseContext.Residents
+        var tempData = await databaseContext.Residents
             .Include(x => x.Residence)
             .Include(x => x.User)
             .ThenInclude(x => x.Residents)

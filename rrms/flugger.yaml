@@ -1,4 +1,4 @@
-url: 'https://54cc-2a02-27b0-5506-5750-7136-e74d-45fb-723f.ngrok-free.app/swagger/v1/swagger.json' 
+url: 'https://fa97-2a02-27b0-5506-5750-7136-e74d-45fb-723f.ngrok-free.app/swagger/v1/swagger.json' 
 models_to_ignore: 
   - 'ResidentStatus'
   - 'NotificationType'
@@ -13,6 +13,7 @@ models_to_ignore:
   - 'ResidenceDetailsResponseModel'
   - 'ResidenceDetailsCityResponseModel'
   - 'ResidencesHistoryResponseModel'
+  - 'ResidenceRecommendationResponseModel'
   - 'ResidentAddRequestModel'
   - 'ResidentStatusUpdateRequestModel'
   - 'ResidenceUpdateRequestModel'

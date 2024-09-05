@@ -1,6 +1,6 @@
 ﻿using RRMS.Domain.Entities;
 
-namespace RRMS.Application.Abstractions.Services.Identity;
+namespace RRMS.Application.Abstractions.Services.ML;
 
 public interface IMLService
 {

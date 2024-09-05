@@ -7,27 +7,17 @@ class ResidencesRecommendationCubit extends Cubit<ResidencesRecommendationState>
     required this.residencesRepository,
   }) : super(ResidencesRecommendationState.initial());
 
-  Future<void> load() async {
+  Future<void> load([int? id]) async {
     emit(state.copyWith(status: ResidencesRecommendationStateStatus.loading));
 
-    final result = await residencesRepository.get();
+    final result = await residencesRepository.getRecommendedById(id ?? state.id ?? 0);
 
     emit(
       state.copyWith(
         status: ResidencesRecommendationStateStatus.loaded,
-        searchModel: searchModel,
+        id: id,
         residences: result.data,
       ),
     );
-  }
-
-  void updateSearchModel(ResidencesRecommendationSearchRequestModel searchModel) {
-    emit(state.copyWith(searchModel: searchModel));
-  }
-
-  @override
-  void onEvent(Object event) {
-    if (event is ResidenceAddState && event.status == ResidenceAddStateStatus.submittingSuccess) load();
-    if (event is ResidenceDeleteState && event.status == ResidenceDeleteStateStatus.submittingSuccess) load();
   }
 }
