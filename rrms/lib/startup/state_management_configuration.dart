@@ -46,6 +46,7 @@ class StateManagementConfiguration {
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidenceDeleteCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidencesCubit(residencesRepository: residencesRepository));
+    services.registerFactory(() => ResidencesRecommendationCubit(residencesRepository: residencesRepository));
     services.registerFactory(() => ResidentsCubit(residentsRepository: residentsRepository));
     services.registerFactory(() => NotificationsCubit(notificationsRepository: notificationsRepository));
     services.registerFactory(() => ResidencesHistoryCubit(residencesHistoryRepository: residencesRepository));

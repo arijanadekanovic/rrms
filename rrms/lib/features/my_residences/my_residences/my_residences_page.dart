@@ -25,7 +25,13 @@ class MyResidencesPage extends StatelessWidget {
                     final residence = residencesState.residences[index];
 
                     return ResidenceListTile(
-                      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+                      onTap: () => context.push(
+                        ResidenceDetailsPage.route,
+                        extra: ResidenceDetailsPageModel(
+                          title: residence.name.value,
+                          id: residence.id.value,
+                        ),
+                      ),
                       residence: residence,
                     );
                   },
@@ -38,7 +44,13 @@ class MyResidencesPage extends StatelessWidget {
                     final residence = residencesState.residences[index];
 
                     return ResidenceListTile(
-                      onTap: () => context.push(ResidenceDetailsPage.route, extra: residence),
+                      onTap: () => context.push(
+                        ResidenceDetailsPage.route,
+                        extra: ResidenceDetailsPageModel(
+                          title: residence.name.value,
+                          id: residence.id.value,
+                        ),
+                      ),
                       residence: residence,
                     );
                   },

@@ -14,7 +14,7 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           path: ResidenceDetailsPage.route.withoutFirstSlash,
           builder: (_, state) => ResidenceDetailsPage(
-            residence: state.extra as ResidenceResponseModel,
+            model: state.extra as ResidenceDetailsPageModel,
           ),
         ),
         GoRoute(

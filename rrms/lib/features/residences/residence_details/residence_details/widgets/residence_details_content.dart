@@ -1,12 +1,12 @@
 import 'package:rrms/_all.dart';
 
 class ResidenceDetailsContent extends StatelessWidget {
-  final ResidenceResponseModel residence;
+  final int id;
   final bool allowActions;
 
   const ResidenceDetailsContent({
     super.key,
-    required this.residence,
+    required this.id,
     this.allowActions = true,
   });
 
@@ -15,7 +15,7 @@ class ResidenceDetailsContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: BlocProvider(
-        create: (context) => services.get<ResidenceDetailsCubit>()..load(residence.id.value),
+        create: (context) => services.get<ResidenceDetailsCubit>()..load(id.value),
         child: BlocBuilder<ResidenceDetailsCubit, ResidenceDetailsState>(
           builder: (context, residenceDetailsState) {
             if (residenceDetailsState.status == ResidenceDetailsStateStatus.loading) {
@@ -164,6 +164,8 @@ class _ResidenceDetailsInfo extends StatelessWidget {
               );
             },
           ),
+        const Gap(20),
+        ResidencesRecommendationList(),
       ],
     );
   }
