@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:rrms/domain/models/payment/response_models/payment_response_model.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:rrms/_all.dart';
 
 class PaymentHistory extends StatelessWidget {
   final PaymentResponseModel payment;
@@ -39,9 +36,9 @@ class PaymentHistory extends StatelessWidget {
                 const SizedBox(height: 10),
                 _buildRow('assets/name.png', 'Tenant: ${payment.residentName}'),
                 const SizedBox(height: 5),
-                _buildRow('assets/date.png', 'Date: ${payment.paymentDate}'),
+                _buildRow('assets/date.png', 'Date: ${payment.paymentDate.formatDateTime()}'),
                 const SizedBox(height: 5),
-                _buildRow('assets/dolar.png', '${payment.amount}\$'),
+                _buildRow('assets/dolar.png', '${payment.amount.formatPriceWithCurrency()}'),
                 const SizedBox(height: 10),
                 if (payment.slipUrl != null && payment.slipUrl!.isNotEmpty) _buildAttachmentRow(context),
               ],
