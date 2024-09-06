@@ -19,12 +19,12 @@ class PaymentSlipList extends StatelessWidget {
           child: ListTile(
             title: Row(
               children: [
-                Icon(Icons.home_outlined, size: 20),
+                Icon(Icons.home_outlined, size: 20, color: context.secondaryTextStyle.color),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     payment.residenceName ?? '',
-                    style: const TextStyle(color: Color(0xFFF38B72)),
+                    style: context.textStyle.t14600,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -34,11 +34,11 @@ class PaymentSlipList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                _buildRow(Icons.person_outlined, 'Tenant: ${payment.residentName}'),
+                _buildRow(Icons.person_outlined, 'Tenant: ${payment.residentName}', context),
                 const SizedBox(height: 5),
-                _buildRow(Icons.calendar_today_outlined, 'Date: ${payment.paymentDate.formatDateTime()}'),
+                _buildRow(Icons.calendar_today_outlined, 'Date: ${payment.paymentDate.formatDateTime()}', context),
                 const SizedBox(height: 5),
-                _buildRow(Icons.attach_money_outlined, '${payment.amount.formatPriceWithCurrency()}'),
+                _buildRow(Icons.attach_money_outlined, '${payment.amount.formatPriceWithCurrency()}', context),
                 const SizedBox(height: 5),
                 if (payment.slipUrl != null && payment.slipUrl!.isNotEmpty) _buildAttachmentRow(context),
               ],
@@ -49,20 +49,24 @@ class PaymentSlipList extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(IconData icon, String text) {
+  Widget _buildRow(IconData icon, String text, BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 20),
+        Icon(icon, size: 20, color: context.secondaryTextStyle.color),
         const SizedBox(width: 10),
-        Text(text),
+        Text(
+          text,
+          style: context.textStyle.t14500.withColor(context.secondaryTextStyle.color),
+        ),
       ],
     );
   }
 
   Widget _buildAttachmentRow(BuildContext context) {
+    final color = context.secondaryTextStyle.color;
     return Row(
       children: [
-        Icon(Icons.attach_file_outlined, size: 20),
+        Icon(Icons.attach_file_outlined, size: 20, color: context.secondaryTextStyle.color),
         const SizedBox(width: 10),
         GestureDetector(
           onTap: () {
@@ -70,7 +74,8 @@ class PaymentSlipList extends StatelessWidget {
           },
           child: Text(
             'Slip',
-            style: TextStyle(
+            style: context.textStyle.t14500.copyWith(
+              color: color,
               decoration: TextDecoration.underline,
             ),
           ),
@@ -80,52 +85,46 @@ class PaymentSlipList extends StatelessWidget {
   }
 
   Future<void> _handleAttachmentTap(BuildContext context, String url) async {
-    try {
-      final response = await http.get(Uri.parse(url));
-      final bytes = response.bodyBytes;
+    final response = await http.get(Uri.parse(url));
+    final bytes = response.bodyBytes;
 
-      final dir = await getApplicationDocumentsDirectory();
-      final file = File('${dir.path}/${url.split('/').last}');
-      await file.writeAsBytes(bytes, flush: true);
+    final dir = await getApplicationDocumentsDirectory();
+    final file = File('${dir.path}/${url.split('/').last}');
+    await file.writeAsBytes(bytes, flush: true);
 
-      if (url.endsWith('.jpg') || url.endsWith('.png')) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ImageScreen(filePath: file.path),
-          ),
-        );
-      } else if (url.endsWith('.pdf')) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PDFScreen(filePath: file.path),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Unsupported file type')),
-        );
-      }
-    } catch (e) {
+    if (url.endsWith('.jpg') || url.endsWith('.png') || url.endsWith('.jpeg')) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ImageScreen(imageUrl: url),
+        ),
+      );
+    } else if (url.endsWith('.pdf')) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PDFScreen(filePath: file.path),
+        ),
+      );
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to load attachment')),
+        const SnackBar(content: Text('Unsupported file type')),
       );
     }
   }
 }
 
 class ImageScreen extends StatelessWidget {
-  final String filePath;
+  final String imageUrl;
 
-  const ImageScreen({Key? key, required this.filePath}) : super(key: key);
+  const ImageScreen({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('View Image')),
+      appBar: AppBar(title: const Text('View Image')),
       body: Center(
-        child: Image.file(File(filePath)),
+        child: Image.network(imageUrl),
       ),
     );
   }
