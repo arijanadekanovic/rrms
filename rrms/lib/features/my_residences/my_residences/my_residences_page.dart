@@ -26,11 +26,8 @@ class MyResidencesPage extends StatelessWidget {
 
                     return ResidenceListTile(
                       onTap: () => context.push(
-                        ResidenceDetailsPage.route,
-                        extra: ResidenceDetailsPageModel(
-                          title: residence.name.value,
-                          id: residence.id.value,
-                        ),
+                        MyResidenceDetailsPage.route,
+                        extra: residence,
                       ),
                       residence: residence,
                     );
@@ -45,11 +42,8 @@ class MyResidencesPage extends StatelessWidget {
 
                     return ResidenceListTile(
                       onTap: () => context.push(
-                        ResidenceDetailsPage.route,
-                        extra: ResidenceDetailsPageModel(
-                          title: residence.name.value,
-                          id: residence.id.value,
-                        ),
+                        MyResidenceDetailsPage.route,
+                        extra: residence,
                       ),
                       residence: residence,
                     );

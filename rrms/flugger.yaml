@@ -1,4 +1,4 @@
-url: 'https://fa97-2a02-27b0-5506-5750-7136-e74d-45fb-723f.ngrok-free.app/swagger/v1/swagger.json' 
+url: 'https://993d-77-77-214-110.ngrok-free.app/swagger/v1/swagger.json' 
 models_to_ignore: 
   - 'ResidentStatus'
   - 'NotificationType'

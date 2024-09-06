@@ -160,12 +160,12 @@ class _ResidenceDetailsInfo extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const Gap(20),
+                  ResidencesRecommendationList(),
                 ],
               );
             },
           ),
-        const Gap(20),
-        ResidencesRecommendationList(),
       ],
     );
   }
