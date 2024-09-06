@@ -2,7 +2,7 @@ import 'package:rrms/_all.dart';
 import 'package:path/path.dart';
 import 'package:path/path.dart' as p;
 
-class FileInfo extends BaseModel {
+class FileInfo  {
   String path;
   File file;
   String name;
@@ -31,7 +31,4 @@ class FileInfo extends BaseModel {
       type: FileInfoType.fromExtension(extension),
     );
   }
-
-  @override
-  List<Object?> get props => [path];
 }

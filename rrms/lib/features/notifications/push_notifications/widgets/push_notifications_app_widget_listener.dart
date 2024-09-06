@@ -23,12 +23,8 @@ class _PushNotificationsAppWidgetListenerState extends State<PushNotificationsAp
   void _maybeOpenNotificationDetails(PushNotificationModel? notification) {
     final isAuthenticated = context.read<AuthCubit>().state.status == AuthStateStatus.authenticated;
 
-    print('notification != null && isAuthenticated: ${notification != null} | ${isAuthenticated}');
-
     if (notification != null && isAuthenticated) {
-      // TODO: PUSH CHAT DETAILS PAGE
       print('NEW NOTIFICATION HERE');
-      // appRouter.go(NotificationDetailsPage.route, extra: notification);
     }
   }
 

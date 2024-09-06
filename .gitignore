@@ -5,3 +5,4 @@
 /.idea
 ngrok/ngrok.exe
 rrms/lib/config/app_settings/development_app_settings.dart
+rrms/pubspec.lock

@@ -14,14 +14,8 @@ class ResidencesFilters extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: _SearchTextField()),
-            BlocBuilder<ProfileCubit, ProfileState>(
-              builder: (context, profileState) {
-                if (!profileState.isResident) {
-                  return const SizedBox();
-                }
-
-                return _HistoryButton();
-              },
+            ResidentVisibility(
+              child: _HistoryButton(),
             ),
             _FiltersButton(),
           ],

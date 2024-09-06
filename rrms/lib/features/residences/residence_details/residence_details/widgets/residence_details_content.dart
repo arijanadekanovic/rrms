@@ -2,12 +2,10 @@ import 'package:rrms/_all.dart';
 
 class ResidenceDetailsContent extends StatelessWidget {
   final int id;
-  final bool allowActions;
 
   const ResidenceDetailsContent({
     super.key,
     required this.id,
-    this.allowActions = true,
   });
 
   @override
@@ -36,7 +34,7 @@ class ResidenceDetailsContent extends StatelessWidget {
                     url: details.thumbnailUrl,
                   ),
                   const Gap(20),
-                  _ResidenceDetailsInfo(details: details, allowActions: allowActions)
+                  _ResidenceDetailsInfo(details: details)
                 ],
               ),
               large: (context, child) => Padding(
@@ -51,7 +49,7 @@ class ResidenceDetailsContent extends StatelessWidget {
                     ),
                     const Gap(20),
                     Expanded(
-                      child: _ResidenceDetailsInfo(details: details, allowActions: allowActions),
+                      child: _ResidenceDetailsInfo(details: details),
                     ),
                   ],
                 ),
@@ -67,11 +65,9 @@ class ResidenceDetailsContent extends StatelessWidget {
 class _ResidenceDetailsInfo extends StatelessWidget {
   const _ResidenceDetailsInfo({
     required this.details,
-    required this.allowActions,
   });
 
   final ResidenceDetailsResponseModel details;
-  final bool allowActions;
 
   @override
   Widget build(BuildContext context) {
@@ -106,66 +102,59 @@ class _ResidenceDetailsInfo extends StatelessWidget {
         Text('Description:', style: context.textStyle.t14500),
         const Gap(10),
         Text(details.description.value, style: context.textStyle.t14500),
-        if (allowActions)
-          BlocBuilder<ProfileCubit, ProfileState>(
-            builder: (context, profileState) {
-              if (!profileState.isResident) {
-                return const SizedBox();
-              }
-
-              return Column(
+        ResidentVisibility(
+          child: Column(
+            children: [
+              const Gap(40),
+              Row(
                 children: [
-                  const Gap(40),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: BlocBuilder<ProfileCubit, ProfileState>(
-                          builder: (context, profileState) {
-                            return Button(
-                              textStyle: context.textStyle.t16600,
-                              padding: EdgeInsets.all(10),
-                              primary: true,
-                              text: 'Message',
-                              onTap: () => context.push(
-                                ChatMessagesPage.route,
-                                extra: ChatMessagesSearchRequestModel(
-                                  residenceId: details.id,
-                                  chatPartnerId: details.ownerId,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      const Gap(30),
-                      Expanded(
-                        child: Button(
+                  Expanded(
+                    child: BlocBuilder<ProfileCubit, ProfileState>(
+                      builder: (context, profileState) {
+                        return Button(
                           textStyle: context.textStyle.t16600,
                           padding: EdgeInsets.all(10),
                           primary: true,
-                          color: context.appTheme.blue,
-                          text: 'Rent',
-                          onTap: () {
-                            showAppDialog(
-                              context,
-                              AppDialogModel(
-                                title: 'Rent request',
-                                child: ResidentAddForm(
-                                  residenceId: details.id.value,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                          text: 'Message',
+                          onTap: () => context.push(
+                            ChatMessagesPage.route,
+                            extra: ChatMessagesSearchRequestModel(
+                              residenceId: details.id,
+                              chatPartnerId: details.ownerId,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                  const Gap(20),
-                  ResidencesRecommendationList(),
+                  const Gap(30),
+                  Expanded(
+                    child: Button(
+                      textStyle: context.textStyle.t16600,
+                      padding: EdgeInsets.all(10),
+                      primary: true,
+                      color: context.appTheme.blue,
+                      text: 'Rent',
+                      onTap: () {
+                        showAppDialog(
+                          context,
+                          AppDialogModel(
+                            title: 'Rent request',
+                            child: ResidentAddForm(
+                              residenceId: details.id.value,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
-              );
-            },
+              ),
+              const Gap(20),
+              ResidencesRecommendationList(),
+            ],
           ),
+        ),
       ],
     );
   }

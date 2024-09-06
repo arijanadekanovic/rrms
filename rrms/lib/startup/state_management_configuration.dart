@@ -16,7 +16,6 @@ class StateManagementConfiguration {
 
     services.registerSingleton<IEventBus>(EventBus());
 
-    services.registerSingleton(ConnectivityCubit());
     services.registerSingleton(ErrorHandlerCubit(restApiClient: restApiClient));
     services.registerSingleton(LocalizationCubit(restApiClient: restApiClient, configRepository: configRepository));
     services.registerSingleton(ThemeCubit(configRepository: configRepository));
@@ -39,8 +38,6 @@ class StateManagementConfiguration {
     final chatsRepository = services.get<ChatsRepository>();
 
     services.registerFactoryParam((int? index, _) => NavigationCubit(index: index.value));
-    services.registerFactoryParam((bool? isVisible, _) => VisibilityCubit(isVisible: isVisible.value));
-    services.registerFactoryParam((Permission permission, _) => PermissionHandlerCubit(permission: permission));
     services.registerFactoryParam((String url, _) => AppPdfViewerCubit(url: url));
 
     services.registerFactory(() => ResidenceDetailsCubit(residencesRepository: residencesRepository));

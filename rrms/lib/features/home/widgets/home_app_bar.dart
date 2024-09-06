@@ -11,7 +11,6 @@ class HomeAppBar extends StatelessWidget {
       primary: true,
       child: Row(
         children: [
-          // TODO: Maybe refactor this logo to align to design
           Image.asset(
             AppAssets.logo,
             height: 70,
@@ -25,10 +24,7 @@ class HomeAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            // TODO: Push new notifications list page here
-            context.push(NotificationsPage.route);
-          },
+          onPressed: () => context.push(NotificationsPage.route),
           icon: Icon(
             Icons.notifications_none_rounded,
           ),

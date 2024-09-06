@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
-class PushNotificationsCubit extends EventCubit<PushNotificationsState> {
+class PushNotificationsCubit extends EventProviderCubit<PushNotificationsState> {
   final PushNotificationsService pushNotificationsService;
 
   StreamSubscription? _pushNotificationsSubscription;
@@ -28,10 +28,5 @@ class PushNotificationsCubit extends EventCubit<PushNotificationsState> {
     _pushNotificationsSubscription?.cancel();
 
     return super.close();
-  }
-
-  @override
-  void onEvent(Object event) {
-    if (event is PermissionHandlerState && event.permission == Permission.notification && event.permissionStatus == PermissionStatus.granted) init();
   }
 }
