@@ -14,8 +14,8 @@ class HomeAppBar extends StatelessWidget {
           // TODO: Maybe refactor this logo to align to design
           Image.asset(
             AppAssets.logo,
-            height: 30,
-            width: 30,
+            height: 70,
+            width: 70,
           ),
           const Gap(10),
           Text(
