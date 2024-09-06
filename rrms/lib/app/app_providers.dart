@@ -10,7 +10,6 @@ class AppProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        _<ConnectivityCubit>(),
         _<ErrorHandlerCubit>(),
         _<LocalizationCubit>(),
         _<AuthCubit>(),

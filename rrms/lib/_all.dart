@@ -14,13 +14,9 @@ export 'package:gap/gap.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
 export 'package:flutter_svg/flutter_svg.dart';
-export 'package:permission_handler/permission_handler.dart';
-export 'package:path_provider/path_provider.dart';
 export 'dart:io';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
-export 'package:url_launcher/url_launcher.dart';
-export 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 export 'package:flutter_native_splash/flutter_native_splash.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 
