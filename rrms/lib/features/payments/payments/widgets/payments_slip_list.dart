@@ -1,5 +1,3 @@
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:http/http.dart' as http;
 import 'package:rrms/_all.dart';
 
 class PaymentSlipList extends StatelessWidget {
@@ -85,13 +83,6 @@ class PaymentSlipList extends StatelessWidget {
   }
 
   Future<void> _handleAttachmentTap(BuildContext context, String url) async {
-    final response = await http.get(Uri.parse(url));
-    final bytes = response.bodyBytes;
-
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/${url.split('/').last}');
-    await file.writeAsBytes(bytes, flush: true);
-
     if (url.endsWith('.jpg') || url.endsWith('.png') || url.endsWith('.jpeg')) {
       Navigator.push(
         context,
@@ -103,7 +94,9 @@ class PaymentSlipList extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => PDFScreen(filePath: file.path),
+          builder: (context) => AppPdfViewer(
+            model: AppPdfViewerModel(url: url),
+          ),
         ),
       );
     } else {
@@ -124,27 +117,7 @@ class ImageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('View Image')),
       body: Center(
-        child: Image.network(imageUrl),
-      ),
-    );
-  }
-}
-
-class PDFScreen extends StatelessWidget {
-  final String filePath;
-
-  const PDFScreen({Key? key, required this.filePath}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('View PDF')),
-      body: PDFView(
-        filePath: filePath,
-        enableSwipe: true,
-        swipeHorizontal: true,
-        autoSpacing: true,
-        pageFling: true,
+        child: CachedImage(url: imageUrl),
       ),
     );
   }
