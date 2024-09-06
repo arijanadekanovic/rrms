@@ -27,12 +27,6 @@ dependencies:
   flutter_keyboard_visibility: ^6.0.0
   flutter_native_splash: ^2.4.0
   flutter_paypal_payment: ^1.0.6
-  # paypal_payment: ^1.0.0+2
-  # paypal_native_checkout: ^1.0.4
-  # paypal_webview: ^0.0.6
-  # flutter_paypal_checkout: ^1.0.1
-  # paypal_sdk: ^1.0.10
-  # paypal_mobile_web: ^0.0.1
   flutter_launcher_icons: ^0.13.1
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
@@ -54,9 +48,9 @@ dependencies:
   uuid: ^4.4.0
   webview_flutter: ^4.7.0
   wechat_assets_picker: ^9.0.3
+  
 
 dev_dependencies:
-  # analyzer: ^6.4.1
   analyzer: ^6.7.0
   build_runner: ^2.4.9
   flutter_lints: ^4.0.0

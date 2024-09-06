@@ -1,5 +1,6 @@
 import 'package:rrms/_all.dart';
 import 'package:rrms/features/residences/residences_history/residences_history_page.dart';
+
 class ResidencesFilters extends StatelessWidget {
   const ResidencesFilters({
     super.key,
@@ -13,7 +14,15 @@ class ResidencesFilters extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(child: _SearchTextField()),
-            _HistoryButton(),
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (context, profileState) {
+                if (!profileState.isResident) {
+                  return const SizedBox();
+                }
+
+                return _HistoryButton();
+              },
+            ),
             _FiltersButton(),
           ],
         ),
@@ -80,7 +89,6 @@ class _HistoryButton extends StatelessWidget {
     );
   }
 }
-
 
 class _FiltersButton extends StatelessWidget {
   const _FiltersButton();
