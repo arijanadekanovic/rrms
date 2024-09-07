@@ -67,7 +67,7 @@ public sealed class ChatMessageAddCommandHandler : ICommandHandler<ChatMessageAd
             };
 
             var messaging = FirebaseMessaging.DefaultInstance;
-            var result = await messaging.SendAsync(message);
+            await messaging.SendAsync(message);
         }
 
         return Result.Success();
