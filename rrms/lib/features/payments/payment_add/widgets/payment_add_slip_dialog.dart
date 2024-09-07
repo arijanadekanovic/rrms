@@ -28,60 +28,63 @@ class PaymentAddDialog extends StatelessWidget {
               }
             },
             builder: (context, paymentAddState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Gap(10),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Amount: ${amount.formatPrice()}\$',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const Gap(15),
-                  MediaPickerButton(
-                    onMediaTaken: (items) {
-                      final fileInfo = items.firstOrDefault();
-                      if (fileInfo != null) {
-                        context.read<PaymentAddCubit>().update(paymentAddState.model.copyWith(slip: fileInfo));
-                      }
-                    },
-                    type: MediaPickerButtonType.file,
-                    fileConfig: MediaPickerFileConfig(
-                      fileType: FileType.custom,
-                      allowedExtensions: ['pdf', 'png', 'jpg', 'jpeg'],
-                    ),
-                    allowMultiple: false,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Container(
-                        color: Colors.transparent,
-                        child: const Text(
-                          'Browse your payment slip',
-                          style: TextStyle(color: Colors.black, decoration: TextDecoration.underline),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Gap(20),
-                  Align(
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Gap(10),
+                    Align(
                       alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 200,
-                        height: 50,
-                        child: Button(
-                          text: 'Submit',
-                          primary: true,
-                          isLoading: paymentAddState.status == PaymentAddStateStatus.submitting,
-                          onTap: () => context.read<PaymentAddCubit>().submit(),
-                        ),
-                      )),
-                  const Gap(20),
-                ],
+                      child: Text(
+                        'Amount: ${amount.formatPrice()}\$',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const Gap(15),
+                    MediaPickerButton(
+                      onMediaTaken: (items) {
+                        final fileInfo = items.firstOrDefault();
+                        if (fileInfo != null) {
+                          context.read<PaymentAddCubit>().update(paymentAddState.model.copyWith(slip: fileInfo));
+                        }
+                      },
+                      type: MediaPickerButtonType.file,
+                      fileConfig: MediaPickerFileConfig(
+                        fileType: FileType.custom,
+                        allowedExtensions: ['pdf', 'png', 'jpg', 'jpeg'],
+                      ),
+                      allowMultiple: false,
+                      child: Button(
+                        secondary: true,
+                        text: paymentAddState.model.slip == null ? 'Choose file' : 'Choose another file',
+                      ),
+                    ),
+                    if (paymentAddState.model.slip != null) ...[
+                      const Gap(20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              paymentAddState.model.slip?.name ?? '',
+                              style: context.textStyle.t14500,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                    const Gap(20),
+                    Button(
+                      text: 'Submit',
+                      primary: true,
+                      isLoading: paymentAddState.status == PaymentAddStateStatus.submitting,
+                      onTap: () => context.read<PaymentAddCubit>().submit(),
+                    ),
+                    const Gap(20),
+                  ],
+                ),
               );
             },
           ),
