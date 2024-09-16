@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
 AppSettings developmentAppSettings = AppSettings(
-  mainApiUrl: 'https://5491-109-175-99-208.ngrok-free.app',
-  storageApiUrl: 'https://04b6-109-175-99-208.ngrok-free.app',
+  mainApiUrl: 'https://localhost:5001',
+  storageApiUrl: 'https://localhost:5003',
 );

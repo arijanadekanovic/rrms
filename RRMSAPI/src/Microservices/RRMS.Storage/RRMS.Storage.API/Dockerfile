@@ -1,5 +1,3 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
@@ -12,7 +10,6 @@ WORKDIR /src
 COPY ["src/Microservices/RRMS.Storage/RRMS.Storage.API/RRMS.Storage.API.csproj", "src/Microservices/RRMS.Storage/RRMS.Storage.API/"]
 COPY ["src/Microservices/RRMS.Storage/RRMS.Storage.Application/RRMS.Storage.Application.csproj", "src/Microservices/RRMS.Storage/RRMS.Storage.Application/"]
 COPY ["src/Microservices/RRMS.Storage/RRMS.Storage.Domain/RRMS.Storage.Domain.csproj", "src/Microservices/RRMS.Storage/RRMS.Storage.Domain/"]
-COPY ["src/Microservices/RRMS.Storage/RRMS.Storage.SharedKernel/RRMS.Storage.SharedKernel.csproj", "src/Microservices/RRMS.Storage/RRMS.Storage.SharedKernel/"]
 COPY ["src/Microservices/RRMS.Storage/RRMS.Storage.Infrastructure/RRMS.Storage.Infrastructure.csproj", "src/Microservices/RRMS.Storage/RRMS.Storage.Infrastructure/"]
 RUN dotnet restore "./src/Microservices/RRMS.Storage/RRMS.Storage.API/RRMS.Storage.API.csproj"
 COPY . .
