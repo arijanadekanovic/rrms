@@ -1,6 +1,6 @@
 import 'package:rrms/_all.dart';
 
 AppSettings developmentAppSettings = AppSettings(
-  mainApiUrl: 'https://10.0.2.2:5001',
-  storageApiUrl: 'https://10.0.2.2:5003',
+  mainApiUrl: 'https://localhost:5001',
+  storageApiUrl: 'https://localhost:5003',
 );
