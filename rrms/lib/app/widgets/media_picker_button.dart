@@ -71,6 +71,16 @@ class MediaPickerButton extends StatelessWidget {
       return;
     }
 
+    if (Platform.isAndroid || Platform.isIOS) {
+      await _handleGalleryMobile(context);
+    }
+
+    if (Platform.isWindows) {
+      await _handleGalleryWindows(context);
+    }
+  }
+
+  Future<void> _handleGalleryMobile(BuildContext context) async {    
     final List<String> selectedAssetIds = [];
 
     final assets = await AssetPicker.pickAssets(
@@ -135,6 +145,20 @@ class MediaPickerButton extends StatelessWidget {
           onMediaCropped?.call(croppedImages);
         }
       }
+    }
+  }
+
+  Future<void> _handleGalleryWindows(BuildContext context) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      final fileInfo = FileInfo.fromPath(result.files.single.path!);
+
+      onMediaTaken?.call([fileInfo]);
+      onMediaCropped?.call([fileInfo]);
     }
   }
 
