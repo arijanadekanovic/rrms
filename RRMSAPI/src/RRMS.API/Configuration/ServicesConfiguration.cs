@@ -19,7 +19,7 @@ public static class ServicesConfiguration
 
         FirebaseApp.Create(new AppOptions()
         {
-            Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rrms-d79d6-firebase-adminsdk-y0bsn-59d247d1d6.json")),
+            Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "rrms-d79d6-firebase-adminsdk-y0bsn-ad44475a1b.json")),
         });
 
         builder.Services
