@@ -17,7 +17,7 @@ class ChatsRepositoryImpl implements ChatsRepository {
   Future<Result<List<ChatGroupResponseModel>>> getChatGroups() async {
     final result = await restApiClient.get<List<ChatGroupResponseModel>>(
       '/api/chat/chat-groups',
-      parser: (data) => data.map<ChatGroupResponseModel>((x) => ChatGroupResponseModel.fromJson(x)).toList(),
+      onSuccess: (data) => data.map<ChatGroupResponseModel>((x) => ChatGroupResponseModel.fromJson(x)).toList(),
     );
 
     return result;
@@ -28,7 +28,7 @@ class ChatsRepositoryImpl implements ChatsRepository {
     final result = await restApiClient.get<ChatMessagesResponseModel>(
       '/api/chat/chat-messages',
       queryParameters: searchModel.toJson(),
-      parser: (data) => ChatMessagesResponseModel.fromJson(data),
+      onSuccess: (data) => ChatMessagesResponseModel.fromJson(data),
     );
 
     return result;

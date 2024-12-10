@@ -15,7 +15,7 @@ class CitiesRepositoryImpl implements CitiesRepository {
   Future<Result<List<CityResponseModel>>> get() async {
     final result = await restApiClient.get<List<CityResponseModel>>(
       '/api/city/cities',
-      parser: (data) => data.map<CityResponseModel>((x) => CityResponseModel.fromJson(x)).toList(),
+      onSuccess: (data) => data.map<CityResponseModel>((x) => CityResponseModel.fromJson(x)).toList(),
     );
 
     return result;

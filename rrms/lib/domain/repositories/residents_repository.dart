@@ -18,7 +18,7 @@ class ResidentsRepositoryImpl implements ResidentsRepository {
     final result = await restApiClient.get<List<ResidentResponseModel>>(
       '/api/resident/residents',
       queryParameters: searchModel.toJson(),
-      parser: (data) => parseList(data, ResidentResponseModel.fromJson),
+      onSuccess: (data) => parseList(data, ResidentResponseModel.fromJson),
     );
 
     return result;

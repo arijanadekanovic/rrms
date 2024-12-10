@@ -25,7 +25,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
     final result = await restApiClient.get<List<ResidenceResponseModel>>(
       '/api/residence/residences',
       queryParameters: searchModel.toJson(),
-      parser: (data) => parseList(data, ResidenceResponseModel.fromJson),
+      onSuccess: (data) => parseList(data, ResidenceResponseModel.fromJson),
     );
 
     return result;
@@ -35,7 +35,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
   Future<Result<List<ResidenceRecommendationResponseModel>>> getRecommendedById(int id) async {
     final result = await restApiClient.get<List<ResidenceRecommendationResponseModel>>(
       '/api/residence/residences-recommendation/$id',
-      parser: (data) => parseList(data, ResidenceRecommendationResponseModel.fromJson),
+      onSuccess: (data) => parseList(data, ResidenceRecommendationResponseModel.fromJson),
     );
 
     return result;
@@ -45,7 +45,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
   Future<Result<List<ResidencesHistoryResponseModel>>> getHistory() async {
     final result = await restApiClient.get<List<ResidencesHistoryResponseModel>>(
       '/api/residence/residences-history',
-      parser: (data) => data.map<ResidencesHistoryResponseModel>((x) => ResidencesHistoryResponseModel.fromJson(x)).toList(),
+      onSuccess: (data) => data.map<ResidencesHistoryResponseModel>((x) => ResidencesHistoryResponseModel.fromJson(x)).toList(),
     );
     return result;
   }
@@ -54,7 +54,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
   Future<Result<ResidenceDetailsResponseModel>> getById(int id) async {
     final result = await restApiClient.get<ResidenceDetailsResponseModel>(
       '/api/residence/details/$id',
-      parser: (data) => ResidenceDetailsResponseModel.fromJson(data),
+      onSuccess: (data) => ResidenceDetailsResponseModel.fromJson(data),
     );
 
     return result;
@@ -79,7 +79,7 @@ class ResidencesRepositoryImpl implements ResidencesRepository {
   Future<Result<ResidenceUpdateRequestModel>> prepareForUpdate(int id) async {
     final result = await restApiClient.get(
       '/api/residence/details/$id',
-      parser: (data) {
+      onSuccess: (data) {
         var details = ResidenceDetailsResponseModel.fromJson(data);
 
         return ResidenceUpdateRequestModel(

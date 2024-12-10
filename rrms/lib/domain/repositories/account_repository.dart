@@ -28,7 +28,7 @@ class AccountRepositoryImpl implements AccountRepository {
   Future<Result<AccountDetailsResponseModel>> getAccountDetails() async {
     final result = await restApiClient.get(
       '/api/account/account-details',
-      parser: (data) => AccountDetailsResponseModel.fromJson(data),
+      onSuccess: (data) => AccountDetailsResponseModel.fromJson(data),
     );
 
     return result;
@@ -38,7 +38,7 @@ class AccountRepositoryImpl implements AccountRepository {
   Future<Result<AccountUpdateRequestModel>> prepareForUpdate() async {
     final result = await restApiClient.get(
       '/api/account/account-details',
-      parser: (data) {
+      onSuccess: (data) {
         var details = AccountDetailsResponseModel.fromJson(data);
 
         return AccountUpdateRequestModel(

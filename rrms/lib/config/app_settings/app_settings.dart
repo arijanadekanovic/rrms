@@ -1,17 +1,22 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:rrms/_all.dart';
 
 class AppSettings {
-  final String mainApiUrl;
-  final String storageApiUrl;
+  final AppSettingsApiUrl apiUrlMobile;
+  final AppSettingsApiUrl apiUrlDesktop;
   final bool resetStorage;
   final String appName;
   final PayPalAppSettings payPalAppSettings;
   final LoggingOptions loggingOptions;
 
   AppSettings({
-    this.mainApiUrl = 'https://10.0.2.2:5001',
-    this.storageApiUrl = 'https://10.0.2.2:5003',
+    this.apiUrlMobile = const AppSettingsApiUrl(
+      mainApiUrl: 'https://10.0.2.2:5001',
+      storageApiUrl: 'https://10.0.2.2:5003',
+    ),
+    this.apiUrlDesktop = const AppSettingsApiUrl(
+      mainApiUrl: 'https://localhost:5001',
+      storageApiUrl: 'https://localhost:5003',
+    ),
     this.resetStorage = false,
     this.appName = 'RRMS',
     this.payPalAppSettings = const PayPalAppSettings(
@@ -19,6 +24,31 @@ class AppSettings {
       secretKey: 'EASMvGL_wHPZGj9KVn3pDt5gIsdYRuvXgP_bZdKlC6u4PmV1WKGbWwcA1o3zQZxaMZj9oPdfHzPD9R14',
     ),
     this.loggingOptions = const LoggingOptions(),
+  });
+
+  String get mainApiUrl => _isMobile
+      ? apiUrlMobile.mainApiUrl
+      : _isDesktop
+          ? apiUrlDesktop.mainApiUrl
+          : '<UNSUPPORTED PLATFORM>';
+
+  String get storageApiUrl => _isMobile
+      ? apiUrlMobile.storageApiUrl
+      : _isDesktop
+          ? apiUrlDesktop.storageApiUrl
+          : '<UNSUPPORTED PLATFORM>';
+
+  bool get _isDesktop => Platform.isWindows || Platform.isLinux || Platform.isMacOS;
+  bool get _isMobile => Platform.isAndroid || Platform.isIOS;
+}
+
+class AppSettingsApiUrl {
+  final String mainApiUrl;
+  final String storageApiUrl;
+
+  const AppSettingsApiUrl({
+    required this.mainApiUrl,
+    required this.storageApiUrl,
   });
 }
 

@@ -18,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
     final result = await restApiClient.post(
       '/api/auth/sign-in',
       data: model.toJson(),
-      parser: (data) => SignInResponseModel.fromJson(data),
+      onSuccess: (data) => SignInResponseModel.fromJson(data),
     );
 
     await _authenticate(

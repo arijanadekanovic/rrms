@@ -34,7 +34,7 @@ class PaymentsRepositoryImpl implements PaymentsRepository {
     final result = await restApiClient.get<List<PaymentResponseModel>>(
       '/api/payment/payments',
       queryParameters: searchModel.toJson(),
-      parser: (data) => data.map<PaymentResponseModel>((x) => PaymentResponseModel.fromJson(x)).toList(),
+      onSuccess: (data) => data.map<PaymentResponseModel>((x) => PaymentResponseModel.fromJson(x)).toList(),
     );
 
     return result;
