@@ -10,8 +10,8 @@ class AppSettings {
   final LoggingOptions loggingOptions;
 
   AppSettings({
-    this.mainApiUrl = '<URL>',
-    this.storageApiUrl = '<URL>',
+    this.mainApiUrl = 'https://10.0.2.2:5001',
+    this.storageApiUrl = 'https://10.0.2.2:5003',
     this.resetStorage = false,
     this.appName = 'RRMS',
     this.payPalAppSettings = const PayPalAppSettings(
