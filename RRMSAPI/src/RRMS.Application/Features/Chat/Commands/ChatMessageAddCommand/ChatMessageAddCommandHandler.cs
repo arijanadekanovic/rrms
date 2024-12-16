@@ -51,23 +51,30 @@ public sealed class ChatMessageAddCommandHandler : ICommandHandler<ChatMessageAd
 
         if (!string.IsNullOrEmpty(chatPartner.FcmToken))
         {
-            var message = new Message()
+            try
             {
-                Notification = new FirebaseAdmin.Messaging.Notification
+                var message = new Message()
                 {
-                    Title = "New message",
-                    Body = $"{currentUser.FirstName} {currentUser.LastName} sent you a message"
-                },
-                Data = new Dictionary<string, string>()
-                {
-                    ["message"] = chatMessage.Text,
-                    ["profilePhotoUrl"] = currentUser.ProfilePhotoUrl,
-                },
-                Token = chatPartner.FcmToken,
-            };
+                    Notification = new FirebaseAdmin.Messaging.Notification
+                    {
+                        Title = "New message",
+                        Body = $"{currentUser.FirstName} {currentUser.LastName} sent you a message"
+                    },
+                    Data = new Dictionary<string, string>()
+                    {
+                        ["message"] = chatMessage.Text,
+                        ["profilePhotoUrl"] = currentUser.ProfilePhotoUrl,
+                    },
+                    Token = chatPartner.FcmToken,
+                };
 
-            var messaging = FirebaseMessaging.DefaultInstance;
-            await messaging.SendAsync(message);
+                var messaging = FirebaseMessaging.DefaultInstance;
+                await messaging.SendAsync(message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         return Result.Success();
