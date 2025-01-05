@@ -8,7 +8,15 @@
             "program": "lib/main.dart",
             "args": [
                 "--dart-define",
-                "environment=development"
+                "environment=development",
+                "--dart-define",
+                "mainApiUrl=https://10.0.2.2:5001",
+                "--dart-define",
+                "storageApiUrl=https://10.0.2.2:5003",
+                "--dart-define",
+                "paypalClientId=AbHQr8FP8YjRNclQTc7-nfHsyFLP0l0DFp-UCsJhfWtI0E-DYDaukjciqqFbJhefRLoMDTTVSrO3fAqH",
+                "--dart-define",
+                "paypalSecretKey=EASMvGL_wHPZGj9KVn3pDt5gIsdYRuvXgP_bZdKlC6u4PmV1WKGbWwcA1o3zQZxaMZj9oPdfHzPD9R14"
             ]
         },
         {
@@ -19,7 +27,15 @@
             "deviceId": "UBV0218423001447",
             "args": [
                 "--dart-define",
-                "environment=development"
+                "environment=development",
+                "--dart-define",
+                "mainApiUrl=https://10.0.2.2:5001",
+                "--dart-define",
+                "storageApiUrl=https://10.0.2.2:5003",
+                "--dart-define",
+                "paypalClientId=AbHQr8FP8YjRNclQTc7-nfHsyFLP0l0DFp-UCsJhfWtI0E-DYDaukjciqqFbJhefRLoMDTTVSrO3fAqH",
+                "--dart-define",
+                "paypalSecretKey=EASMvGL_wHPZGj9KVn3pDt5gIsdYRuvXgP_bZdKlC6u4PmV1WKGbWwcA1o3zQZxaMZj9oPdfHzPD9R14"
             ]
         },
         {
@@ -30,7 +46,15 @@
             "deviceId": "Windows",
             "args": [
                 "--dart-define",
-                "environment=development"
+                "environment=development",
+                "--dart-define",
+                "mainApiUrl=https://localhost:5001",
+                "--dart-define",
+                "storageApiUrl=https://localhost:5003",
+                "--dart-define",
+                "paypalClientId=AbHQr8FP8YjRNclQTc7-nfHsyFLP0l0DFp-UCsJhfWtI0E-DYDaukjciqqFbJhefRLoMDTTVSrO3fAqH",
+                "--dart-define",
+                "paypalSecretKey=EASMvGL_wHPZGj9KVn3pDt5gIsdYRuvXgP_bZdKlC6u4PmV1WKGbWwcA1o3zQZxaMZj9oPdfHzPD9R14"
             ]
         }
     ],
