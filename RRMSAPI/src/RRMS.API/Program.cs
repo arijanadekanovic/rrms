@@ -7,6 +7,12 @@ using RRMS.Microservices.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Postavite aplikaciju da koristi HTTP
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5000); // HTTP port za aplikaciju
+});
+
 builder.ConfigureServices();
 
 var app = builder.Build();
@@ -21,14 +27,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerApi("RRMS v1.0.0");
 }
-else
-{
-    app
-        .UseHsts()
-        .UseHttpsRedirection();
-}
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

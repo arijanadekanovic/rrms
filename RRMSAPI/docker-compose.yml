@@ -9,7 +9,6 @@ services:
       dockerfile: src/RRMS.API/Dockerfile
     ports:
       - "5000:5000"
-      - "5001:5001"  
 
   rrms.storage.api:
     image: ${DOCKER_REGISTRY-}rrmsstorageapi
@@ -19,7 +18,6 @@ services:
       dockerfile: src/Microservices/RRMS.Storage/RRMS.Storage.API/Dockerfile
     ports:
       - "5002:5002"
-      - "5003:5003"
 
   rrms.database:
     image: mcr.microsoft.com/mssql/server:2019-latest

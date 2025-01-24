@@ -5,7 +5,7 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "rrms.api",
-      "composeLaunchUrl": "https://localhost:5001/swagger/index.html",
+      "composeLaunchUrl": "http://localhost:5000/swagger/index.html",
       "serviceActions": {
         "rrms.dataseeder": "DoNotStart",
         //"rrms.storage.api": "StartWithoutDebugging",
@@ -21,7 +21,7 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "rrms.api",
-      "composeLaunchUrl": "https://localhost:5001/swagger/index.html",
+      "composeLaunchUrl": "http://localhost:5000/swagger/index.html",
       "serviceActions": {
         "rrms.dataseeder": "DoNotStart",
         "rrms.api": "StartDebugging",
@@ -35,7 +35,7 @@
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
       "composeLaunchServiceName": "rrms.storage.api",
-      "composeLaunchUrl": "https://localhost:5003/swagger/index.html",
+      "composeLaunchUrl": "http://localhost:5002/swagger/index.html",
       "serviceActions": {
         "rrms.dataseeder": "DoNotStart",
         "rrms.api": "DoNotStart",
