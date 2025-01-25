@@ -4,31 +4,54 @@ services:
   rrms.api:
     image: ${DOCKER_REGISTRY-}rrmsapi
     container_name: rrms.api
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
     build:
       context: .
       dockerfile: src/RRMS.API/Dockerfile
     ports:
       - "5000:5000"
+    links:
+      - rrms.database
+    depends_on:
+      - rrms.database
+    networks:
+      - rrms2025
 
   rrms.storage.api:
     image: ${DOCKER_REGISTRY-}rrmsstorageapi
     container_name: rrms.storage.api
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
     build:
       context: .
       dockerfile: src/Microservices/RRMS.Storage/RRMS.Storage.API/Dockerfile
     ports:
       - "5002:5002"
+    links:
+      - rrms.database
+    depends_on:
+      - rrms.database
+    networks:
+      - rrms2025
 
   rrms.database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: rrms.database
+    restart: unless-stopped
     environment:
       MSSQL_SA_PASSWORD: "Password1*"
       ACCEPT_EULA: "Y"
     ports:
-      - 1433:1433
-    volumes:
-      - rrms_db_data:/var/opt/mssql
+      - 1401:1433
+    expose:
+      - 1433
+    networks:
+      - rrms2025
 
   rrms.dataseeder:
     image: ${DOCKER_REGISTRY-}dataseeder
@@ -36,16 +59,27 @@ services:
     build:
       context: .
       dockerfile: src/Microservices/DataSeeder/Dockerfile
+    links:
+      - rrms.database
+    depends_on:
+      - rrms.database
+    networks:
+      - rrms2025
 
   rrms.rabbitmq:
     image: rabbitmq:3-management
     container_name: rrms.rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    expose:
+      - 5672
+    networks:
+      - rrms2025
 
-volumes:
-  rrms_db_data:
+networks:
+  rrms2025:
+    driver: bridge 
