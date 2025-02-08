@@ -6,6 +6,7 @@ using RRMS.API.Endpoints.Notification;
 using RRMS.API.Endpoints.Payment.Builder;
 using RRMS.API.Endpoints.Residence.Builder;
 using RRMS.API.Endpoints.Resident.Builder;
+using RRMS.API.Endpoints.User.Builder;
 
 namespace RRMS.API.Endpoints;
 
@@ -17,6 +18,7 @@ internal static class ApiEndpointsBuilder
 
         builder.MapAccountEndpoints().WithTags("Account");
         builder.MapAuthEndpoints().WithTags("Auth");
+        builder.MapUserEndpoints().WithTags("User");
         builder.MapChatEndpoints().WithTags("Chat");
         builder.MapCityEndpoints().WithTags("City");
         builder.MapNotificationEndpoints().WithTags("Notification");
