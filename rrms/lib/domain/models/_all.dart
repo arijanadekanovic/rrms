@@ -6,4 +6,5 @@ export 'notification/_all.dart';
 export 'payment/_all.dart';
 export 'residence/_all.dart';
 export 'resident/_all.dart';
+export 'user/_all.dart';
 export '_local/_all.dart';

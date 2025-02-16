@@ -45,6 +45,11 @@ class RepositoriesConfiguration {
         restApiClient: services.get<RestApiClient>(),
       ),
     );
+    services.registerSingleton<UsersRepository>(
+      UsersRepositoryImpl(
+        restApiClient: services.get<RestApiClient>(),
+      ),
+    );
     services.registerSingleton<ChatsRepository>(
       ChatsRepositoryImpl(
         restApiClient: services.get<RestApiClient>(),

@@ -14,7 +14,7 @@ ThemeData appThemeLargeBase(AppThemeData appTheme) {
     ),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: appTheme.primaryColor,
-      selectionColor: appTheme.primaryColor.withOpacity(0.5),
+      selectionColor: appTheme.primaryColor.withAlpha(125),
       selectionHandleColor: appTheme.primaryColor,
     ),
     dropdownMenuTheme: DropdownMenuThemeData(
